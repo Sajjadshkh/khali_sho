@@ -11,10 +11,6 @@
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
-    font-family: "font1";
-    src: url(../fonts/anjomanfont/Anjoman-Bold.ttf) format("truetype");
-}
 
 body {
     font-family: 'Vazir', 'IRANSans', sans-serif;
