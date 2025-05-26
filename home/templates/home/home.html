@@ -1,47 +1,120 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خالی شو - فضای امن برای تخلیه احساسات</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <title>خالی شو - فضای امن برای تخلیه احساسات</title>
 </head>
-<body class="bg-pattern scroll-smooth">
-    <!-- Header -->
-    <header class="bg-white py-4 shadow-md">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
-                        <span class="text-purple-500 text-xl font-bold">خ</span>
+<body>
+
+          <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+               {% comment %} <a href="#" class="nav__logo">Logo</a> {% endcomment %}
+               <div class="nav__actions">
+                <!-- Toggle button -->
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-menu-line"></i>
                     </div>
-                    <span class="mr-2 text-xl font-bold text-purple-700">خالی شو</span>
                 </div>
+               <img src="{% static 'img/k1s_logo.png' %}" alt="Your Logo" class="logo">
                 
-                <!-- Navigation -->
-                <nav class="hidden md:flex space-x-6 space-x-reverse">
-                    <a href="#services" class="text-purple-700 hover:text-purple-900 transition">خدمات</a>
-                    <a href="#podcasts" class="text-purple-700 hover:text-purple-900 transition">پادکست‌ها</a>
-                    <a href="#about" class="text-purple-700 hover:text-purple-900 transition">درباره ما</a>
-                    <a href="#support" class="text-purple-700 hover:text-purple-900 transition">پشتیبانی</a>
-                </nav>
-                
-                <!-- Sign Up Button -->
-                <div>
-                    <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full shadow-md transition btn-no-border">
-                        ثبت نام / ورود
-                    </button>
+                <div class="nav__menu" id="nav-menu">
+                  <ul class="nav__list">
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">خانه</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">خدمات</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">پادکست‌ ها</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">درباره ما</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">پشتیبانی</a>
+                     </li>
+                  </ul>
+   
+                  <!-- Close button -->
+                  <div class="nav__close" id="nav-close">
+                     <i class="ri-close-line"></i>
+                  </div>
+               </div>
+   
+               <div class="nav__actions">
+                  <!-- Search button -->
+                  {% comment %} <i class="ri-search-line nav__search" id="search-btn"></i> {% endcomment %}
+   
+                  <!-- Login button -->
+                  <i class="ri-user-line nav__login" id="login-btn"></i>
+                  <div class="nav__toggle" id="nav-toggle">
+                    <i></i>
                 </div>
-            </div>
-        </div>
-    </header>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i></i>
+                </div>
+               </div>
+            </nav>
+         </header>
+   
+         <!--==================== SEARCH ====================-->
+        {% comment %} <div class="search" id="search">
+            <form action="" class="search__form">
+               <i class="ri-search-line search__icon"></i>
+               <input type="search" placeholder="دنبال چه می گردید؟" class="search__input">
+            </form>
+   
+            <i class="ri-close-line search__close" id="search-close"></i>
+         </div>
+    {% endcomment %}
+         <!--==================== LOGIN ====================-->
+         <div class="login" id="login">
+            <form action="" class="login__form">
+               <h2 class="login__title">ورود</h2>
+               
+               <div class="login__group">
+                  <div>
+                     <label for="email" class="login__label">ایمیل</label>
+                     <input type="email" placeholder="ایمیل خود را وارد کنید" id="email" class="login__input">
+                  </div>
+                  
+                  <div>
+                     <label for="password" class="login__label">رمز ورود</label>
+                     <input type="password" placeholder="رمز خود را وارد کنید" id="password" class="login__input">
+                  </div>
+               </div>
+   
+               <div>
+                  <p class="login__signup">
+                    حساب کاربری ندارید؟ <a href="#">ثبت نام</a>
+                  </p>
+      
+                  <a href="#" class="login__forgot">
+                     رمز خود را فراموش کرده اید؟
+                  </a>
+      
+                  <button type="submit" class="login__button">ورود</button>
+               </div>
+            </form>
+   
+            <i class="ri-close-line login__close" id="login-close"></i>
+         </div>
 
     <!-- Hero Section -->
-    <section class="py-16 bg-gradient-to-b from-blue-50 to-purple-50">
+    <section class="hero py-16 bg-gradient-to-b from-blue-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-8 md:mb-0">
@@ -833,8 +906,8 @@
             </div>
         </div>
     </footer>
-
-    <script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    {% comment %} <script>
         // Testimonial Slider
         const slider = document.getElementById('testimonial-slider');
         const prevBtn = document.getElementById('prev-testimonial');
@@ -858,5 +931,5 @@
         chatBtn.addEventListener('click', () => {
             alert('پشتیبانی آنلاین در حال حاضر در دسترس نیست. لطفاً در ساعات کاری تماس بگیرید.');
         });
-    </script>
+    </script> {% endcomment %}
 </body>
