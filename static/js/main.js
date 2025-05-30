@@ -66,3 +66,26 @@ loginClose.addEventListener('click', () =>{
  chatBtn.addEventListener('click', () => {
      alert('پشتیبانی آنلاین در حال حاضر در دسترس نیست. لطفاً در ساعات کاری تماس بگیرید.');
  });
+
+  // Simple animation for scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Donate button effect
+        const donateBtn = document.querySelector('.donate-btn');
+        if(donateBtn) {
+            donateBtn.addEventListener('mouseenter', () => {
+                donateBtn.innerHTML = 'حمایت مالی <i class="fas fa-hand-holding-heart ml-2"></i>';
+            });
+            
+            donateBtn.addEventListener('mouseleave', () => {
+                donateBtn.innerHTML = 'حمایت مالی <i class="fas fa-heart ml-2"></i>';
+            });
+        }

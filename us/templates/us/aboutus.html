@@ -1,0 +1,382 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درباره ما | خالی شو</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-section py-20 px-4 md:px-10 lg:px-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6">
+                <span class="gradient-text">خالی شو</span>، صدایت را میشنویم
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">
+                پلتفرمی برای تخلیه هیجانی و دریافت حمایت فوری در لحظات سخت زندگی
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 md:px-10 lg:px-20 py-12">
+        <!-- About Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">درباره خالی شو</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="max-w-4xl mx-auto text-justify text-gray-700 leading-relaxed">
+                <p class="mb-4">
+                    خالی شو یک پلتفرم خدمات مشاوره‌ای است که با هدف کمک به افرادی که در لحظات سخت زندگی تنها هستند و احساسات منفی دارند ایجاد شده است. ما باور داریم که هر کس در زندگی ممکن است لحظاتی را تجربه کند که نیاز به شنیده شدن و حمایت فوری داشته باشد.
+                </p>
+                <p class="mb-4">
+                    در خالی شو، شما می‌توانید با ثبت درخواست تماس، سریعاً با یک مشاور دلسوز و متخصص ارتباط برقرار کنید تا در این لحظات سخت همراه شما باشد و به شما کمک کند تا از احساسات منفی تخلیه شوید و راه‌حل‌های مناسب را پیدا کنید.
+                </p>
+                <p>
+                    ما متعهد هستیم که در سریع‌ترین زمان ممکن پاسخگوی شما باشیم و فضایی امن برای بیان احساسات و دریافت حمایت تخصصی فراهم کنیم.
+                </p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">نحوه ارائه خدمات</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">تماس فوری</h3>
+                    <p class="text-gray-600">
+                        با ثبت درخواست در سایت یا اپلیکیشن، در کمتر از 15 دقیقه با یک مشاور متخصص ارتباط برقرار می‌کنید.
+                    </p>
+                </div>
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300">
+                    <div class="text-purple-500 text-4xl mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">چت آنلاین</h3>
+                    <p class="text-gray-600">
+                        امکان گفتگوی متنی با مشاوران در صورت تمایل به ارتباط نوشتاری و حفظ ناشناس بودن بیشتر.
+                    </p>
+                </div>
+                <div class="service-card bg-white rounded-lg shadow-md p-6 transition-all duration-300">
+                    <div class="text-green-500 text-4xl mb-4">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">نوبت‌دهی حضوری</h3>
+                    <p class="text-gray-600">
+                        برای مواردی که نیاز به پیگیری تخصصی‌تر دارید، می‌توانید از مشاوره حضوری استفاده کنید.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emergency Services Section -->
+        <section class="mb-20 bg-red-50 rounded-xl p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">خدمات فوری و ضروری</h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto"></div>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <img src="https://images.unsplash.com/photo-1593104547486-8199f41f1d84?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Emergency Support" class="rounded-lg shadow-lg w-full">
+                    </div>
+                    <div class="md:w-1/2 md:pr-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-600">حمایت در بحران‌های روانی</h3>
+                        <p class="text-gray-700 mb-4">
+                            برای افرادی که در معرض خطر خودکشی هستند یا از بحران‌های شدید روانی رنج می‌برند، خدمات فوری و رایگان ارائه می‌دهیم.
+                        </p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-2"></i>
+                                <span>پاسخگویی 24 ساعته</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-2"></i>
+                                <span>مشاوره تخصصی رایگان</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 ml-2"></i>
+                                <span>ارتباط با اورژانس اجتماعی در صورت نیاز</span>
+                            </li>
+                        </ul>
+                        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                            درخواست کمک فوری
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">تیم پشتیبانی و همکاران</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">دکتر سارا محمدی</h3>
+                        <p class="text-blue-500 mb-2">روانشناس بالینی</p>
+                        <p class="text-gray-600 text-sm">متخصص در درمان افسردگی و اضطراب با 10 سال سابقه کار</p>
+                    </div>
+                </div>
+                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">علی رضایی</h3>
+                        <p class="text-purple-500 mb-2">مشاور خانواده</p>
+                        <p class="text-gray-600 text-sm">متخصص در حل تعارضات خانوادگی و زناشویی</p>
+                    </div>
+                </div>
+                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">نرگس حسینی</h3>
+                        <p class="text-green-500 mb-2">کارشناس مددکاری اجتماعی</p>
+                        <p class="text-gray-600 text-sm">متخصص در حمایت از زنان و کودکان در معرض خطر</p>
+                    </div>
+                </div>
+                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-semibold">دکتر امیرحسین یوسفی</h3>
+                        <p class="text-red-500 mb-2">روانپزشک</p>
+                        <p class="text-gray-600 text-sm">متخصص در درمان اختلالات روانپزشکی و بحران‌های روانی</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="mb-20 bg-blue-50 rounded-xl p-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">چرا خالی شو را انتخاب کنید؟</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-lock text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">محیط امن و محرمانه</h3>
+                                <p class="text-gray-600 mt-1">اطلاعات شما کاملاً محرمانه می‌ماند و فضایی امن برای بیان احساسات فراهم می‌کنیم.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-clock text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">پاسخگویی سریع</h3>
+                                <p class="text-gray-600 mt-1">در لحظات سخت زندگی، در کمتر از 15 دقیقه با شما تماس می‌گیریم.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-hand-holding-heart text-green-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">تیم متخصص و دلسوز</h3>
+                                <p class="text-gray-600 mt-1">مشاوران ما با تجربه و تحصیلات تخصصی، آماده کمک به شما هستند.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-red-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-heart text-red-500"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold">خدمات خیریه</h3>
+                                <p class="text-gray-600 mt-1">به افراد نیازمند و در معرض خطر، خدمات رایگان ارائه می‌دهیم.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charity Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">حمایت از نیازمندان</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-8 text-white">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4">همراهی شما می‌تواند زندگی‌ها را تغییر دهد</h3>
+                    <p class="mb-6">
+                        بخشی از درآمد خالی شو به ارائه خدمات رایگان به افراد نیازمند اختصاص می‌یابد. شما نیز می‌توانید با مشارکت در این طرح خیریه، به افرادی که در معرض خطر هستند و توانایی مالی برای دریافت مشاوره ندارند کمک کنید.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                            <div class="text-4xl mb-2">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">بازماندگان خودکشی</h4>
+                            <p class="text-sm">حمایت روانی از افرادی که از خودکشی رهایی یافته‌اند</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                            <div class="text-4xl mb-2">
+                                <i class="fas fa-female"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">زنان باردار محروم</h4>
+                            <p class="text-sm">مشاوره و حمایت روانی برای مادران در مناطق محروم</p>
+                        </div>
+                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                            <div class="text-4xl mb-2">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h4 class="font-semibold mb-2">کودکان بی‌سرپرست</h4>
+                            <p class="text-sm">حمایت روانی از کودکان در مراکز نگهداری</p>
+                        </div>
+                    </div>
+                    <button class="donate-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 mx-auto block">
+                        حمایت مالی
+                        <i class="fas fa-heart ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section class="mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">همکاران ما</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-8">
+                <h3 class="text-xl font-semibold mb-6 text-center">متخصصین همکار</h3>
+                <div class="flex flex-wrap justify-center gap-6 mb-10">
+                    <div class="bg-gray-100 px-6 py-3 rounded-full flex items-center">
+                        <i class="fas fa-user-md text-blue-500 mr-2"></i>
+                        <span>روانپزشکان</span>
+                    </div>
+                    <div class="bg-gray-100 px-6 py-3 rounded-full flex items-center">
+                        <i class="fas fa-brain text-purple-500 mr-2"></i>
+                        <span>روانشناسان بالینی</span>
+                    </div>
+                    <div class="bg-gray-100 px-6 py-3 rounded-full flex items-center">
+                        <i class="fas fa-hands-helping text-green-500 mr-2"></i>
+                        <span>مشاوران خانواده</span>
+                    </div>
+                    <div class="bg-gray-100 px-6 py-3 rounded-full flex items-center">
+                        <i class="fas fa-child text-red-500 mr-2"></i>
+                        <span>مشاوران کودک و نوجوان</span>
+                    </div>
+                </div>
+                
+                <h3 class="text-xl font-semibold mb-6 text-center mt-12">کافه‌ها و رستوران‌های همراه</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="flex flex-col items-center">
+                        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه کتاب" class="w-24 h-24 object-cover rounded-full mb-2">
+                        <span class="font-medium">کافه کتاب آرامش</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه" class="w-24 h-24 object-cover rounded-full mb-2">
+                        <span class="font-medium">رستوران گفتگو</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه" class="w-24 h-24 object-cover rounded-full mb-2">
+                        <span class="font-medium">کافه دنج</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4aea148b0d1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="رستوران" class="w-24 h-24 object-cover rounded-full mb-2">
+                        <span class="font-medium">رستوران همدلی</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">خالی شو</h3>
+                    <p class="text-gray-400">
+                        پلتفرم مشاوره آنلاین برای تخلیه هیجانی و دریافت حمایت فوری در لحظات سخت زندگی
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">لینک‌های مفید</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">صفحه اصلی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">خدمات ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">مقالات</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">تماس با ما</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">ارتباط با ما</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-blue-400 mr-2"></i>
+                            <span>021-12345678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-400 mr-2"></i>
+                            <span>info@khalisho.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-400 mr-2"></i>
+                            <span>تهران، خیابان آزادی، کوچه سلامت</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">شبکه‌های اجتماعی</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="bg-purple-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-purple-700 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 خالی شو - تمام حقوق محفوظ است</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/main.js' %}" defer></script>
+</body>
+</html>
