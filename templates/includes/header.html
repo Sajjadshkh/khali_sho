@@ -1,0 +1,101 @@
+{% load static %}
+
+          <!--==================== HEADER ====================-->
+        <header class="header" id="header">
+            <nav class="nav container">
+               {% comment %} <a href="#" class="nav__logo">Logo</a> {% endcomment %}
+               <div class="nav__actions">
+                <!-- Toggle button -->
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class="ri-menu-line"></i>
+                    </div>
+                </div>
+               <img src="{% static 'img/k1s_logo.png' %}" alt="Your Logo" class="logo">
+                
+                <div class="nav__menu" id="nav-menu">
+                  <ul class="nav__list">
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">خانه</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">خدمات</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">پادکست‌ ها</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="{% url 'us:aboutus' %}" class="nav__link">درباره ما</a>
+                     </li>
+   
+                     <li class="nav__item">
+                        <a href="#" class="nav__link">پشتیبانی</a>
+                     </li>
+                  </ul>
+   
+                  <!-- Close button -->
+                  <div class="nav__close" id="nav-close">
+                     <i class="ri-close-line"></i>
+                  </div>
+               </div>
+   
+               <div class="nav__actions">
+                  <!-- Search button -->
+                  {% comment %} <i class="ri-search-line nav__search" id="search-btn"></i> {% endcomment %}
+   
+                  <!-- Login button -->
+                  <i class="ri-user-line nav__login" id="login-btn"></i>
+                  <div class="nav__toggle" id="nav-toggle">
+                    <i></i>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i></i>
+                </div>
+               </div>
+            </nav>
+         </header>
+   
+         <!--==================== SEARCH ====================-->
+        {% comment %} <div class="search" id="search">
+            <form action="" class="search__form">
+               <i class="ri-search-line search__icon"></i>
+               <input type="search" placeholder="دنبال چه می گردید؟" class="search__input">
+            </form>
+   
+            <i class="ri-close-line search__close" id="search-close"></i>
+         </div>
+    {% endcomment %}
+         <!--==================== LOGIN ====================-->
+         <div class="login" id="login">
+            <form action="" class="login__form">
+               <h2 class="login__title">ورود</h2>
+               
+               <div class="login__group">
+                  <div>
+                     <label for="email" class="login__label">ایمیل</label>
+                     <input type="email" placeholder="ایمیل خود را وارد کنید" id="email" class="login__input">
+                  </div>
+                  
+                  <div>
+                     <label for="password" class="login__label">رمز ورود</label>
+                     <input type="password" placeholder="رمز خود را وارد کنید" id="password" class="login__input">
+                  </div>
+               </div>
+   
+               <div>
+                  <p class="login__signup">
+                    حساب کاربری ندارید؟ <a href="#">ثبت نام</a>
+                  </p>
+      
+                  <a href="#" class="login__forgot">
+                     رمز خود را فراموش کرده اید؟
+                  </a>
+      
+                  <button type="submit" class="login__button">ورود</button>
+               </div>
+            </form>
+   
+            <i class="ri-close-line login__close" id="login-close"></i>
+         </div>

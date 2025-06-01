@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    {% include 'includes/head_refrences.html' %}
+  </head>
+
+  <body class="body">
+    {% comment %} <div class="loading-screen">
+      <div class="loading-icon">
+        <img
+          src="{% static 'img/k1s_logo.png' %}"
+          alt="Your Logo"
+          class="logo"
+        />
+      </div>
+    </div> {% endcomment %}
+    {% include 'includes/header.html' %}
+
+
+    {% block contant %}
+
+
+
+    {% endblock %}
+    
+    
+    {% include 'includes/footer.html' %}
+  <script src="{% static 'js/main.js' %}" defer></script>
+  </body>
+</html>

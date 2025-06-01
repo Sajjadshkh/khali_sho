@@ -89,3 +89,13 @@ loginClose.addEventListener('click', () =>{
                 donateBtn.innerHTML = 'حمایت مالی <i class="fas fa-heart ml-2"></i>';
             });
         }
+
+// loding screen
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Simulate the delay in loading your content (remove this in production)
+  setTimeout(function () {
+    document.querySelector(".loading-screen").style.display = "none"; // Hide loading screen
+    document.querySelector("header").style.display = "block"; // Show the navigation bar
+  }, 2000); // Change the duration as needed
+});

@@ -11,10 +11,18 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     <title>خالی شو - فضای امن برای تخلیه احساسات</title>
 </head>
-<body>
-
+<body class="body">
+    <div class="loading-screen">
+      <div class="loading-icon">
+        <img
+          src="{% static 'img/k1s_logo.png' %}"
+          alt="Your Logo"
+          class="logo"
+        />
+      </div>
+    </div>
           <!--==================== HEADER ====================-->
-        <header class="header" id="header">
+        <header class="header" id="header" style="display: none;">
             <nav class="nav container">
                {% comment %} <a href="#" class="nav__logo">Logo</a> {% endcomment %}
                <div class="nav__actions">
@@ -113,7 +121,7 @@
             <i class="ri-close-line login__close" id="login-close"></i>
          </div>
 
-    <!-- Hero Section -->
+    <!-- banner Section -->
     <section class="banner py-16 bg-gradient-to-b from-blue-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
@@ -907,29 +915,5 @@
         </div>
     </footer>
     <script src="{% static 'js/main.js' %}" defer></script>
-    {% comment %} <script>
-        // Testimonial Slider
-        const slider = document.getElementById('testimonial-slider');
-        const prevBtn = document.getElementById('prev-testimonial');
-        const nextBtn = document.getElementById('next-testimonial');
-        let currentSlide = 0;
-        const slideWidth = document.querySelector('.testimonial-card').offsetWidth + 32; // 32 is for margin
-        
-        nextBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide + 1) % 3;
-            slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            currentSlide = (currentSlide - 1 + 3) % 3;
-            slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-        });
-        
-        // Chat Button
-        const chatBtn = document.getElementById('chat-btn');
-        
-        chatBtn.addEventListener('click', () => {
-            alert('پشتیبانی آنلاین در حال حاضر در دسترس نیست. لطفاً در ساعات کاری تماس بگیرید.');
-        });
-    </script> {% endcomment %}
+    
 </body>
