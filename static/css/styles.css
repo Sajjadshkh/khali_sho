@@ -119,82 +119,6 @@ body {
 
 
 
-/* ************** about us ************** */
-
-
-.gradient-text {
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-        
-.hero-section {
-  background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
-}
-        
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-        
-.team-member:hover img {
-  transform: scale(1.05);
-}
-        
-.donate-btn {
-  animation: pulse 2s infinite; 
-}
-        
-@keyframes pulse {
-  0% {
-      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
-  }
-  70% {
-      box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
-  }
-  100% {
-  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
-  }
-}
-
-/* new_header */
-
-/*=============== VARIABLES CSS ===============*/
-:root {
-  --header-height: 2rem;
-
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(230, 75%, 56%);
-  --title-color:  hsl(230, 12%, 40%);
-  --text-color: hsl(230, 12%, 40%);
-  --body-color: hsl(230, 100%, 98%);
-  --container-color: hsl(230, 100%, 97%);
-  --border-color: hsl(230, 25%, 80%);
-
-  /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
-  --h2-font-size: 1.25rem;
-  --normal-font-size: .938rem;
-
-  /*========== Font weight ==========*/
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semi-bold: 600;
-
-  /*========== z index ==========*/
-  --z-fixed: 100;
-  --z-modal: 1000;
-}
-
-/*========== Responsive typography ==========*/
-@media screen and (min-width: 1023px) {
-  :root {
-    --h2-font-size: 1.5rem;
-    --normal-font-size: 1rem;
-  }
-}
 
 /*=============== BASE ===============*/
 * {
@@ -239,6 +163,9 @@ img {
   height: auto;
 }
 
+.banner .container {
+   margin-top: 3rem;
+}
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   max-width: 1120px;
@@ -562,3 +489,126 @@ img {
     margin-inline: auto;
   }
 }
+
+/* ************** about us ************** */
+
+.hero-section .container {
+            margin-top: 3rem;
+        }
+.gradient-text {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+        
+.hero-section {
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+}
+        
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+        
+.team-member:hover img {
+  transform: scale(1.05);
+}
+        
+.donate-btn {
+  animation: pulse 2s infinite; 
+}
+        
+@keyframes pulse {
+  0% {
+      box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7);
+  }
+  70% {
+      box-shadow: 0 0 0 10px rgba(74, 222, 128, 0);
+  }
+  100% {
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+
+/* new_header */
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 2rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(230, 75%, 56%);
+  --title-color:  hsl(230, 12%, 40%);
+  --text-color: hsl(230, 12%, 40%);
+  --body-color: hsl(230, 100%, 98%);
+  --container-color: hsl(230, 100%, 97%);
+  --border-color: hsl(230, 25%, 80%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1023px) {
+  :root {
+    --h2-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+  }
+}
+
+
+/* ************** podcast ************** */
+
+.header-podcast .container {
+            margin-top: 2rem;
+        }
+
+.header-podcast .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .podcast-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .audio-player {
+            -webkit-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-player:hover {
+            transform: scale(1.02);
+        }
+        
+        .upload-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }

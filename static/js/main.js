@@ -104,3 +104,33 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("header").style.display = "block"; // Show the navigation bar
   }, 2000); // Change the duration as needed
 });
+
+// podcasts
+        // Simple animation for upload button
+        const uploadBtn = document.querySelector('.upload-btn');
+        if(uploadBtn) {
+            uploadBtn.addEventListener('mouseenter', () => {
+                uploadBtn.innerHTML = '<i class="fas fa-share-square ml-2"></i> انتشار پادکست';
+            });
+            
+            uploadBtn.addEventListener('mouseleave', () => {
+                uploadBtn.innerHTML = '<i class="fas fa-podcast ml-2"></i> انتشار پادکست';
+            });
+        }
+        
+        // Simulate podcast play count
+        document.querySelectorAll('audio').forEach(audio => {
+            audio.addEventListener('play', function() {
+                const card = this.closest('.podcast-card');
+                if(card) {
+                    card.classList.add('ring-2', 'ring-blue-500');
+                }
+            });
+            
+            audio.addEventListener('pause', function() {
+                const card = this.closest('.podcast-card');
+                if(card) {
+                    card.classList.remove('ring-2', 'ring-blue-500');
+                }
+            });
+        });

@@ -7,3 +7,9 @@ class AboutUsView(ListView):
     model = Aboutus
     context_object_name = 'aboutus'
 
+class PodcastsView(ListView):
+    template_name = 'us/podcasts.html'
+    model = Aboutus
+    context_object_name = 'aboutus'
+
+

@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پادکست‌ها{% endblock %}
+
+{% block content %}
+
+{% comment %} <body class="min-h-screen flex flex-col"> {% endcomment %}
+    <!-- Header -->
+    <section class="header-podcast bg-gradient-to-r from-blue-50 to-purple-50 py-16 px-4 md:px-10 lg:px-20">
+        <div class="container mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6">
+                <span class="gradient-text">پادکست‌های خالی شو</span>
+                <br>صدای بی‌صدایان را بشنوید
+            </h1>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                تجربیات واقعی، درد دل‌های ناشناس و راهکارهای تخصصی برای زمانی که تنها هستید و نیاز به شنیده شدن دارید
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 md:px-10 lg:px-20 py-8">
+        <!-- Search and Filter -->
+        <div class="mb-8 bg-white rounded-xl shadow-sm p-4">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-grow">
+                    <input type="text" placeholder="جستجو بر اساس کلمه کلیدی (اضطراب، افسردگی، خانواده و ...)" 
+                           class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
+                </div>
+                <select class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option>همه موضوعات</option>
+                    <option>روابط عاطفی</option>
+                    <option>خانواده</option>
+                    <option>اضطراب و استرس</option>
+                    <option>افسردگی</option>
+                    <option>مسائل شغلی</option>
+                    <option>بحران‌های روانی</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Podcast Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Podcast Card 1 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
+                        <span class="text-gray-500 text-sm mr-2">25 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">غلبه بر ترس از تنهایی</h3>
+                    <p class="text-gray-600 text-sm mb-4">تجربه یک دختر ۲۴ ساله از ترس‌های شبانه و راهکارهای مشاور</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">تنهایی</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">اضطراب</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">شب‌های سخت</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Card 2 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
+                        <span class="text-gray-500 text-sm mr-2">18 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">پس از جدایی چه کنم؟</h3>
+                    <p class="text-gray-600 text-sm mb-4">تجربه یک پسر ۳۰ ساله از شکست عاطفی و راه‌های مقابله</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">جدایی</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">عشق</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">سوگ عاطفی</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Card 3 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
+                        <span class="text-gray-500 text-sm mr-2">32 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">کنترل خشم در خانواده</h3>
+                    <p class="text-gray-600 text-sm mb-4">مشاوره یک مادر ۴۰ ساله برای مدیریت عصبانیت با فرزندان</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">خشم</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">خانواده</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">مدیریت احساسات</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Card 4 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
+                        <span class="text-gray-500 text-sm mr-2">15 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">ترس از آینده شغلی</h3>
+                    <p class="text-gray-600 text-sm mb-4">تجربه یک دانشجوی ۲۶ ساله از نگرانی‌های پس از فارغ‌التحصیلی</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">شغل</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">آینده</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">استرس</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Card 5 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
+                        <span class="text-gray-500 text-sm mr-2">42 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">مقابله با افکار خودکشی</h3>
+                    <p class="text-gray-600 text-sm mb-4">مشاوره فوری با یک جوان ۲۲ ساله در بحران روانی</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">بحران</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">افکار منفی</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">حمایت فوری</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Podcast Card 6 -->
+            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
+                <div class="p-4">
+                    <div class="flex items-center mb-3">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
+                        <span class="text-gray-500 text-sm mr-2">21 دقیقه</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">تجربه مادرانگی در محرومیت</h3>
+                    <p class="text-gray-600 text-sm mb-4">داستان یک مادر باردار از چالش‌های زندگی در منطقه محروم</p>
+                    <div class="audio-player bg-gray-50 rounded-lg p-3">
+                        <audio controls class="w-full">
+                            <source src="#" type="audio/mpeg">
+                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
+                        </audio>
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">بارداری</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">محرومیت</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">حمایت</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="bg-white rounded-xl shadow-sm p-6 mb-12">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">داستان خود را با ما به اشتراک بگذارید</h2>
+                <p class="text-gray-600 mt-2">تجربیات شما می‌تواند به دیگران کمک کند</p>
+            </div>
+            
+            <div class="max-w-2xl mx-auto">
+                <!-- Step 1: Register -->
+                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
+                    <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
+                        <span class="font-bold">۱</span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">ثبت نام یا ورود</h3>
+                        <p class="text-gray-600 text-sm">برای آپلود پادکست باید در خالی شو حساب کاربری داشته باشید</p>
+                        <button class="mt-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition">
+                            ورود / ثبت نام
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Record/Upload -->
+                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
+                    <div class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
+                        <span class="font-bold">۲</span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">ضبط یا آپلود فایل صوتی</h3>
+                        <p class="text-gray-600 text-sm">می‌توانید مستقیماً ضبط کنید یا فایل صوتی آماده آپلود نمایید</p>
+                        <div class="mt-3 flex gap-3">
+                            <button class="bg-white border border-purple-500 text-purple-600 hover:bg-purple-50 px-4 py-2 rounded-lg text-sm transition flex items-center">
+                                <i class="fas fa-microphone ml-2"></i>
+                                ضبط صدا
+                            </button>
+                            <button class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm transition flex items-center">
+                                <i class="fas fa-upload ml-2"></i>
+                                آپلود فایل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Add Details -->
+                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
+                    <div class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
+                        <span class="font-bold">۳</span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">اطلاعات پادکست</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">عنوان پادکست</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">موضوع اصلی</label>
+                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                                    <option>روابط عاطفی</option>
+                                    <option>خانواده</option>
+                                    <option>اضطراب و استرس</option>
+                                    <option>افسردگی</option>
+                                    <option>مسائل شغلی</option>
+                                    <option>بحران‌های روانی</option>
+                                    <option>سایر</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">کلمات کلیدی (حداکثر ۳ مورد)</label>
+                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" placeholder="مثلاً: اضطراب، تنهایی، خانواده">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Accept Rules -->
+                <div class="flex items-start p-4 border border-gray-200 rounded-lg">
+                    <div class="bg-red-100 text-red-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
+                        <span class="font-bold">۴</span>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">قوانین و مقررات</h3>
+                        <div class="bg-gray-50 p-3 rounded-lg mb-3 text-sm text-gray-600">
+                            <ul class="list-disc pr-5 space-y-1">
+                                <li>رعایت کامل محرمانگی اطلاعات و عدم افشای هویت واقعی</li>
+                                <li>عدم استفاده از اسامی واقعی افراد</li>
+                                <li>پرهیز از هرگونه توهین به مقدسات، حکومت و مذهب</li>
+                                <li>عدم انتشار محتوای غیراخلاقی یا خلاف قانون</li>
+                                <li>مسئولیت محتوای منتشر شده بر عهده کاربر است</li>
+                            </ul>
+                        </div>
+                        <div class="flex items-start">
+                            <input type="checkbox" id="acceptRules" class="mt-1 ml-2">
+                            <label for="acceptRules" class="text-sm text-gray-700">قوانین و مقررات را مطالعه کرده‌ام و می‌پذیرم</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="mt-6 text-center">
+                    <button class="upload-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition inline-flex items-center">
+                        <i class="fas fa-podcast ml-2"></i>
+                        انتشار پادکست
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- When to Contact Section -->
+        <div class="bg-blue-50 rounded-xl p-6 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-6">در چه مواقعی می‌توانید از خالی شو کمک بگیرید؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-blue-100 text-blue-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">احساس تنهایی شدید</h3>
+                        <p class="text-gray-600 text-sm">وقتی کسی را برای صحبت کردن ندارید</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-purple-100 text-purple-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-sad-tear"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">افسردگی و ناامیدی</h3>
+                        <p class="text-gray-600 text-sm">وقتی انگیزه خود را از دست داده‌اید</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-red-100 text-red-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-angry"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">خشم و عصبانیت کنترل‌نشده</h3>
+                        <p class="text-gray-600 text-sm">وقتی نمی‌توانید خشم خود را مدیریت کنید</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-yellow-100 text-yellow-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-stress"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">استرس و اضطراب شدید</h3>
+                        <p class="text-gray-600 text-sm">وقتی فشار روانی شما را آزار می‌دهد</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-green-100 text-green-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-family"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">مشکلات خانوادگی</h3>
+                        <p class="text-gray-600 text-sm">تعارض با همسر، والدین یا فرزندان</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm flex items-start">
+                    <div class="bg-indigo-100 text-indigo-800 p-2 rounded-full mr-3">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-1">افکار خودکشی</h3>
+                        <p class="text-gray-600 text-sm">در بحران‌های شدید روانی</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+  {% endblock %}
