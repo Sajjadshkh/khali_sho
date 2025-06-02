@@ -6,3 +6,4 @@ class AboutUsView(ListView):
     template_name = 'us/aboutus.html'
     model = Aboutus
     context_object_name = 'aboutus'
+

@@ -42,23 +42,28 @@ loginBtn.addEventListener('click', () =>{
 loginClose.addEventListener('click', () =>{
    login.classList.remove('show-login')
 })
+// Testimonial Slider (safe version)
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.getElementById('testimonial-slider');
+  const prevBtn = document.getElementById('prev-testimonial');
+  const nextBtn = document.getElementById('next-testimonial');
+  const testimonialCard = document.querySelector('.testimonial-card');
 
- // Testimonial Slider
- const slider = document.getElementById('testimonial-slider');
- const prevBtn = document.getElementById('prev-testimonial');
- const nextBtn = document.getElementById('next-testimonial');
- let currentSlide = 0;
- const slideWidth = document.querySelector('.testimonial-card').offsetWidth + 32; // 32 is for margin
- 
- nextBtn.addEventListener('click', () => {
-     currentSlide = (currentSlide + 1) % 3;
-     slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
- });
- 
- prevBtn.addEventListener('click', () => {
-     currentSlide = (currentSlide - 1 + 3) % 3;
-     slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
- });
+  if (slider && prevBtn && nextBtn && testimonialCard) {
+    let currentSlide = 0;
+    const slideWidth = testimonialCard.offsetWidth + 32; // 32 is for margin
+
+    nextBtn.addEventListener('click', () => {
+      currentSlide = (currentSlide + 1) % 3;
+      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentSlide = (currentSlide - 1 + 3) % 3;
+      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    });
+  }
+});
  
  // Chat Button
  const chatBtn = document.getElementById('chat-btn');

@@ -3,10 +3,11 @@
 <html lang="fa" dir="rtl">
   <head>
     {% include 'includes/head_refrences.html' %}
+    <title>{% block title %}{% endblock %}</title>
   </head>
 
   <body class="body">
-    {% comment %} <div class="loading-screen">
+    <div class="loading-screen">
       <div class="loading-icon">
         <img
           src="{% static 'img/k1s_logo.png' %}"
@@ -14,11 +15,12 @@
           class="logo"
         />
       </div>
-    </div> {% endcomment %}
+    </div>
+
     {% include 'includes/header.html' %}
 
 
-    {% block contant %}
+    {% block content %}
 
 
 
