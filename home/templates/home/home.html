@@ -252,7 +252,7 @@
             </div>
             
             <!-- Pricing Plans -->
-            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+            <div id="plans" class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
                 <h3 class="text-2xl font-bold text-center text-purple-800 mb-8">پلن‌های خدمات تلفنی</h3>
                 
                 <div class="grid md:grid-cols-4 gap-6">
@@ -309,9 +309,9 @@
                     <p class="text-gray-600 mb-6 leading-relaxed">
                         مجموعه‌ای از گفتگوهای واقعی کاربران با مشاوران ما (با حفظ حریم خصوصی) که می‌توانند برای شما الهام‌بخش و راهگشا باشند. شما هم می‌توانید داستان خود را ضبط کرده و با ما به اشتراک بگذارید.
                     </p>
-                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                    <a href="{% url 'us:podcasts' %}" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
                         گوش دادن به پادکست‌ها
-                    </button>
+                    </a>
                 </div>
                 <div class="md:w-1/2">
                     <div class="bg-blue-50 p-8 rounded-xl">
@@ -563,11 +563,11 @@
                         ما با گردآوری تیمی از متخصصان دلسوز و مجرب، این امکان را فراهم کرده‌ایم که هر فردی در هر زمان و مکان بتواند بدون ترس از قضاوت شدن، با کسی صحبت کند و راهکارهای عملی دریافت نماید.
                     </p>
                     <div class="flex space-x-4 space-x-reverse">
-                        <a href="#team" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                        <a href="{% url 'us:aboutus' %}#ourteam" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
                             تیم ما
                         </a>
-                        <a href="#values" class="border border-purple-600 text-purple-600 hover:bg-purple-50 px-6 py-3 rounded-full transition btn-no-border">
-                            ارزش‌های ما
+                        <a href="{% url 'us:aboutus' %}" class="border border-purple-600 text-purple-600 hover:bg-purple-50 px-6 py-3 rounded-full transition btn-no-border">
+                            درباره خالی شو
                         </a>
                     </div>
                 </div>
