@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block title %}راستی آزمایی{% endblock %}
+
+{% block content %}
+<div class="otp-page">
+  <div class="form">
+    <form class="register-form">
+      <input type="text" placeholder="name" />
+      <input type="password" placeholder="password" />
+      <input type="text" placeholder="email address" />
+    </form>
+    <form class="login-form" method="post">
+      <h2>لطفا کد ۴ رقمی را وارد کنید :</h2>
+      {% csrf_token %} {{ form.code }}
+      <button>ارسال</button>
+    </form>
+  </div>
+</div>
+{%endblock%}

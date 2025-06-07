@@ -11,3 +11,13 @@ class Aboutus(models.Model):
     class Meta:
         verbose_name = "درباره ما"
         verbose_name_plural = "درباره ما"
+
+
+class OTP(models.Model):
+    token = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=11)
+    code = models.SmallIntegerField()
+    expration_code = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.phone

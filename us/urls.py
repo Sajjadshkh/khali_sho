@@ -9,8 +9,9 @@ urlpatterns = [
     # path("contactus/", views.ContactUsView.as_view(), name='contactus'),
     path("aboutus/", views.AboutUsView.as_view(), name='aboutus'),
     path("podcasts/", views.PodcastsView.as_view(), name='podcasts'),
-    # path('workus/', views.OTPView.as_view(), name='workus'),
-    # path('checkotp/', views.CheckOTPView.as_view(), name='checkotp'),
+    path("podcasts/create/", views.PodcastCreateView.as_view(), name='podcast_create'),
+    path('pushpodcast/', views.OTPView.as_view(), name='pushpodcast'),
+    path('checkotp/', views.CheckOTPView.as_view(), name='checkotp'),
     # path('workwithus/', views.WorkWithUsView.as_view(), name='workwithus'),
 
 ]
