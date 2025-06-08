@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}خدمات ما{% endblock %}
+
+{% block content %}
+    
+    <!-- Services -->
+    <section id="services" class="py-16 bg-gradient-to-b from-purple-50 to-blue-50" style="margin-top: 3rem;">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">خدمات ما</h2>
+            
+            <div class="grid md:grid-cols-1 gap-8 mb-12">
+                <!-- Phone Services -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-phone-alt text-purple-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-purple-800 mb-2">خدمات تلفنی</h3>
+                        <p class="text-gray-600">بدون نیاز به مراجعه حضوری، از هرجایی که هستید با متخصصان ما تماس بگیرید</p>
+                    </div>
+                    
+                    <div class="grid gap-6">
+                        <!-- Regular Call -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-heart text-pink-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-pink-800">برای تخلیه احساسات و درد و دل ساده، بدون دریافت مشاوره تخصصی</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Consultation Call -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-md text-purple-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-purple-800">برای دریافت راهنمایی و مشاوره عمومی در زمینه‌های مختلف زندگی</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Specialist Call -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-graduation-cap text-blue-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-800">برای دریافت مشاوره تخصصی در زمینه‌های حقوقی، مالی، خانواده، کودک و ...</h4>
+                            </div>
+                        </div>
+                        <div class="text-center mt-6">
+                        <a href="#phoneplans" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm transition btn-no-border">
+                           مشاهده پلن‌ها
+                        </a>
+                        </div>
+                    </div>
+                </div>
+                
+        <div id="phoneplans" class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-center text-purple-800 mb-8">پلن‌های خدمات تلفنی</h3>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Plan 1 -->
+                    <div class="bg-white border border-purple-200 rounded-xl p-6 hover:border-purple-400 transition text-center">
+                        <h4 class="font-bold text-purple-700 mb-2">پلن پایه</h4>
+                        <p class="text-gray-500 text-sm mb-4">30 دقیقه مشاوره + 5 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-purple-800 mb-6">150,000 تومان</p>
+                        <button class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 2 -->
+                    <div class="bg-white border border-blue-200 rounded-xl p-6 hover:border-blue-400 transition text-center">
+                        <h4 class="font-bold text-blue-700 mb-2">پلن استاندارد</h4>
+                        <p class="text-gray-500 text-sm mb-4">60 دقیقه مشاوره + 10 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-blue-800 mb-6">280,000 تومان</p>
+                        <button class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 3 -->
+                    <div class="bg-white border border-pink-200 rounded-xl p-6 hover:border-pink-400 transition text-center">
+                        <h4 class="font-bold text-pink-700 mb-2">پلن پیشرفته</h4>
+                        <p class="text-gray-500 text-sm mb-4">90 دقیقه مشاوره + 15 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-pink-800 mb-6">390,000 تومان</p>
+                        <button class="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 4 -->
+                    <div class="bg-white border border-green-200 rounded-xl p-6 hover:border-green-400 transition text-center">
+                        <h4 class="font-bold text-green-700 mb-2">پلن ویژه</h4>
+                        <p class="text-gray-500 text-sm mb-4">120 دقیقه مشاوره + 25 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-green-800 mb-6">500,000 تومان</p>
+                        <button class="w-full bg-green-100 hover:bg-green-200 text-green-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </section>   
+    <section id="services" class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            {% comment %} <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">خدمات ما</h2> {% endcomment %}
+            
+            <div class="grid md:grid-cols-1 gap-8 mb-12">
+                <!-- In-Person Services -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-800 mb-2">خدمات حضوری</h3>
+                        <p class="text-gray-600">در محیطی آرام و خصوصی با متخصصان ما ملاقات کنید</p>
+                    </div>
+                    
+                    <div class="grid gap-6">
+                        <!-- Regular Meeting -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-heart text-pink-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-pink-800">گفتگوی رو در رو برای تخلیه احساسات در محیطی امن و آرام</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Consultation Meeting -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-user-md text-purple-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-purple-800">مشاوره حضوری عمومی برای حل مسائل روزمره و بهبود کیفیت زندگی</h4>
+                            </div>
+                        </div>
+                        
+                        <!-- Specialist Meeting -->
+                        <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-graduation-cap text-blue-600"></i>
+                                </div>
+                                <h4 class="text-xl font-bold text-blue-800">مشاوره حضوری تخصصی در زمینه‌های مختلف با متخصصان مجرب</h4>
+                            </div>
+                        </div>
+                        <div class="text-center mt-6">
+                        <a href="#inpersonplans" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm transition btn-no-border">
+                           مشاهده پلن‌ها
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pricing Plans -->
+            <div id="inpersonplans" class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-center text-purple-800 mb-8">پلن‌های خدمات حضوری</h3>
+                
+                <div class="grid md:grid-cols-4 gap-6">
+                    <!-- Plan 1 -->
+                    <div class="bg-white border border-purple-200 rounded-xl p-6 hover:border-purple-400 transition text-center">
+                        <h4 class="font-bold text-purple-700 mb-2">پلن پایه</h4>
+                        <p class="text-gray-500 text-sm mb-4">30 دقیقه مشاوره + 5 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-purple-800 mb-6">150,000 تومان</p>
+                        <button class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 2 -->
+                    <div class="bg-white border border-blue-200 rounded-xl p-6 hover:border-blue-400 transition text-center">
+                        <h4 class="font-bold text-blue-700 mb-2">پلن استاندارد</h4>
+                        <p class="text-gray-500 text-sm mb-4">60 دقیقه مشاوره + 10 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-blue-800 mb-6">280,000 تومان</p>
+                        <button class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 3 -->
+                    <div class="bg-white border border-pink-200 rounded-xl p-6 hover:border-pink-400 transition text-center">
+                        <h4 class="font-bold text-pink-700 mb-2">پلن پیشرفته</h4>
+                        <p class="text-gray-500 text-sm mb-4">90 دقیقه مشاوره + 15 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-pink-800 mb-6">390,000 تومان</p>
+                        <button class="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                    
+                    <!-- Plan 4 -->
+                    <div class="bg-white border border-green-200 rounded-xl p-6 hover:border-green-400 transition text-center">
+                        <h4 class="font-bold text-green-700 mb-2">پلن ویژه</h4>
+                        <p class="text-gray-500 text-sm mb-4">120 دقیقه مشاوره + 25 دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-green-800 mb-6">500,000 تومان</p>
+                        <button class="w-full bg-green-100 hover:bg-green-200 text-green-700 py-2 rounded-full transition btn-no-border">
+                            انتخاب پلن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

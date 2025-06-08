@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>خالی شو - تخلیه احساسات و مشاوره آنلاین</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <style>
+       @font-face {
+           font-family: 'Vazir';
+           src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
+           font-weight: normal;
+           font-style: normal;
+       }
+       
+       @font-face {
+           font-family: 'IRANSans';
+           src: url('https://cdn.jsdelivr.net/gh/rastikerdar/iransans-font@master/dist/fonts/IRANSansWeb.woff2') format('woff2');
+           font-weight: normal;
+           font-style: normal;
+       }
+       
+       body {
+           font-family: 'Vazir', 'IRANSans', sans-serif;
+           background-color: #f8f9fa;
+       }
+       
+       .bg-pattern {
+           background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d1d5db' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+       }
+       
+       .testimonial-card {
+           width: 8rem;
+           height: 5rem;
+           transition: all 0.3s ease;
+       }
+       
+       .floating-btn {
+           position: fixed;
+           bottom: 2rem;
+           left: 2rem;
+           z-index: 50;
+           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+           transition: all 0.3s ease;
+           opacity: 0.8;
+       }
+       
+       .floating-btn:hover {
+           opacity: 1;
+           transform: scale(1.05);
+       }
+       
+       .chat-btn {
+           position: fixed;
+           bottom: 1rem;
+           right: 1rem;
+           z-index: 50;
+       }
+       
+       .service-card:hover {
+           transform: translateY(-5px);
+           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+       }
+       
+       .scroll-smooth {
+           scroll-behavior: smooth;
+       }
+       
+       .btn-no-border {
+           border: none;
+           outline: none;
+       }
+       
+       .podcast-preview {
+           background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+           background-size: cover;
+           background-position: center;
+       }
+   </style>
+</head>
+<body class="bg-pattern scroll-smooth">
+   <!-- Header -->
+   <header class="bg-gradient-to-r from-blue-100 to-purple-100 py-4 shadow-md">
+       <div class="container mx-auto px-4">
+           <div class="flex justify-between items-center">
+               <!-- Logo -->
+               <div class="flex items-center">
+                   <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md">
+                       <span class="text-purple-500 text-xl font-bold">خ</span>
+                   </div>
+                   <span class="mr-2 text-xl font-bold text-purple-700">خالی شو</span>
+               </div>
+               
+               <!-- Navigation -->
+               <nav class="hidden md:flex space-x-6 space-x-reverse">
+                   <a href="#services" class="text-purple-700 hover:text-purple-900 transition">خدمات</a>
+                   <a href="#podcasts" class="text-purple-700 hover:text-purple-900 transition">پادکست‌ها</a>
+                   <a href="#about" class="text-purple-700 hover:text-purple-900 transition">درباره ما</a>
+                   <a href="#support" class="text-purple-700 hover:text-purple-900 transition">پشتیبانی</a>
+               </nav>
+               
+               <!-- Sign Up Button -->
+               <div>
+                   <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full shadow-md transition btn-no-border">
+                       ثبت نام / ورود
+                   </button>
+               </div>
+           </div>
+       </div>
+   </header>
+ 
+   <!-- Hero Section -->
+   <section class="py-16 bg-gradient-to-b from-blue-50 to-purple-50">
+       <div class="container mx-auto px-4">
+           <div class="flex flex-col md:flex-row items-center">
+               <div class="md:w-1/2 mb-8 md:mb-0">
+                   <h1 class="text-4xl font-bold text-purple-800 mb-4">احساساتت رو خالی کن، سبک شو</h1>
+                   <p class="text-gray-600 mb-6 leading-relaxed">
+                       در فضایی امن و بدون قضاوت، حرف‌های ناگفته‌ات رو با مشاوران متخصص ما در میان بگذار.
+                       چه برای تخلیه احساسات و چه برای دریافت مشاوره تخصصی، ما اینجا هستیم تا بهت کمک کنیم.
+                   </p>
+                   <div class="flex space-x-4 space-x-reverse">
+                       <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                           شروع مکالمه
+                       </button>
+                       <button class="border border-purple-600 text-purple-600 hover:bg-purple-50 px-6 py-3 rounded-full transition btn-no-border">
+                           بیشتر بدانید
+                       </button>
+                   </div>
+               </div>
+               <div class="md:w-1/2 flex justify-center">
+                   <div class="relative">
+                       <div class="w-64 h-64 bg-purple-200 rounded-full opacity-50 absolute -top-4 -right-4"></div>
+                       <div class="w-64 h-64 bg-blue-200 rounded-full opacity-50 absolute -bottom-4 -left-4"></div>
+                       <div class="relative z-10">
+                           <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                                alt="مشاوره آنلاین"
+                                class="w-80 h-80 object-cover rounded-full border-8 border-white shadow-xl">
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Testimonials -->
+   <section class="py-12 bg-white">
+       <div class="container mx-auto px-4">
+           <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">تجربه کاربران ما</h2>
+           
+           <div class="relative max-w-4xl mx-auto">
+               <div class="overflow-hidden">
+                   <div class="flex transition-transform duration-300" id="testimonial-slider">
+                       <!-- Testimonial 1 -->
+                       <div class="min-w-full px-4">
+                           <div class="bg-purple-50 p-6 rounded-xl shadow-md">
+                               <div class="flex items-center mb-4">
+                                   <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="کاربر" class="w-12 h-12 rounded-full object-cover">
+                                   <div class="mr-3">
+                                       <h4 class="font-bold text-purple-800">نازنین</h4>
+                                       <p class="text-gray-500 text-sm">دانشجو</p>
+                                   </div>
+                               </div>
+                               <p class="text-gray-700">
+                                   بعد از یک شکست عاطفی سخت، واقعا نیاز داشتم با کسی حرف بزنم که قضاوتم نکنه. مشاور خالی شو بهم کمک کرد احساساتم رو بشناسم و دوباره به زندگی امیدوار بشم.
+                               </p>
+                           </div>
+                       </div>
+                       
+                       <!-- Testimonial 2 -->
+                       <div class="min-w-full px-4">
+                           <div class="bg-blue-50 p-6 rounded-xl shadow-md">
+                               <div class="flex items-center mb-4">
+                                   <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="کاربر" class="w-12 h-12 rounded-full object-cover">
+                                   <div class="mr-3">
+                                       <h4 class="font-bold text-blue-800">امیرحسین</h4>
+                                       <p class="text-gray-500 text-sm">مدیر پروژه</p>
+                                   </div>
+                               </div>
+                               <p class="text-gray-700">
+                                   استرس کار و زندگی شخصی من رو از پا انداخته بود. مشاوره تخصصی خالی شو بهم کمک کرد راهکارهای عملی برای مدیریت استرس پیدا کنم و الان کیفیت زندگی‌ام خیلی بهتر شده.
+                               </p>
+                           </div>
+                       </div>
+                       
+                       <!-- Testimonial 3 -->
+                       <div class="min-w-full px-4">
+                           <div class="bg-pink-50 p-6 rounded-xl shadow-md">
+                               <div class="flex items-center mb-4">
+                                   <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="کاربر" class="w-12 h-12 rounded-full object-cover">
+                                   <div class="mr-3">
+                                       <h4 class="font-bold text-pink-800">فاطمه</h4>
+                                       <p class="text-gray-500 text-sm">مادر خانه‌دار</p>
+                                   </div>
+                               </div>
+                               <p class="text-gray-700">
+                                   به عنوان یک مادر، همیشه احساس می‌کردم کسی حرف‌های من رو نمی‌فهمه. خالی شو فضای امنی برام ایجاد کرد که بتونم بدون ترس از قضاوت، احساساتم رو بیان کنم و راهنمایی بگیرم.
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               
+               <!-- Navigation Arrows -->
+               <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+                   <i class="fas fa-chevron-right text-purple-600"></i>
+               </button>
+               <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+                   <i class="fas fa-chevron-left text-purple-600"></i>
+               </button>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Services -->
+   <section id="services" class="py-16 bg-gray-50">
+       <div class="container mx-auto px-4">
+           <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">خدمات ما</h2>
+           
+           <div class="grid md:grid-cols-2 gap-8 mb-16">
+               <!-- Phone Services -->
+               <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                   <div class="flex items-center mb-4">
+                       <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                           <i class="fas fa-phone-alt text-blue-600 text-xl"></i>
+                       </div>
+                       <h3 class="mr-3 text-xl font-bold text-blue-800">خدمات تلفنی</h3>
+                   </div>
+                   
+                   <div class="space-y-4">
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-blue-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">تماس تلفنی عادی: برای تخلیه احساسات و درد و دل روزمره</p>
+                       </div>
+                       
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-blue-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">تماس مشاوره‌ای: دریافت راهنمایی از مشاوران متخصص</p>
+                       </div>
+                       
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-blue-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">تماس تخصصی: مشاوره در زمینه‌های حقوقی، مالی، خانواده و ...</p>
+                       </div>
+                   </div>
+                   
+                   <div class="mt-6">
+                       <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm transition btn-no-border">
+                           مشاهده پلن‌ها
+                       </button>
+                   </div>
+               </div>
+               
+               <!-- In-Person Services -->
+               <div class="bg-white p-6 rounded-xl shadow-md service-card transition">
+                   <div class="flex items-center mb-4">
+                       <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                           <i class="fas fa-user-friends text-purple-600 text-xl"></i>
+                       </div>
+                       <h3 class="mr-3 text-xl font-bold text-purple-800">خدمات حضوری</h3>
+                   </div>
+                   
+                   <div class="space-y-4">
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-purple-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">مشاوره حضوری در مکان‌های آرام و اختصاصی</p>
+                       </div>
+                       
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-purple-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">جلسات خصوصی با مشاوران متخصص</p>
+                       </div>
+                       
+                       <div class="flex items-start">
+                           <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-1">
+                               <i class="fas fa-check text-purple-600 text-xs"></i>
+                           </div>
+                           <p class="mr-2 text-gray-700">مکان‌های انتخابی در سطح شهر با فضای آرام و دلنشین</p>
+                       </div>
+                   </div>
+                   
+                   <div class="mt-6">
+                       <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full text-sm transition btn-no-border">
+                           مشاهده پلن‌ها
+                       </button>
+                   </div>
+               </div>
+           </div>
+           
+           <!-- Pricing Plans -->
+           <div class="bg-white p-8 rounded-xl shadow-lg">
+               <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">پلن‌های خدمات تلفنی</h3>
+               
+               <div class="grid md:grid-cols-4 gap-6">
+                   <!-- Plan 1 -->
+                   <div class="border border-blue-100 rounded-xl p-6 hover:border-blue-300 transition">
+                       <div class="text-center mb-4">
+                           <h4 class="font-bold text-blue-700">پلن پایه</h4>
+                           <p class="text-gray-500 text-sm">مناسب برای مکالمات کوتاه</p>
+                       </div>
+                       <div class="text-center mb-4">
+                           <span class="text-3xl font-bold text-blue-600">30</span>
+                           <span class="text-gray-600">+5 دقیقه</span>
+                       </div>
+                       <ul class="space-y-2 mb-6">
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">مکالمه با مشاور عمومی</span>
+                           </li>
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">تخلیه احساسات</span>
+                           </li>
+                       </ul>
+                       <button class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
+                           انتخاب پلن
+                       </button>
+                   </div>
+                   
+                   <!-- Plan 2 -->
+                   <div class="border border-purple-100 rounded-xl p-6 hover:border-purple-300 transition">
+                       <div class="text-center mb-4">
+                           <h4 class="font-bold text-purple-700">پلن استاندارد</h4>
+                           <p class="text-gray-500 text-sm">مناسب برای مشاوره اولیه</p>
+                       </div>
+                       <div class="text-center mb-4">
+                           <span class="text-3xl font-bold text-purple-600">60</span>
+                           <span class="text-gray-600">+10 دقیقه</span>
+                       </div>
+                       <ul class="space-y-2 mb-6">
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">مشاوره تخصصی</span>
+                           </li>
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">راهکارهای عملی</span>
+                           </li>
+                       </ul>
+                       <button class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
+                           انتخاب پلن
+                       </button>
+                   </div>
+                   
+                   <!-- Plan 3 -->
+                   <div class="border border-pink-100 rounded-xl p-6 hover:border-pink-300 transition">
+                       <div class="text-center mb-4">
+                           <h4 class="font-bold text-pink-700">پلن حرفه‌ای</h4>
+                           <p class="text-gray-500 text-sm">مناسب برای مشاوره تخصصی</p>
+                       </div>
+                       <div class="text-center mb-4">
+                           <span class="text-3xl font-bold text-pink-600">90</span>
+                           <span class="text-gray-600">+15 دقیقه</span>
+                       </div>
+                       <ul class="space-y-2 mb-6">
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">مشاوره با متخصصین</span>
+                           </li>
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">پیگیری وضعیت</span>
+                           </li>
+                       </ul>
+                       <button class="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 rounded-full transition btn-no-border">
+                           انتخاب پلن
+                       </button>
+                   </div>
+                   
+                   <!-- Plan 4 -->
+                   <div class="border border-indigo-100 rounded-xl p-6 hover:border-indigo-300 transition">
+                       <div class="text-center mb-4">
+                           <h4 class="font-bold text-indigo-700">پلن ویژه</h4>
+                           <p class="text-gray-500 text-sm">مناسب برای مشاوره بلندمدت</p>
+                       </div>
+                       <div class="text-center mb-4">
+                           <span class="text-3xl font-bold text-indigo-600">120</span>
+                           <span class="text-gray-600">+25 دقیقه</span>
+                       </div>
+                       <ul class="space-y-2 mb-6">
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">مشاوره تخصصی پیشرفته</span>
+                           </li>
+                           <li class="flex items-center">
+                               <i class="fas fa-check text-green-500 ml-2"></i>
+                               <span class="text-gray-700">پشتیبانی اختصاصی</span>
+                           </li>
+                       </ul>
+                       <button class="w-full bg-indigo-100 hover:bg-indigo-200 text-indigo-700 py-2 rounded-full transition btn-no-border">
+                           انتخاب پلن
+                       </button>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Podcasts Preview -->
+   <section id="podcasts" class="py-16 podcast-preview">
+       <div class="container mx-auto px-4">
+           <div class="flex flex-col md:flex-row items-center">
+               <div class="md:w-1/2 mb-8 md:mb-0">
+                   <h2 class="text-3xl font-bold text-purple-800 mb-4">پادکست‌های خالی شو</h2>
+                   <p class="text-gray-600 mb-6 leading-relaxed">
+                       گوش کن به تجربیات واقعی افرادی که مثل تو بودن. پادکست‌های ما شامل مکالمات و درد و دل‌های مشتریان با مشاوران ماست که می‌تونه بهت کمک کنه احساس تنهایی نکنی و راهکارهای عملی یاد بگیری.
+                   </p>
+                   <div class="flex space-x-4 space-x-reverse">
+                       <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                           <i class="fas fa-headphones ml-2"></i>
+                           گوش دادن به پادکست‌ها
+                       </button>
+                   </div>
+               </div>
+               <div class="md:w-1/2 relative">
+                   <div class="bg-white bg-opacity-80 backdrop-blur-sm p-6 rounded-xl shadow-lg">
+                       <div class="grid grid-cols-3 gap-2">
+                           <div class="bg-gray-100 p-3 rounded flex flex-col items-center">
+                               <i class="fas fa-file-audio text-gray-500 text-2xl mb-2"></i>
+                               <span class="text-xs text-gray-600">پادکست 1</span>
+                           </div>
+                           <div class="bg-gray-100 p-3 rounded flex flex-col items-center">
+                               <i class="fas fa-file-audio text-gray-500 text-2xl mb-2"></i>
+                               <span class="text-xs text-gray-600">پادکست 2</span>
+                           </div>
+                           <div class="bg-gray-100 p-3 rounded flex flex-col items-center">
+                               <i class="fas fa-file-audio text-gray-500 text-2xl mb-2"></i>
+                               <span class="text-xs text-gray-600">پادکست 3</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Join Our Team -->
+   <section class="py-16 bg-white">
+       <div class="container mx-auto px-4">
+           <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">به تیم ما بپیوندید</h2>
+           
+           <div class="flex flex-col md:flex-row">
+               <div class="md:w-1/2 mb-8 md:mb-0">
+                   <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl h-full">
+                       <h3 class="text-xl font-bold text-purple-800 mb-4">همکاری با خالی شو</h3>
+                       <p class="text-gray-600 mb-6">
+                           اگر شما هم دلتون میخواد به دیگران کمک کنید و در بهبود سلامت روان جامعه نقش داشته باشید، می‌تونید به عنوان مشاور، شنونده یا صاحب محل با ما همکاری کنید.
+                       </p>
+                       <p class="text-gray-600 mb-6">
+                           ما به دنبال افراد دلسوز، متخصص و با تجربه هستیم که بتونن در فضایی امن به مراجعان کمک کنن.
+                       </p>
+                       <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                           فرم همکاری را پر کنید
+                       </button>
+                   </div>
+               </div>
+               
+               <div class="md:w-1/2 md:pr-8">
+                   <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 h-full">
+                       <h3 class="text-xl font-bold text-purple-800 mb-4">جای دنج داری؟</h3>
+                       <p class="text-gray-600 mb-4">
+                           اگر صاحب کافه، رستوران، کافه کتاب یا هر مکان آرام و مناسبی هستید، می‌تونید محل خودتون رو برای برگزاری جلسات مشاوره حضوری معرفی کنید.
+                       </p>
+                       <p class="text-gray-600 mb-6">
+                           پس از تأیید توسط کارشناسان ما، محل شما در لیست مکان‌های قابل انتخاب برای مراجعان قرار می‌گیره.
+                       </p>
+                       <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                           معرفی محل
+                       </button>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Top Consultants -->
+   <section class="py-16 bg-gray-50">
+       <div class="container mx-auto px-4">
+           <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">مشاوران برتر ما</h2>
+           
+           <div class="grid md:grid-cols-3 gap-8">
+               <!-- Consultant 1 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-purple-100">
+                   <h3 class="text-xl font-bold text-purple-800 mb-1">دکتر سارا محمدی</h3>
+                   <p class="text-gray-500 text-sm mb-3">مشاور خانواده و ازدواج</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       با بیش از 10 سال سابقه در مشاوره خانواده و حل تعارضات زناشویی
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">خانواده</span>
+                       <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">ازدواج</span>
+                       <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">روابط</span>
+                   </div>
+               </div>
+               
+               <!-- Consultant 2 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-blue-100">
+                   <h3 class="text-xl font-bold text-blue-800 mb-1">دکتر امیر حسینی</h3>
+                   <p class="text-gray-500 text-sm mb-3">مشاور شغلی و توسعه فردی</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       متخصص در حل مشکلات شغلی و افزایش بهره‌وری فردی و سازمانی
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">شغلی</span>
+                       <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">توسعه فردی</span>
+                       <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">مدیریت زمان</span>
+                   </div>
+               </div>
+               
+               <!-- Consultant 3 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-pink-100">
+                   <h3 class="text-xl font-bold text-pink-800 mb-1">دکتر فاطمه کریمی</h3>
+                   <p class="text-gray-500 text-sm mb-3">روانشناس کودک و نوجوان</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       متخصص در حل مشکلات رفتاری و تربیتی کودکان و نوجوانان
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">کودک</span>
+                       <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">نوجوان</span>
+                       <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">تربیتی</span>
+                   </div>
+               </div>
+           </div>
+           
+           <div class="grid md:grid-cols-3 gap-8 mt-8">
+               <!-- Consultant 4 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-green-100">
+                   <h3 class="text-xl font-bold text-green-800 mb-1">دکتر مریم رضایی</h3>
+                   <p class="text-gray-500 text-sm mb-3">مشاور تحصیلی</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       متخصص در حل مشکلات تحصیلی و برنامه‌ریزی درسی برای دانش‌آموزان
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">تحصیلی</span>
+                       <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">برنامه‌ریزی</span>
+                       <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">انگیزشی</span>
+                   </div>
+               </div>
+               
+               <!-- Consultant 5 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-indigo-100">
+                   <h3 class="text-xl font-bold text-indigo-800 mb-1">دکتر علی موسوی</h3>
+                   <p class="text-gray-500 text-sm mb-3">مشاور حقوقی</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       وکیل پایه یک دادگستری و متخصص در حل مشکلات حقوقی و قضایی
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">حقوقی</span>
+                       <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">قضایی</span>
+                       <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">مالی</span>
+                   </div>
+               </div>
+               
+               <!-- Consultant 6 -->
+               <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                   <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-yellow-100">
+                   <h3 class="text-xl font-bold text-yellow-800 mb-1">دکتر حسین نجفی</h3>
+                   <p class="text-gray-500 text-sm mb-3">مشاور مالی</p>
+                   <p class="text-gray-600 text-sm mb-4">
+                       کارشناس ارشد مالی و متخصص در حل مشکلات اقتصادی و مدیریت دارایی
+                   </p>
+                   <div class="flex justify-center space-x-2">
+                       <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">مالی</span>
+                       <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">اقتصادی</span>
+                       <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">سرمایه‌گذاری</span>
+                   </div>
+               </div>
+           </div>
+           
+           <div class="text-center mt-8">
+               <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                   مشاهده تمام مشاوران
+               </button>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- About Us -->
+   <section id="about" class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+       <div class="container mx-auto px-4">
+           <div class="flex flex-col md:flex-row items-center">
+               <div class="md:w-1/2 mb-8 md:mb-0">
+                   <h2 class="text-3xl font-bold text-purple-800 mb-4">درباره خالی شو</h2>
+                   <p class="text-gray-600 mb-4 leading-relaxed">
+                       خالی شو با هدف ایجاد فضایی امن برای بیان احساسات و دریافت مشاوره تخصصی تأسیس شده است. ما معتقدیم هر انسانی نیاز دارد گاهی بدون ترس از قضاوت، احساساتش را بیان کند و راهنمایی بگیرد.
+                   </p>
+                   <p class="text-gray-600 mb-6 leading-relaxed">
+                       تیم ما متشکل از مشاوران و روانشناسان متخصص است که با حساسیت و دقت انتخاب شده‌اند تا بتوانند به بهترین شکل به شما کمک کنند. ما به حریم خصوصی و محرمانه بودن اطلاعات شما احترام می‌گذاریم.
+                   </p>
+                   <div class="flex space-x-4 space-x-reverse">
+                       <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                           بیشتر درباره ما
+                       </button>
+                   </div>
+               </div>
+               <div class="md:w-1/2 flex justify-center">
+                   <div class="relative">
+                       <div class="w-64 h-64 bg-purple-200 rounded-full opacity-50 absolute -top-4 -right-4"></div>
+                       <div class="w-64 h-64 bg-blue-200 rounded-full opacity-50 absolute -bottom-4 -left-4"></div>
+                       <div class="relative z-10">
+                           <img src="https://images.unsplash.com/photo-1552664730-d307ca884974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                                alt="تیم خالی شو"
+                                class="w-80 h-80 object-cover rounded-xl border-8 border-white shadow-xl">
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- FAQ -->
+   <section class="py-16 bg-white">
+       <div class="container mx-auto px-4">
+           <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">سوالات متداول</h2>
+           
+           <div class="max-w-3xl mx-auto">
+               <!-- Question 1 -->
+               <div class="mb-4 border-b border-gray-200 pb-4">
+                   <button class="flex justify-between items-center w-full text-right">
+                       <span class="text-lg font-medium text-purple-800">چگونه می‌توانم از خدمات خالی شو استفاده کنم؟</span>
+                       <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                   </button>
+                   <div class="mt-2 text-gray-600 hidden">
+                       <p>پس از ثبت نام در سایت، می‌توانید از بخش خدمات، پلن مورد نظر خود را انتخاب و پرداخت کنید. سپس در زمان مقرر مشاور ما با شما تماس خواهد گرفت یا می‌توانید برای جلسه حضوری رزرو کنید.</p>
+                   </div>
+               </div>
+               
+               <!-- Question 2 -->
+               <div class="mb-4 border-b border-gray-200 pb-4">
+                   <button class="flex justify-between items-center w-full text-right">
+                       <span class="text-lg font-medium text-purple-800">آیا مشاوره‌های شما محرمانه است؟</span>
+                       <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                   </button>
+                   <div class="mt-2 text-gray-600 hidden">
+                       <p>بله، تمامی مکالمات و جلسات مشاوره به صورت کاملاً محرمانه انجام می‌شود و اطلاعات شما نزد ما امن خواهد بود.</p>
+                   </div>
+               </div>
+               
+               <!-- Question 3 -->
+               <div class="mb-4 border-b border-gray-200 pb-4">
+                   <button class="flex justify-between items-center w-full text-right">
+                       <span class="text-lg font-medium text-purple-800">چگونه می‌توانم مشاور خالی شو شوم؟</span>
+                       <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                   </button>
+                   <div class="mt-2 text-gray-600 hidden">
+                       <p>می‌توانید از بخش "به تیم ما بپیوندید" فرم مربوطه را پر کنید. پس از بررسی مدارک و انجام مصاحبه، در صورت تأیید می‌توانید با ما همکاری کنید.</p>
+                   </div>
+               </div>
+               
+               <!-- Question 4 -->
+               <div class="mb-4 border-b border-gray-200 pb-4">
+                   <button class="flex justify-between items-center w-full text-right">
+                       <span class="text-lg font-medium text-purple-800">هزینه خدمات چگونه محاسبه می‌شود؟</span>
+                       <i class="fas fa-chevron-down text-purple-600 transition-transform duration-300"></i>
+                   </button>
+                   <div class="mt-2 text-gray-600 hidden">
+                       <p>هزینه خدمات بر اساس نوع مشاوره (تلفنی/حضوری)، تخصص مشاور و مدت زمان جلسه متغیر است. می‌توانید در بخش پلن‌ها، تعرفه خدمات را مشاهده کنید.</p>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+   <!-- Floating Plan Button -->
+   <button class="floating-btn bg-gradient-to-r from-purple-500 to-pink-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition">
+       <i class="fas fa-gem text-xl"></i>
+   </button>
+ 
+   <!-- Chat Button -->
+   <button id="chat-btn" class="chat-btn bg-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-md hover:bg-purple-700 transition">
+       <i class="fas fa-comment-dots"></i>
+   </button>
+ 
+   <!-- Footer -->
+   <footer class="bg-blue-50 text-gray-800 pt-12 pb-6">
+       <div class="container mx-auto px-4">
+           <div class="grid md:grid-cols-4 gap-8 mb-8">
+               <!-- Column 1 -->
+               <div>
+                   <div class="flex items-center mb-4">
+                       <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                           <span class="text-purple-600 font-bold">خ</span>
+                       </div>
+                       <span class="mr-2 text-lg font-bold">خالی شو</span>
+                   </div>
+                   <p class="text-gray-600 mb-4">
+                       فضایی امن برای تخلیه احساسات و دریافت مشاوره تخصصی
+                   </p>
+                   <div class="flex space-x-4 space-x-reverse">
+                       <a href="#" class="text-gray-600 hover:text-purple-700 transition">
+                           <i class="fab fa-instagram text-xl"></i>
+                       </a>
+                       <a href="#" class="text-gray-600 hover:text-purple-700 transition">
+                           <i class="fab fa-linkedin text-xl"></i>
+                       </a>
+                       <a href="#" class="text-gray-600 hover:text-purple-700 transition">
+                           <i class="fab fa-telegram text-xl"></i>
+                       </a>
+                   </div>
+               </div>
+               
+               <!-- Column 2 -->
+               <div>
+                   <h3 class="text-lg font-bold mb-4">لینک‌های سریع</h3>
+                   <ul class="space-y-2">
+                       <li><a href="#" class="text-gray-600 hover:text-purple-700 transition">صفحه اصلی</a></li>
+                       <li><a href="#services" class="text-gray-600 hover:text-purple-700 transition">خدمات</a></li>
+                       <li><a href="#podcasts" class="text-gray-600 hover:text-purple-700 transition">پادکست‌ها</a></li>
+                       <li><a href="#about" class="text-gray-600 hover:text-purple-700 transition">درباره ما</a></li>
+                   </ul>
+               </div>
+               
+               <!-- Column 3 -->
+               <div>
+                   <h3 class="text-lg font-bold mb-4">اطلاعات بیشتر</h3>
+                   <ul class="space-y-2">
+                       <li><a href="#" class="text-gray-600 hover:text-purple-700 transition">سوالات متداول</a></li>
+                       <li><a href="#" class="text-gray-600 hover:text-purple-700 transition">شرایط و ضوابط</a></li>
+                       <li><a href="#" class="text-gray-600 hover:text-purple-700 transition">حریم خصوصی</a></li>
+                       <li><a href="#" class="text-gray-600 hover:text-purple-700 transition">همکاری با ما</a></li>
+                   </ul>
+               </div>
+               
+               <!-- Column 4 -->
+               <div>
+                   <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                   <ul class="space-y-2">
+                       <li class="flex items-center">
+                           <i class="fas fa-phone ml-2 text-gray-600"></i>
+                           <span class="text-gray-600">021-12345678</span>
+                       </li>
+                       <li class="flex items-center">
+                           <i class="fas fa-envelope ml-2 text-gray-600"></i>
+                           <span class="text-gray-600">info@khalisho.com</span>
+                       </li>
+                       <li class="flex items-center">
+                           <i class="fas fa-map-marker-alt ml-2 text-gray-600"></i>
+                           <span class="text-gray-600">تهران، خیابان آزادی، پلاک 123</span>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+           
+           <div class="border-t border-blue-100 pt-6 text-center text-gray-600">
+               <p>© 2023 خالی شو. تمامی حقوق محفوظ است.</p>
+           </div>
+       </div>
+   </footer>
+ 
+   <script>
+       // Testimonial Slider
+       const slider = document.getElementById('testimonial-slider');
+       const prevBtn = document.getElementById('prev-testimonial');
+       const nextBtn = document.getElementById('next-testimonial');
+       let currentSlide = 0;
+       
+       function updateSlider() {
+           slider.style.transform = `translateX(${-currentSlide * 100}%)`;
+       }
+       
+       nextBtn.addEventListener('click', () => {
+           currentSlide = (currentSlide + 1) % 3;
+           updateSlider();
+       });
+       
+       prevBtn.addEventListener('click', () => {
+           currentSlide = (currentSlide - 1 + 3) % 3;
+           updateSlider();
+       });
+       
+       // FAQ Accordion
+       const faqButtons = document.querySelectorAll('.border-b button');
+       
+       faqButtons.forEach(button => {
+           button.addEventListener('click', () => {
+               const answer = button.nextElementSibling;
+               const icon = button.querySelector('i');
+               
+               answer.classList.toggle('hidden');
+               icon.classList.toggle('fa-chevron-down');
+               icon.classList.toggle('fa-chevron-up');
+           });
+       });
+       
+       // Chat Button
+       const chatBtn = document.getElementById('chat-btn');
+       
+       chatBtn.addEventListener('click', () => {
+           alert('پشتیبان آنلاین در حال حاضر در دسترس نیست. لطفاً در ساعات کاری تماس بگیرید.');
+       });
+ 
+       // Floating button opacity on scroll
+       const floatingBtn = document.querySelector('.floating-btn');
+       
+       window.addEventListener('scroll', () => {
+           if (window.scrollY > 300) {
+               floatingBtn.style.opacity = '1';
+           } else {
+               floatingBtn.style.opacity = '0.8';
+           }
+       });
+   </script>
+</body>
+</html>

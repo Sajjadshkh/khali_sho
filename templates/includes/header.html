@@ -10,16 +10,17 @@
                         <i class="ri-menu-line"></i>
                     </div>
                 </div>
-               <img src="{% static 'img/khalisho.png' %}" alt="Your Logo" class="logo">
-                
+               <a href="{% url 'home:home' %}">
+                  <img src="{% static 'img/khalisho.png' %}" alt="Your Logo" class="logo">
+               </a>                   
                 <div class="nav__menu" id="nav-menu">
                   <ul class="nav__list">
-                     <li class="nav__item">
+                     {% comment %} <li class="nav__item">
                         <a href="{% url 'home:home' %}" class="nav__link">خانه</a>
-                     </li>
+                     </li> {% endcomment %}
    
                      <li class="nav__item">
-                        <a href="#" class="nav__link">خدمات</a>
+                        <a href="{% url 'us:services' %}" class="nav__link">خدمات</a>
                      </li>
    
                      <li class="nav__item">
