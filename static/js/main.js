@@ -134,10 +134,3 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
-
-fetch('/home/login/')
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("popup-container").innerHTML = html;
-    document.getElementById("login").classList.add("show");
-  });
