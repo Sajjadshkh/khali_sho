@@ -70,23 +70,30 @@
     {% endcomment %}
          <!--==================== LOGIN ====================-->
          <div class="login" id="login">
-            <form id="login-form" method="post" class="login__form">
+<form id="login-form" method="post" class="login__form">
   {% csrf_token %}
   <h2 class="login__title">ورود</h2>
 
   <div class="login__group">
     <div>
-      <label class="login__label">نام کاربری یا ایمیل</label>
-      <input type="text" name="username" placeholder="نام کاربری" class="login__input" required>
+      <label class="login__label">نام کاربری</label>
+      <input type="text" name="username" placeholder="نام کاربری خود را وارد کنید" class="login__input" required>
     </div>
     <div>
       <label class="login__label">رمز ورود</label>
-      <input type="password" name="password" placeholder="رمز عبور" class="login__input" required>
+      <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید" class="login__input" required>
     </div>
   </div>
 
   <div id="login-error" style="color:red; margin-top:10px;"></div>
 
+<p class="login__signup">
+      حساب کاربری ندارید؟ <a href="{% url 'accounts:register' %}">ثبت نام</a>
+    </p>
+
+    {% comment %} <a href="#" class="login__forgot">
+      رمز خود را فراموش کرده‌اید؟
+    </a> {% endcomment %}
   <button type="submit" class="login__button">ورود</button>
 </form>
    
