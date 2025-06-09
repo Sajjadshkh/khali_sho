@@ -29,19 +29,24 @@ navClose.addEventListener('click', () =>{
 // })
 
 /*=============== LOGIN ===============*/
-const login = document.getElementById('login'),
-      loginBtn = document.getElementById('login-btn'),
-      loginClose = document.getElementById('login-close')
 
-/* Login show */
-loginBtn.addEventListener('click', () =>{
-   login.classList.add('show-login')
-})
+document.addEventListener('DOMContentLoaded', () => {
+  const login = document.getElementById('login'),
+        loginBtn = document.getElementById('login-btn'),
+        loginClose = document.getElementById('login-close');
 
-/* Login hidden */
-loginClose.addEventListener('click', () =>{
-   login.classList.remove('show-login')
-})
+  if (loginBtn) {  // فقط اگر loginBtn وجود داشت
+    loginBtn.addEventListener('click', () => {
+      login.classList.add('show-login');
+    });
+  }
+
+  if (loginClose) {
+    loginClose.addEventListener('click', () => {
+      login.classList.remove('show-login');
+    });
+  }
+});
 // Testimonial Slider (safe version)
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.getElementById('testimonial-slider');
@@ -131,6 +136,100 @@ document.addEventListener("DOMContentLoaded", function () {
                 const card = this.closest('.podcast-card');
                 if(card) {
                     card.classList.remove('ring-2', 'ring-blue-500');
+                }
+            });
+        });
+
+
+    // adviser
+
+         // Simple animation for upload button
+        // Tab switching for education levels
+        const tabs = document.querySelectorAll('[data-tab]');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Hide all tab contents
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+                
+                // Show the selected tab content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+            });
+        });
+        
+        // Specialty selection
+        const specialtyTags = document.querySelectorAll('.specialty-tag');
+        const selectedSpecialtiesInput = document.getElementById('selected-specialties');
+        let selectedSpecialties = [];
+        
+        specialtyTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const specialty = tag.getAttribute('data-specialty');
+                
+                if (tag.classList.contains('selected')) {
+                    // Remove from selected
+                    tag.classList.remove('selected');
+                    selectedSpecialties = selectedSpecialties.filter(item => item !== specialty);
+                } else {
+                    // Add to selected
+                    tag.classList.add('selected');
+                    selectedSpecialties.push(specialty);
+                }
+                
+                // Update hidden input
+                selectedSpecialtiesInput.value = selectedSpecialties.join(',');
+            });
+        });
+        
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            if (!document.getElementById('terms').checked) {
+                document.getElementById('terms').nextElementSibling.classList.add('text-red-500');
+                isValid = false;
+            } else {
+                document.getElementById('terms').nextElementSibling.classList.remove('text-red-500');
+            }
+            
+            if (selectedSpecialties.length === 0) {
+                alert('لطفا حداقل یک زمینه تخصصی را انتخاب کنید.');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('لطفا تمامی فیلدهای الزامی را پر کنید.');
+            } else {
+                // In a real app, you would submit the form here
+                alert('فرم با موفقیت ارسال شد! اطلاعات شما در حال بررسی است.');
+            }
+        });
+        
+        // Add red border to required fields when they lose focus and are empty
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-red-500');
+                } else {
+                    this.classList.remove('border-red-500');
                 }
             });
         });

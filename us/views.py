@@ -34,6 +34,12 @@ class PodcastCreateView(ListView):
     template_name = 'us/podcast_create.html'
     success_url = reverse_lazy('us:podcasts')
 
+class adviserCreateView(ListView):
+    model = Aboutus
+    # form_class = PodcastForm
+    template_name = 'us/workusadviser.html'
+    success_url = reverse_lazy('us:podcasts')
+
 
 # class OTPView(View):
 

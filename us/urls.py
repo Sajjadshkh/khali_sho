@@ -11,6 +11,7 @@ urlpatterns = [
     path("services/", views.ServicesView.as_view(), name='services'),
     path("podcasts/", views.PodcastsView.as_view(), name='podcasts'),
     path("podcast/create/", views.PodcastCreateView.as_view(), name='podcast_create'),
+    path("adviser/create/", views.adviserCreateView.as_view(), name='adviser_create'),
     # path('pushpodcast/', views.OTPView.as_view(), name='pushpodcast'),
     path('otp/', views.OTPView.as_view(), name='otp'),
     path('checkotp/', views.CheckOTPView.as_view(), name='checkotp'),
