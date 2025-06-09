@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
+
 from .forms import RegisterForm, LoginForm
 from django.http import JsonResponse
 
@@ -8,6 +10,8 @@ def register_view(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            # 🔐 پاک کردن تایید OTP بعد از استفاده
+            request.session.pop('otp_verified', None)
             return redirect('accounts:login')
     else:
         form = RegisterForm()
