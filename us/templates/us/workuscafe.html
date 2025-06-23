@@ -1,0 +1,368 @@
+کدهای فرم ثبت نام کافه
+
+!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام کافه در پلتفرم ما</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .form-container {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-container:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .input-field:focus {
+            border-color: #d1a054;
+            box-shadow: 0 0 0 3px rgba(209, 160, 84, 0.2);
+        }
+        
+        .checkbox:checked {
+            background-color: #d1a054;
+            border-color: #d1a054;
+        }
+        
+        .submit-btn {
+            background-color: #d1a054;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b78a46;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background-color: #d1a054;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl overflow-hidden form-container">
+            <!-- Header -->
+            <div class="bg-amber-800 text-white py-6 px-8">
+                <h1 class="text-2xl font-bold text-center">
+                    <i class="fas fa-coffee mr-2"></i>
+                    فرم ثبت نام کافه در پلتفرم ما
+                </h1>
+                <p class="text-amber-100 text-center mt-2">اطلاعات کافه و مالک را با دقت وارد نمایید</p>
+            </div>
+            
+            <!-- Progress Steps -->
+            <div class="bg-amber-50 px-8 py-4 flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold">1</div>
+                    <div class="mr-2 text-sm font-medium text-amber-800">اطلاعات پایه</div>
+                </div>
+                <div class="h-1 flex-1 bg-amber-200 mx-2"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center font-bold">2</div>
+                    <div class="mr-2 text-sm font-medium text-gray-500">اطلاعات مالک</div>
+                </div>
+                <div class="h-1 flex-1 bg-amber-200 mx-2"></div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 rounded-full bg-amber-200 text-amber-800 flex items-center justify-center font-bold">3</div>
+                    <div class="mr-2 text-sm font-medium text-gray-500">تایید نهایی</div>
+                </div>
+            </div>
+            
+            <!-- Form -->
+            <form class="p-8">
+                <!-- Cafe Information Section -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+                        <i class="fas fa-store mr-2 text-amber-700"></i>
+                        اطلاعات کافه
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Cafe Name -->
+                        <div>
+                            <label for="cafe-name" class="block text-sm font-medium text-gray-700 mb-1">نام کافه <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="text" id="cafe-name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="نام کامل کافه" required>
+                                <i class="fas fa-signature absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Cafe Type -->
+                        <div>
+                            <label for="cafe-type" class="block text-sm font-medium text-gray-700 mb-1">نوع کافه <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <select id="cafe-type" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" required>
+                                    <option value="">انتخاب کنید</option>
+                                    <option value="traditional">کافه سنتی</option>
+                                    <option value="modern">کافه مدرن</option>
+                                    <option value="roastery">رستری و تخصصی</option>
+                                    <option value="book">کافه کتاب</option>
+                                    <option value="other">سایر</option>
+                                </select>
+                                <i class="fas fa-coffee absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Address -->
+                        <div class="md:col-span-2">
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">آدرس دقیق <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <textarea id="address" rows="2" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="آدرس کامل با ذکر محله و پلاک" required></textarea>
+                                <i class="fas fa-map-marker-alt absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Location -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">موقعیت روی نقشه <span class="text-red-500">*</span></label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+                                <div class="flex flex-col md:flex-row items-center justify-between">
+                                    <div class="mb-4 md:mb-0">
+                                        <button type="button" class="bg-amber-600 text-white px-4 py-2 rounded-lg flex items-center">
+                                            <i class="fas fa-map-marked-alt ml-2"></i>
+                                            انتخاب موقعیت
+                                        </button>
+                                    </div>
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-info-circle ml-1 text-amber-600"></i>
+                                        لطفا موقعیت دقیق کافه را روی نقشه مشخص کنید
+                                    </div>
+                                </div>
+                                <div id="map-preview" class="mt-4 h-48 bg-gray-200 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-map text-gray-400 text-4xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cafe Size -->
+                        <div>
+                            <label for="cafe-size" class="block text-sm font-medium text-gray-700 mb-1">وسعت کافه (متر مربع) <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="number" id="cafe-size" min="10" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="مثلا 120" required>
+                                <i class="fas fa-ruler-combined absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Capacity -->
+                        <div>
+                            <label for="capacity" class="block text-sm font-medium text-gray-700 mb-1">ظرفیت (تعداد نفر) <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="number" id="capacity" min="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="مثلا 50" required>
+                                <i class="fas fa-users absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Menu Upload -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">آپلود منوی کافه (PDF یا تصویر) <span class="text-red-500">*</span></label>
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+                                <div class="flex flex-col items-center justify-center">
+                                    <i class="fas fa-file-upload text-4xl text-gray-400 mb-2"></i>
+                                    <p class="text-sm text-gray-500 mb-3">فایل منو را اینجا رها کنید یا کلیک کنید</p>
+                                    <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg">
+                                        انتخاب فایل
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Facilities -->
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">امکانات کافه</label>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="wifi" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="wifi" class="mr-2 text-sm text-gray-700">اینترنت وای فای</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="parking" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="parking" class="mr-2 text-sm text-gray-700">پارکینگ</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="live-music" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="live-music" class="mr-2 text-sm text-gray-700">موسیقی زنده</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="outdoor" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="outdoor" class="mr-2 text-sm text-gray-700">فضای باز</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="hookah" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="hookah" class="mr-2 text-sm text-gray-700">قلیان</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="workspace" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="workspace" class="mr-2 text-sm text-gray-700">فضای کار</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="breakfast" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="breakfast" class="mr-2 text-sm text-gray-700">صبحانه</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="disabled-access" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox">
+                                    <label for="disabled-access" class="mr-2 text-sm text-gray-700">دسترسی معلولین</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Description -->
+                        <div class="md:col-span-2">
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">توضیحات اضافه (اختیاری)</label>
+                            <textarea id="description" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="توضیحات بیشتر درباره فضای کافه، منوی خاص، جو کافه و..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Owner Information Section -->
+                <div class="mb-12">
+                    <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+                        <i class="fas fa-user-tie mr-2 text-amber-700"></i>
+                        اطلاعات مالک
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Owner Name -->
+                        <div>
+                            <label for="owner-name" class="block text-sm font-medium text-gray-700 mb-1">نام و نام خانوادگی مالک <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="text" id="owner-name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="نام کامل مالک" required>
+                                <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- National ID -->
+                        <div>
+                            <label for="national-id" class="block text-sm font-medium text-gray-700 mb-1">کد ملی <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="text" id="national-id" pattern="\d{10}" maxlength="10" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="کد ملی 10 رقمی" required>
+                                <i class="fas fa-id-card absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Phone Number -->
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">شماره موبایل <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <input type="tel" id="phone" pattern="09\d{9}" maxlength="11" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="مثال: 09123456789" required>
+                                <i class="fas fa-phone-alt absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">ایمیل (اختیاری)</label>
+                            <div class="relative">
+                                <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field" placeholder="example@domain.com">
+                                <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Terms and Conditions -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+                        <i class="fas fa-file-contract mr-2 text-amber-700"></i>
+                        قوانین و مقررات
+                    </h2>
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <div class="h-64 overflow-y-auto mb-6 p-4 border border-gray-200 rounded-lg">
+                            <h3 class="font-bold text-lg mb-4 text-gray-800">قوانین و شرایط همکاری با پلتفرم ما</h3>
+                            <p class="text-gray-700 mb-3">1. تمامی اطلاعات ارائه شده باید صحیح و معتبر باشند. در صورت ارائه اطلاعات نادرست، حساب کاربری شما مسدود خواهد شد.</p>
+                            <p class="text-gray-700 mb-3">2. مسئولیت تمامی محتوای منتشر شده در پروفایل کافه بر عهده مالک کافه می باشد.</p>
+                            <p class="text-gray-700 mb-3">3. پلتفرم ما 15% از هر سفارش آنلاین را به عنوان کارمزد دریافت می کند.</p>
+                            <p class="text-gray-700 mb-3">4. موظف به پاسخگویی به نظرات و امتیازات کاربران در مدت حداکثر 24 ساعت هستید.</p>
+                            <p class="text-gray-700 mb-3">5. در صورت بروز هرگونه مشکل در سرویس دهی، پلتفرم حق دارد حساب کاربری شما را به صورت موقت یا دائم مسدود نماید.</p>
+                            <p class="text-gray-700 mb-3">6. اطلاعات شخصی شما صرفاً برای اهداف احراز هویت و ارتباط استفاده خواهد شد و در اختیار اشخاص ثالث قرار نخواهد گرفت.</p>
+                            <p class="text-gray-700">7. شما موظف هستید منوی خود را به روز نگه دارید و در صورت تغییر قیمت ها یا حذف آیتم ها، پلتفرم را مطلع نمایید.</p>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="terms" name="terms" type="checkbox" class="w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox" required>
+                            </div>
+                            <div class="mr-3 text-sm">
+                                <label for="terms" class="font-medium text-gray-700">با کلیک بر روی دکمه ثبت نام، تمامی شرایط و قوانین فوق را می پذیرم.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="flex justify-center">
+                    <button type="submit" class="px-8 py-3 bg-amber-600 text-white rounded-lg font-bold text-lg submit-btn">
+                        <i class="fas fa-paper-plane ml-2"></i>
+                        ارسال برای بررسی
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Simple form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+            
+            if (!document.getElementById('terms').checked) {
+                document.getElementById('terms').nextElementSibling.classList.add('text-red-500');
+                isValid = false;
+            } else {
+                document.getElementById('terms').nextElementSibling.classList.remove('text-red-500');
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('لطفا تمامی فیلدهای الزامی را پر کنید.');
+            } else {
+                // In a real app, you would submit the form here
+                alert('فرم با موفقیت ارسال شد! اطلاعات شما در حال بررسی است.');
+            }
+        });
+        
+        // Add red border to required fields when they lose focus and are empty
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    this.classList.add('border-red-500');
+                } else {
+                    this.classList.remove('border-red-500');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

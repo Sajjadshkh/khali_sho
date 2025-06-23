@@ -34,10 +34,16 @@ class PodcastCreateView(ListView):
     template_name = 'us/podcast_create.html'
     success_url = reverse_lazy('us:podcasts')
 
-class adviserCreateView(ListView):
+class AdviserCreateView(ListView):
     model = Aboutus
     # form_class = PodcastForm
     template_name = 'us/workusadviser.html'
+    success_url = reverse_lazy('us:adviser_create')
+
+class CafeCreateView(ListView):
+    model = Aboutus
+    # form_class = PodcastForm
+    template_name = 'us/workuscafe.html'
     success_url = reverse_lazy('us:podcasts')
 
 
