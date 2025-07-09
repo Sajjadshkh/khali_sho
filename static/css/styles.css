@@ -710,7 +710,7 @@ img {
 }
 
 /* adviser */
-.form-container {
+        .form-container {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border-top: 6px solid #4f46e5;
@@ -776,4 +776,49 @@ img {
         .tab.active {
             background-color: #4f46e5;
             color: white;
+        }
+
+/* Cafe */
+        
+        .form-container {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-container:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .input-field:focus {
+            border-color: #d1a054;
+            box-shadow: 0 0 0 3px rgba(209, 160, 84, 0.2);
+        }
+        
+        .checkbox:checked {
+            background-color: #d1a054;
+            border-color: #d1a054;
+        }
+        
+        .submit-btn {
+            background-color: #d1a054;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #b78a46;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 3px;
+            background-color: #d1a054;
         }
