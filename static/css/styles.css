@@ -780,40 +780,40 @@ img {
 
 /* Cafe */
         
-        .form-container {
+        .cafe-container .form-container {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
         
-        .form-container:hover {
+        .cafe-container .form-container:hover {
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
-        .input-field:focus {
+        .cafe-container .input-field:focus {
             border-color: #d1a054;
             box-shadow: 0 0 0 3px rgba(209, 160, 84, 0.2);
         }
         
-        .checkbox:checked {
+        .cafe-container .checkbox:checked {
             background-color: #d1a054;
             border-color: #d1a054;
         }
         
-        .submit-btn {
+        .cafe-container .submit-btn {
             background-color: #d1a054;
             transition: all 0.3s ease;
         }
         
-        .submit-btn:hover {
+        .cafe-container .submit-btn:hover {
             background-color: #b78a46;
             transform: translateY(-2px);
         }
         
-        .section-title {
+        .cafe-container .section-title {
             position: relative;
         }
         
-        .section-title::after {
+        .cafe-container .section-title::after {
             content: '';
             position: absolute;
             right: 0;
