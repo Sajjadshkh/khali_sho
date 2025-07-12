@@ -3,8 +3,8 @@ from django.views.generic import ListView, CreateView, View
 from django.urls import reverse_lazy, reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
-from .models import Aboutus, OTP
-from .forms import OTPForm, CheckOTPForm
+from .models import Aboutus, OTP, adviser, Certificate
+from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm
 from random import randint
 import ghasedakpack
 
@@ -34,66 +34,26 @@ class PodcastCreateView(ListView):
     template_name = 'us/podcast_create.html'
     success_url = reverse_lazy('us:podcasts')
 
-class AdviserCreateView(ListView):
-    model = Aboutus
-    # form_class = PodcastForm
+
+
+class AdviserCreateView(CreateView):
+    model = adviser
+    form_class = AdviserForm
     template_name = 'us/workusadviser.html'
-    success_url = reverse_lazy('us:adviser_create')
+    success_url = reverse_lazy('home:home')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        files = self.request.FILES.getlist('certificates')
+        for f in files:
+            Certificate.objects.create(adviser=self.object, file=f)
+        return response
 
 class CafeCreateView(ListView):
     model = Aboutus
     # form_class = PodcastForm
     template_name = 'us/workuscafe.html'
-    success_url = reverse_lazy('us:podcasts')
 
-
-# class OTPView(View):
-
-#     def get(self, request):
-#         template_name = 'us/otp.html'
-#         form = OTPForm()
-#         return render(request, 'us/otp.html', {'form': form})
-
-#     def post(self, request):
-#         form = OTPForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             randcode = randint(1000, 9999)
-#             SMS.verification(
-#                 {'receptor': cd["phone"], 'type': '1',
-#                  'template': 'randcode', 'param1': randcode}
-#             )
-#             token = str(uuid4())
-#             OTP.objects.create(phone=cd['phone'], code=randcode, token=token)
-#             print(randcode)
-#             return redirect(reverse('us:checkotp') + f"?token={token}")
-
-#         else:
-#             form.add_error("phone", "invalid data")
-
-#         return render(request, 'us/otp.html', {'form': form})
-
-
-# class CheckOTPView(View):
-#     def get(self, request):
-#         template_name = 'us/checkotp.html'
-#         form = CheckOTPForm()
-#         return render(request, 'us/checkotp.html', {'form': form})
-
-#     def post(self, request):
-#         token = request.GET.get('token')
-#         form = CheckOTPForm(request.POST)
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             if OTP.objects.filter(code=cd['code'], token=token).exists():
-#                 otp = OTP.objects.get(token=token)
-#                 otp.delete()
-#                 return redirect('us:podcast_create')
-
-#         else:
-#             form.add_error("code", "invalid data")
-
-#         return render(request, 'us/checkotp.html', {'form': form})
 class OTPView(View):
    
    def get(self, request):
@@ -126,7 +86,6 @@ class OTPView(View):
 class CheckOTPView(View):
 
     def get(self, request):
-        # template_name = 'us/checkotp.html'
         form = CheckOTPForm()
         return render(request, 'us/checkotp.html', {'form': form})
     
