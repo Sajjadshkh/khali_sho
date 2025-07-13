@@ -62,7 +62,9 @@ class adviser(models.Model):
     email = models.EmailField(unique=True, verbose_name='ایمیل')
     age = models.PositiveIntegerField(verbose_name='سن')
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, verbose_name='جنسیت')
-    location = models.CharField(max_length=255, verbose_name='موقعیت')
+    location = models.CharField(max_length=255, verbose_name='موقعیت', blank=True, null=True)
+    latitude = models.FloatField(null=True, blank=True, verbose_name='عرض جغرافیایی')
+    longitude = models.FloatField(null=True, blank=True, verbose_name='طول جغرافیایی')
 
     bachelor_field = models.CharField(max_length=100, verbose_name='رشته تحصیلی کارشناسی')
     bachelor_year = models.PositiveIntegerField(verbose_name='سال فارغ التحصیلی کارشناسی')
@@ -71,7 +73,7 @@ class adviser(models.Model):
     phd_field = models.CharField(max_length=100, blank=True, null=True, verbose_name='رشته تحصیلی دکتری')
     phd_year = models.PositiveIntegerField(blank=True, null=True, verbose_name='سال فارغ التحصیلی دکتری')
 
-    is_unemployed = models.BooleanField(default=False)
+    is_unemployed = models.BooleanField(default=False, verbose_name='هم اکنون مشغول به کار نیستم')
     current_position = models.CharField(max_length=100, blank=True, null=True, verbose_name='شغل فعلی')
     current_organization = models.CharField(max_length=100, blank=True, null=True, verbose_name='محل کار')
     current_description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
