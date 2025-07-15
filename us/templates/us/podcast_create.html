@@ -16,87 +16,65 @@
             </p>
         </div>
     </section>
- <!-- Upload Section -->
-        <div class="bg-white rounded-xl shadow-sm p-6 mb-12">
-            {% comment %} <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">داستان خود را با ما به اشتراک بگذارید</h2>
-                <p class="text-gray-600 mt-2">تجربیات شما می‌تواند به دیگران کمک کند</p>
-            </div> {% endcomment %}
-            
-            <div class="max-w-2xl mx-auto">
-                {% comment %} <!-- Step 1: Register -->
-                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
-                    <div class="bg-blue-100 text-blue-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
-                        <span class="font-bold">۱</span>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-2">ثبت نام یا ورود</h3>
-                        <p class="text-gray-600 text-sm">برای آپلود پادکست باید در خالی شو حساب کاربری داشته باشید</p>
-                        <button class="mt-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition">
-                            ورود / ثبت نام
-                        </button>
-                    </div>
-                </div> {% endcomment %}
-                
+    <!-- پیام‌های موفقیت یا خطا -->
+    {% if messages %}
+      <div class="max-w-2xl mx-auto mt-6">
+        {% for message in messages %}
+          <div class="mb-4 p-3 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <!-- فرم ارسال پادکست -->
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-12">
+        <div class="max-w-2xl mx-auto">
+            <form method="post" enctype="multipart/form-data" novalidate>
+                {% csrf_token %}
                 <!-- Step 1: Record/Upload -->
                 <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
                     <div class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
                         <span class="font-bold">۱</span>
                     </div>
-                    <div>
-                        <h3 class="font-semibold mb-2">ضبط یا آپلود فایل صوتی</h3>
-                        <p class="text-gray-600 text-sm">می‌توانید مستقیماً ضبط کنید یا فایل صوتی آماده آپلود نمایید</p>
-                        <div class="mt-3 flex gap-3">
-                            <button class="bg-white border border-purple-500 text-purple-600 hover:bg-purple-50 px-4 py-2 rounded-lg text-sm transition flex items-center">
-                                <i class="fas fa-microphone ml-2"></i>
-                                ضبط صدا
-                            </button>
-                            <button class="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm transition flex items-center">
-                                <i class="fas fa-upload ml-2"></i>
-                                آپلود فایل
-                            </button>
+                    <div class="w-full">
+                        <h3 class="font-semibold mb-2">آپلود فایل صوتی</h3>
+                        <p class="text-gray-600 text-sm">می‌توانید مستقیماً فایل صوتی آماده را آپلود نمایید</p>
+                        <div class="mt-3">
+                            {{ form.audio_file.errors }}
+                            {{ form.audio_file }}
                         </div>
                     </div>
                 </div>
-                
                 <!-- Step 2: Add Details -->
                 <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
                     <div class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
                         <span class="font-bold">۲</span>
                     </div>
-                    <div>
+                    <div class="w-full space-y-3">
                         <h3 class="font-semibold mb-2">اطلاعات پادکست</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">عنوان پادکست</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">موضوع اصلی</label>
-                                <select class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm">
-                                    <option>روابط عاطفی</option>
-                                    <option>خانواده</option>
-                                    <option>اضطراب و استرس</option>
-                                    <option>افسردگی</option>
-                                    <option>مسائل شغلی</option>
-                                    <option>بحران‌های روانی</option>
-                                    <option>سایر</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">کلمات کلیدی (حداکثر ۳ مورد)</label>
-                                <input type="text" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm" placeholder="مثلاً: اضطراب، تنهایی، خانواده">
-                            </div>
+                        <div>
+                            {{ form.title.label_tag }}
+                            {{ form.title.errors }}
+                            {{ form.title }}
+                        </div>
+                        <div>
+                            {{ form.category.label_tag }}
+                            {{ form.category.errors }}
+                            {{ form.category }}
+                        </div>
+                        <div>
+                            {{ form.keywords.label_tag }}
+                            {{ form.keywords.errors }}
+                            {{ form.keywords }}
                         </div>
                     </div>
                 </div>
-                
                 <!-- Step 3: Accept Rules -->
                 <div class="flex items-start p-4 border border-gray-200 rounded-lg">
                     <div class="bg-red-100 text-red-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
                         <span class="font-bold">۳</span>
                     </div>
-                    <div>
+                    <div class="w-full">
                         <h3 class="font-semibold mb-2">قوانین و مقررات</h3>
                         <div class="bg-gray-50 p-3 rounded-lg mb-3 text-sm text-gray-600">
                             <ul class="list-disc pr-5 space-y-1">
@@ -108,21 +86,21 @@
                             </ul>
                         </div>
                         <div class="flex items-start">
-                            <input type="checkbox" id="acceptRules" class="mt-1 ml-2">
-                            <label for="acceptRules" class="text-sm text-gray-700">قوانین و مقررات را مطالعه کرده‌ام و می‌پذیرم</label>
+                            {{ form.accepted_rules }}
+                            {{ form.accepted_rules.errors }}
+                            <label for="id_accepted_rules" class="text-sm text-gray-700">قوانین و مقررات را مطالعه کرده‌ام و می‌پذیرم</label>
                         </div>
                     </div>
                 </div>
-                
                 <!-- Submit Button -->
                 <div class="mt-6 text-center">
-                    <button class="upload-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition inline-flex items-center">
+                    <button type="submit" class="upload-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition inline-flex items-center">
                         <i class="fas fa-podcast ml-2"></i>
                         انتشار پادکست
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
+    </div>
 
-
-  {% endblock %}
+{% endblock %}

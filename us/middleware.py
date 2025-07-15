@@ -8,9 +8,10 @@ class OTPVerificationMiddleware:
 
     def __call__(self, request):
         protected_paths = [
-            reverse('us:podcast_create'),
-            # reverse('us:adviser_create'),
+            # reverse('us:podcast_create'),
             reverse('accounts:register'),
+            reverse('us:adviser_create'),
+            reverse('us:cafe_create'),
 
             # مسیرهای بیشتری اضافه کن اگر خواستی
         ]

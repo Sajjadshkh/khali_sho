@@ -166,7 +166,6 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Specialty selection
         const specialtyTags = document.querySelectorAll('.specialty-tag');
-        const selectedSpecialtiesInput = document.getElementById('selected-specialties');
         let selectedSpecialties = [];
         
         specialtyTags.forEach(tag => {
@@ -184,7 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 
                 // Update hidden input
-                selectedSpecialtiesInput.value = selectedSpecialties.join(',');
+                // if (selectedSpecialtiesInput) { // This line is removed
+                //     selectedSpecialtiesInput.value = selectedSpecialties.join(',');
+                // }
             });
         });
         

@@ -65,6 +65,7 @@ class adviser(models.Model):
     location = models.CharField(max_length=255, verbose_name='موقعیت', blank=True, null=True)
     latitude = models.FloatField(null=True, blank=True, verbose_name='عرض جغرافیایی')
     longitude = models.FloatField(null=True, blank=True, verbose_name='طول جغرافیایی')
+    address = models.TextField(verbose_name='آدرس دقیق', blank=True, null=True)
 
     bachelor_field = models.CharField(max_length=100, verbose_name='رشته تحصیلی کارشناسی')
     bachelor_year = models.PositiveIntegerField(verbose_name='سال فارغ التحصیلی کارشناسی')
@@ -73,7 +74,7 @@ class adviser(models.Model):
     phd_field = models.CharField(max_length=100, blank=True, null=True, verbose_name='رشته تحصیلی دکتری')
     phd_year = models.PositiveIntegerField(blank=True, null=True, verbose_name='سال فارغ التحصیلی دکتری')
 
-    is_unemployed = models.BooleanField(default=False, verbose_name='هم اکنون مشغول به کار نیستم')
+    is_unemployed = models.BooleanField(default=False)
     current_position = models.CharField(max_length=100, blank=True, null=True, verbose_name='شغل فعلی')
     current_organization = models.CharField(max_length=100, blank=True, null=True, verbose_name='محل کار')
     current_description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
@@ -105,17 +106,19 @@ class Cafe(models.Model):
     capacity = models.PositiveIntegerField(verbose_name='ظرفیت')
     menu_file = models.FileField(upload_to='menus/', verbose_name='منو')
     description = models.TextField(blank=True, verbose_name='توضیحات اضافه')
+    latitude = models.FloatField(null=True, blank=True, verbose_name='عرض جغرافیایی')
+    longitude = models.FloatField(null=True, blank=True, verbose_name='طول جغرافیایی')
 
     # Facilities
-    has_wifi = models.BooleanField(default=False)
-    has_parking = models.BooleanField(default=False)
-    has_live_music = models.BooleanField(default=False)
-    has_outdoor = models.BooleanField(default=False)
-    has_hookah = models.BooleanField(default=False)
-    has_workspace = models.BooleanField(default=False)
-    serves_breakfast = models.BooleanField(default=False)
-    has_disabled_access = models.BooleanField(default=False)
-    accepted_terms = models.BooleanField(default=False)
+    has_wifi = models.BooleanField(default=False, blank=True)
+    has_parking = models.BooleanField(default=False, blank=True)
+    has_live_music = models.BooleanField(default=False, blank=True)
+    has_outdoor = models.BooleanField(default=False, blank=True)
+    has_hookah = models.BooleanField(default=False, blank=True)
+    has_workspace = models.BooleanField(default=False, blank=True)
+    serves_breakfast = models.BooleanField(default=False, blank=True)
+    has_disabled_access = models.BooleanField(default=False, blank=True)
+    accepted_terms = models.BooleanField(default=False, blank=True)
 
     def __str__(self):
         return self.cafe_name
@@ -130,5 +133,26 @@ class Owner(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class Podcast(models.Model):
+    CATEGORY_CHOICES = [
+        ("روابط عاطفی", "روابط عاطفی"),
+        ("خانواده", "خانواده"),
+        ("اضطراب و استرس", "اضطراب و استرس"),
+        ("افسردگی", "افسردگی"),
+        ("مسائل شغلی", "مسائل شغلی"),
+        ("بحران‌های روانی", "بحران‌های روانی"),
+        ("سایر", "سایر"),
+    ]
+    title = models.CharField(max_length=200, verbose_name="عنوان پادکست")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name="موضوع اصلی")
+    keywords = models.CharField(max_length=100, verbose_name="کلمات کلیدی")
+    audio_file = models.FileField(upload_to="podcasts/", verbose_name="فایل صوتی")
+    accepted_rules = models.BooleanField(verbose_name="تایید قوانین")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+
+    def __str__(self):
+        return self.title
 
 

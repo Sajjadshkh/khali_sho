@@ -1,16 +1,10 @@
 from django.contrib import admin
 from . import models
-from .models import adviser, Certificate, WORK_PREFERENCE_CHOICES, SPECIALTY_CHOICES, CONSULTATION_METHODS
-
-# Helper dicts for value translation
-WORK_PREF_DICT = dict(WORK_PREFERENCE_CHOICES)
-SPECIALTY_DICT = dict(SPECIALTY_CHOICES)
-CONSULTATION_DICT = dict(CONSULTATION_METHODS)
+from .models import adviser, Certificate, Cafe, Owner, Podcast
 
 class AdviserAdmin(admin.ModelAdmin):
     list_display = (
-        'full_name', 'phone', 'email', 'age', 'gender', 'location', 'latitude', 'longitude',
-        'get_work_preferences', 'get_specialties', 'get_consultation_methods'
+        'full_name', 'phone', 'email', 'age', 'gender', 'location', 'latitude', 'longitude'
     )
     fieldsets = (
         (None, {
@@ -26,20 +20,25 @@ class AdviserAdmin(admin.ModelAdmin):
             'fields': ('work_preferences', 'specialties', 'consultation_methods', 'accepted_terms')
         }),
     )
-    readonly_fields = ('get_work_preferences', 'get_specialties', 'get_consultation_methods')
 
-    def get_work_preferences(self, obj):
-        return ', '.join([WORK_PREF_DICT.get(val, val) for val in obj.work_preferences])
-    get_work_preferences.short_description = 'مایل به کار'
+class CafeAdmin(admin.ModelAdmin):
+    list_display = ('cafe_name', 'cafe_type', 'address', 'size', 'capacity', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms')
+    search_fields = ('cafe_name', 'address')
+    list_filter = ('cafe_type', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms')
 
-    def get_specialties(self, obj):
-        return ', '.join([SPECIALTY_DICT.get(val, val) for val in obj.specialties])
-    get_specialties.short_description = 'زمینه های تخصصی'
+class OwnerAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'national_id', 'phone', 'email', 'cafe')
+    search_fields = ('full_name', 'national_id', 'phone', 'email')
+    list_filter = ('cafe',)
 
-    def get_consultation_methods(self, obj):
-        return ', '.join([CONSULTATION_DICT.get(val, val) for val in obj.consultation_methods])
-    get_consultation_methods.short_description = 'روش های مشاوره'
+@admin.register(Podcast)
+class PodcastAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'created_at', 'accepted_rules')
+    search_fields = ('title', 'keywords')
+    list_filter = ('category', 'created_at')
 
 admin.site.register(models.Aboutus)
 admin.site.register(adviser, AdviserAdmin)
 admin.site.register(Certificate)
+admin.site.register(Cafe, CafeAdmin)
+admin.site.register(Owner, OwnerAdmin)

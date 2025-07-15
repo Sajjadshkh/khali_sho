@@ -92,26 +92,6 @@
 .submit-btn:active {
     transform: translateY(0);
 }
-.specialty-tag {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  background: #f3f4f6;
-  color: #6366f1;
-  font-weight: 500;
-  margin: 0.25rem 0.5rem 0.25rem 0;
-  cursor: pointer;
-  border: 2px solid #6366f1;
-  transition: background 0.2s, color 0.2s;
-  user-select: none;
-}
-.specialty-checkbox {
-  display: none;
-}
-.specialty-checkbox:checked + .specialty-tag {
-  background: #6366f1;
-  color: #fff;
-}
 </style>
 
 <div class="container mx-auto px-4 py-12">
@@ -128,465 +108,395 @@
         لطفا اطلاعات خود را با دقت کامل وارد نمایید
       </p>
     </section>
-
+            <!-- Progress Steps -->
+            <div class="bg-indigo-50 px-8 py-4 flex justify-between items-center">
+              <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-full bg-indigo-800 text-white flex items-center justify-center font-bold">1</div>
+                  <div class="mr-2 text-sm font-medium text-indigo-800">اطلاعات شخصی</div>
+              </div>
+              <div class="h-1 flex-1 bg-indigo-200 mx-2"></div>
+              <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-full bg-indigo-200 text-indigo-800 flex items-center justify-center font-bold">2</div>
+                  <div class="mr-2 text-sm font-medium text-gray-500">سوابق تحصیلی و شغلی</div>
+              </div>
+              <div class="h-1 flex-1 bg-indigo-200 mx-2"></div>
+              <div class="flex items-center">
+                  <div class="w-8 h-8 rounded-full bg-indigo-200 text-indigo-800 flex items-center justify-center font-bold">3</div>
+                  <div class="mr-2 text-sm font-medium text-gray-500">تخصص ها و تایید نهایی</div>
+              </div>
+          </div>
     <!-- Form -->
     <form method="POST" enctype="multipart/form-data" class="p-8">
       {% csrf_token %}
-
-      <!-- Personal Information Section -->
-      <div class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
-          <i class="fas fa-user-tie mr-2 text-indigo-700"></i>
-          اطلاعات شخصی
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Full Name -->
-          <div>
-            <label
-              for="{{ form.full_name.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 mb-1"
-            >
-              {{ form.full_name.label }} <span class="text-red-500">*</span>
-            </label>
-            
-            <div class="relative">
-              {{ form.full_name }}
-              {% if form.full_name.errors %}
-                <div class="error-message">{{ form.full_name.errors.0 }}</div>
-              {% endif %}
-              <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
-            </div>
-          </div>
-
-          <!-- Phone Number -->
-          <div>
-            <label
-              for="{{ form.phone.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 mb-1"
-              >{{ form.phone.label }} <span class="text-red-500">*</span></label
-            >
-            <div class="relative">
-              {{ form.phone }}
-              {% if form.phone.errors %}
-                <div class="error-message">{{ form.phone.errors.0 }}</div>
-              {% endif %}
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div>
-            <label
-              for="{{ form.email.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 mb-1"
-              >{{ form.email.label }} <span class="text-red-500">*</span></label
-            >
-            <div class="relative">
-              {{ form.email }}
-              {% if form.email.errors %}
-                <div class="error-message">{{ form.email.errors.0 }}</div>
-              {% endif %}
-              <i
-                class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"
-              ></i>
-            </div>
-          </div>
-
-          <!-- Age -->
-          <div>
-            <label
-              for="{{ form.age.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 mb-1"
-              >{{ form.age.label }} <span class="text-red-500">*</span></label
-            >
-            <div class="relative">
-              {{ form.age }}
-              {% if form.age.errors %}
-                <div class="error-message">{{ form.age.errors.0 }}</div>
-              {% endif %}
-              <i
-                class="fas fa-birthday-cake absolute left-3 top-3.5 text-gray-400"
-              ></i>
-            </div>
-          </div>
-
-          <!-- Gender -->
-          <div>
-            <label
-              for="{{ form.gender.id_for_label }}"
-              class="block text-sm font-medium text-gray-700 mb-1"
-              >{{ form.gender.label }} <span class="text-red-500">*</span></label
-            >
-            <div class="relative">
-              {{ form.gender }}
-              {% if form.gender.errors %}
-                <div class="error-message">{{ form.gender.errors.0 }}</div>
-              {% endif %}
-            </div>
-          </div>
-
-          <!-- Location -->
-          <div class="md:col-span-2">
-            <label class="block text-sm font-medium text-gray-700 mb-1">
-              موقعیت مکانی روی نقشه (برای مشاوره حضوری)
-              <span class="text-red-500">*</span>
-            </label>
-            <div class="relative">
-              <div id="map" style="height: 300px; border-radius: 0.5rem; margin-bottom: 1rem;"></div>
-              {{ form.latitude }}
-              {{ form.longitude }}
-              {% if form.latitude.errors %}
-                <div class="error-message">{{ form.latitude.errors.0 }}</div>
-              {% endif %}
-              {% if form.longitude.errors %}
-                <div class="error-message">{{ form.longitude.errors.0 }}</div>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Education and Work Experience Section -->
-      <div class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
-          <i class="fas fa-graduation-cap mr-2 text-indigo-700"></i>
-          سوابق تحصیلی و شغلی
-        </h2>
-
-        <!-- Education Tabs -->
-        <div class="mb-8">
-          <div class="flex border-b border-gray-200 mb-6">
-            <button
-              type="button"
-              class="px-4 py-2 rounded-t-lg tab active"
-              data-tab="bachelor"
-            >
-              <i class="fas fa-graduation-cap mr-2"></i>
-              کارشناسی
-            </button>
-            <button
-              type="button"
-              class="px-4 py-2 rounded-t-lg tab"
-              data-tab="master"
-            >
-              <i class="fas fa-user-graduate mr-2"></i>
-              کارشناسی ارشد
-            </button>
-            <button
-              type="button"
-              class="px-4 py-2 rounded-t-lg tab"
-              data-tab="phd"
-            >
-              <i class="fas fa-user-tie mr-2"></i>
-              دکتری
-            </button>
-          </div>
-
-          <!-- Bachelor Degree -->
-          <div class="tab-content" id="bachelor-tab">
+        <!-- Step 1: Personal Info -->
+        <div id="step-1" class="step-form">
+          <!-- Personal Information Section -->
+          <div class="mb-12">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+              <i class="fas fa-user-tie mr-2 text-indigo-700"></i>
+              اطلاعات شخصی
+            </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Full Name -->
               <div>
-                <label
-                  for="{{ form.bachelor_field.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.bachelor_field.label }} <span class="text-red-500">*</span></label
-                >
-                {{ form.bachelor_field }}
-                {% if form.bachelor_field.errors %}
-                  <div class="error-message">{{ form.bachelor_field.errors.0 }}</div>
-                {% endif %}
+                <label for="{{ form.full_name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.full_name.label }} <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  {{ form.full_name }}
+                  {% if form.full_name.errors %}
+                    <div class="error-message">{{ form.full_name.errors.0 }}</div>
+                  {% endif %}
+                  <i class="fas fa-user absolute left-3 top-3.5 text-gray-400"></i>
+                </div>
               </div>
+              <!-- Phone Number -->
               <div>
-                <label
-                  for="{{ form.bachelor_year.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.bachelor_year.label }} <span class="text-red-500">*</span></label
-                >
-                {{ form.bachelor_year }}
-                {% if form.bachelor_year.errors %}
-                  <div class="error-message">{{ form.bachelor_year.errors.0 }}</div>
-                {% endif %}
+                <label for="{{ form.phone.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.phone.label }} <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  {{ form.phone }}
+                  {% if form.phone.errors %}
+                    <div class="error-message">{{ form.phone.errors.0 }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <!-- Email -->
+              <div>
+                <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.email.label }} <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  {{ form.email }}
+                  {% if form.email.errors %}
+                    <div class="error-message">{{ form.email.errors.0 }}</div>
+                  {% endif %}
+                  <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+                </div>
+              </div>
+              <!-- Age -->
+              <div>
+                <label for="{{ form.age.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.age.label }} <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  {{ form.age }}
+                  {% if form.age.errors %}
+                    <div class="error-message">{{ form.age.errors.0 }}</div>
+                  {% endif %}
+                  <i class="fas fa-birthday-cake absolute left-3 top-3.5 text-gray-400"></i>
+                </div>
+              </div>
+              <!-- Gender -->
+              <div>
+                <label for="{{ form.gender.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.gender.label }} <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  {{ form.gender }}
+                  {% if form.gender.errors %}
+                    <div class="error-message">{{ form.gender.errors.0 }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <!-- Address & Location -->
+              <div class="md:col-span-2">
+                <label for="{{ form.address.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  {{ form.address.label }}
+                </label>
+                <div class="relative mb-4">
+                  {{ form.address }}
+                  {% if form.address.errors %}<div class="error-message">{{ form.address.errors.0 }}</div>{% endif %}
+                </div>
+                <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                  موقعیت مکانی روی نقشه (اختیاری)
+                </label>
+                <div class="relative">
+                  <div id="map" style="height: 300px; border-radius: 0.5rem; margin-bottom: 1rem;"></div>
+                  {{ form.latitude }}
+                  {{ form.longitude }}
+                  {% if form.latitude.errors %}<div class="error-message">{{ form.latitude.errors.0 }}</div>{% endif %}
+                  {% if form.longitude.errors %}<div class="error-message">{{ form.longitude.errors.0 }}</div>{% endif %}
+                </div>
               </div>
             </div>
           </div>
-
-          <!-- Master Degree (hidden by default) -->
-          <div class="tab-content hidden" id="master-tab">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  for="{{ form.master_field.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.master_field.label }}</label
-                >
-                {{ form.master_field }}
-                {% if form.master_field.errors %}
-                  <div class="error-message">{{ form.master_field.errors.0 }}</div>
-                {% endif %}
-              </div>
-              <div>
-                <label
-                  for="{{ form.master_year.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.master_year.label }}</label
-                >
-                {{ form.master_year }}
-                {% if form.master_year.errors %}
-                  <div class="error-message">{{ form.master_year.errors.0 }}</div>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-
-          <!-- PhD Degree (hidden by default) -->
-          <div class="tab-content hidden" id="phd-tab">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  for="{{ form.phd_field.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.phd_field.label }}</label
-                >
-                {{ form.phd_field }}
-                {% if form.phd_field.errors %}
-                  <div class="error-message">{{ form.phd_field.errors.0 }}</div>
-                {% endif %}
-              </div>
-              <div>
-                <label
-                  for="{{ form.phd_year.id_for_label }}"
-                  class="block text-sm font-medium text-gray-700 mb-1"
-                  >{{ form.phd_year.label }}</label
-                >
-                {{ form.phd_year }}
-                {% if form.phd_year.errors %}
-                  <div class="error-message">{{ form.phd_year.errors.0 }}</div>
-                {% endif %}
-              </div>
-            </div>
+          <div class="flex justify-end">
+            <button type="button" class="submit-btn" onclick="showStep(2)">مرحله بعد</button>
           </div>
         </div>
-
-        <!-- Work Experience -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-3"
-            >سوابق شغلی <span class="text-red-500">*</span></label
-          >
-
-          <!-- Current Job -->
-          <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-            <div class="flex justify-between items-center mb-3">
-              <h3 class="font-medium text-gray-800">شغل فعلی</h3>
-              <div class="flex items-center">
-                {{ form.is_unemployed }}
-                <label
-                  for="{{ form.is_unemployed.id_for_label }}"
-                  class="mr-2 text-sm text-gray-700"
-                  >هم اکنون مشغول به کار نیستم</label
-                >
+        <!-- Step 2: Education & Work -->
+        <div id="step-2" class="step-form" style="display:none;">
+          <!-- Education and Work Experience Section -->
+          <div class="mb-12">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+              <i class="fas fa-graduation-cap mr-2 text-indigo-700"></i>
+              سوابق تحصیلی و شغلی
+            </h2>
+            <!-- Education Tabs -->
+            <div class="mb-8">
+              <div class="flex border-b border-gray-200 mb-6">
+                <button type="button" class="px-4 py-2 rounded-t-lg tab active" data-tab="bachelor">
+                  <i class="fas fa-graduation-cap mr-2"></i>
+                  کارشناسی
+                </button>
+                <button type="button" class="px-4 py-2 rounded-t-lg tab" data-tab="master">
+                  <i class="fas fa-user-graduate mr-2"></i>
+                  کارشناسی ارشد
+                </button>
+                <button type="button" class="px-4 py-2 rounded-t-lg tab" data-tab="phd">
+                  <i class="fas fa-user-tie mr-2"></i>
+                  دکتری
+                </button>
+              </div>
+              <!-- Bachelor Degree -->
+              <div class="tab-content" id="bachelor-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="{{ form.bachelor_field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.bachelor_field.label }} <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.bachelor_field }}
+                    {% if form.bachelor_field.errors %}
+                      <div class="error-message">{{ form.bachelor_field.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <label for="{{ form.bachelor_year.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.bachelor_year.label }} <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.bachelor_year }}
+                    {% if form.bachelor_year.errors %}
+                      <div class="error-message">{{ form.bachelor_year.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <!-- Master Degree (hidden by default) -->
+              <div class="tab-content hidden" id="master-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="{{ form.master_field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.master_field.label }}
+                    </label>
+                    {{ form.master_field }}
+                    {% if form.master_field.errors %}
+                      <div class="error-message">{{ form.master_field.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <label for="{{ form.master_year.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.master_year.label }}
+                    </label>
+                    {{ form.master_year }}
+                    {% if form.master_year.errors %}
+                      <div class="error-message">{{ form.master_year.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              <!-- PhD Degree (hidden by default) -->
+              <div class="tab-content hidden" id="phd-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label for="{{ form.phd_field.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.phd_field.label }}
+                    </label>
+                    {{ form.phd_field }}
+                    {% if form.phd_field.errors %}
+                      <div class="error-message">{{ form.phd_field.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <label for="{{ form.phd_year.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
+                      {{ form.phd_year.label }}
+                    </label>
+                    {{ form.phd_year }}
+                    {% if form.phd_year.errors %}
+                      <div class="error-message">{{ form.phd_year.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label
-                  for="{{ form.current_position.id_for_label }}"
-                  class="block text-xs font-medium text-gray-700 mb-1"
-                  >{{ form.current_position.label }}</label
-                >
-                {{ form.current_position }}
-                {% if form.current_position.errors %}
-                  <div class="error-message">{{ form.current_position.errors.0 }}</div>
-                {% endif %}
+            <!-- Work Experience -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-3">
+                سوابق شغلی <span class="text-red-500">*</span>
+              </label>
+              <div class="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <div class="flex justify-between items-center mb-3">
+                  <h3 class="font-medium text-gray-800">شغل فعلی</h3>
+                  <div class="flex items-center">
+                    {{ form.is_unemployed }}
+                    <label for="{{ form.is_unemployed.id_for_label }}" class="mr-2 text-sm text-gray-700">هم اکنون مشغول به کار نیستم</label>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label for="{{ form.current_position.id_for_label }}" class="block text-xs font-medium text-gray-700 mb-1">
+                      {{ form.current_position.label }}
+                    </label>
+                    {{ form.current_position }}
+                    {% if form.current_position.errors %}
+                      <div class="error-message">{{ form.current_position.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <label for="{{ form.current_organization.id_for_label }}" class="block text-xs font-medium text-gray-700 mb-1">
+                      {{ form.current_organization.label }}
+                    </label>
+                    {{ form.current_organization }}
+                    {% if form.current_organization.errors %}
+                      <div class="error-message">{{ form.current_organization.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <label for="{{ form.current_description.id_for_label }}" class="block text-xs font-medium text-gray-700 mb-1">
+                      {{ form.current_description.label }}
+                    </label>
+                    {{ form.current_description }}
+                    {% if form.current_description.errors %}
+                      <div class="error-message">{{ form.current_description.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                </div>
               </div>
-              <div>
-                <label
-                  for="{{ form.current_organization.id_for_label }}"
-                  class="block text-xs font-medium text-gray-700 mb-1"
-                  >{{ form.current_organization.label }}</label
-                >
-                {{ form.current_organization }}
-                {% if form.current_organization.errors %}
-                  <div class="error-message">{{ form.current_organization.errors.0 }}</div>
-                {% endif %}
+            </div>
+            <!-- Work Preferences -->
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-3">نوع همکاری مورد علاقه</label>
+              <div class="checkbox-group">
+                {% for checkbox in form.work_preferences %}
+                  <div class="checkbox-item">
+                    {{ checkbox.tag }}
+                    <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                  </div>
+                {% endfor %}
               </div>
-              <div>
-                <label
-                  for="{{ form.current_description.id_for_label }}"
-                  class="block text-xs font-medium text-gray-700 mb-1"
-                  >{{ form.current_description.label }}</label
-                >
-                {{ form.current_description }}
-                {% if form.current_description.errors %}
-                  <div class="error-message">{{ form.current_description.errors.0 }}</div>
-                {% endif %}
+              {% if form.work_preferences.errors %}
+                <div class="error-message">{{ form.work_preferences.errors.0 }}</div>
+              {% endif %}
+            </div>
+            <!-- Certificates -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-3">مدارک و گواهینامه ها</label>
+              <div class="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+                <div class="flex flex-col items-center justify-center">
+                  <i class="fas fa-file-certificate text-4xl text-gray-400 mb-2"></i>
+                  <p class="text-sm text-gray-500 mb-3">مدارک خود را اینجا رها کنید یا کلیک کنید</p>
+                  <input type="file" name="certificates" multiple class="hidden" id="certificate-upload">
+                  <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" onclick="document.getElementById('certificate-upload').click()">انتخاب فایل</button>
+                </div>
               </div>
             </div>
           </div>
+          <div class="flex justify-between">
+            <button type="button" class="submit-btn" onclick="showStep(1)">مرحله قبل</button>
+            <button type="button" class="submit-btn" onclick="showStep(3)">مرحله بعد</button>
+          </div>
         </div>
-
-        <!-- Work Preferences -->
-        <div class="mb-6">
-          <label class="block text-sm font-medium text-gray-700 mb-3">
-            نوع همکاری مورد علاقه
-          </label>
-          <div class="checkbox-group">
-            {% for checkbox in form.work_preferences %}
-              <div class="checkbox-item">
-                {{ checkbox.tag }}
-                <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+        <!-- Step 3: Specialties & Final -->
+        <div id="step-3" class="step-form" style="display:none;">
+          <!-- Specialties Section -->
+          <div class="mb-12">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+              <i class="fas fa-brain mr-2 text-indigo-700"></i>
+              تخصص ها و زمینه های فعالیت
+            </h2>
+            <div class="mb-8">
+              <label class="block text-sm font-medium text-gray-700 mb-3">زمینه‌های تخصصی <span class="text-red-500">*</span></label>
+              <div class="checkbox-group">
+                {% for checkbox in form.specialties %}
+                  <div class="checkbox-item">
+                    {{ checkbox.tag }}
+                    <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                  </div>
+                {% endfor %}
               </div>
-            {% endfor %}
-          </div>
-          {% if form.work_preferences.errors %}
-            <div class="error-message">{{ form.work_preferences.errors.0 }}</div>
-          {% endif %}
-        </div>
-
-        <!-- Certificates -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-3"
-            >مدارک و گواهینامه ها</label
-          >
-
-          <div
-            class="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50"
-          >
-            <div class="flex flex-col items-center justify-center">
-              <i
-                class="fas fa-file-certificate text-4xl text-gray-400 mb-2"
-              ></i>
-              <p class="text-sm text-gray-500 mb-3">
-                مدارک خود را اینجا رها کنید یا کلیک کنید
-              </p>
-              <input type="file" name="certificates" multiple class="hidden" id="certificate-upload">
-              <button
-                type="button"
-                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
-                onclick="document.getElementById('certificate-upload').click()"
-              >
-                انتخاب فایل
-              </button>
+              {% if form.specialties.errors %}
+                <div class="error-message">{{ form.specialties.errors.0 }}</div>
+              {% endif %}
+            </div>
+            <!-- Consultation Methods -->
+            <div class="mb-8">
+              <label class="block text-sm font-medium text-gray-700 mb-3">روش‌های مشاوره <span class="text-red-500">*</span></label>
+              <div class="checkbox-group">
+                {% for checkbox in form.consultation_methods %}
+                  <div class="checkbox-item">
+                    {{ checkbox.tag }}
+                    <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                  </div>
+                {% endfor %}
+              </div>
+              {% if form.consultation_methods.errors %}
+                <div class="error-message">{{ form.consultation_methods.errors.0 }}</div>
+              {% endif %}
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Specialties Section -->
-      <div class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
-          <i class="fas fa-brain mr-2 text-indigo-700"></i>
-          تخصص ها و زمینه های فعالیت
-        </h2>
-
-        <div class="mb-8">
-          <label class="block text-sm font-medium text-gray-700 mb-3">
-            زمینه‌های تخصصی <span class="text-red-500">*</span>
-          </label>
-          <div class="checkbox-group">
-            {% for checkbox in form.specialties %}
-              <input type="checkbox" class="specialty-checkbox" id="{{ checkbox.id_for_label }}" name="{{ checkbox.name }}" value="{{ checkbox.choice_value }}"{% if checkbox.value %} checked{% endif %}>
-              <label class="specialty-tag" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
-            {% endfor %}
-          </div>
-          {% if form.specialties.errors %}
-            <div class="error-message">{{ form.specialties.errors.0 }}</div>
-          {% endif %}
-        </div>
-
-        <!-- Consultation Methods -->
-        <div class="mb-8">
-          <label class="block text-sm font-medium text-gray-700 mb-3">
-            روش‌های مشاوره <span class="text-red-500">*</span>
-          </label>
-          <div class="checkbox-group">
-            {% for checkbox in form.consultation_methods %}
-              <input type="checkbox" class="specialty-checkbox" id="{{ checkbox.id_for_label }}" name="{{ checkbox.name }}" value="{{ checkbox.choice_value }}"{% if checkbox.value %} checked{% endif %}>
-              <label class="specialty-tag" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
-            {% endfor %}
-          </div>
-          {% if form.consultation_methods.errors %}
-            <div class="error-message">{{ form.consultation_methods.errors.0 }}</div>
-          {% endif %}
-        </div>
-      </div>
-
-      <!-- Terms and Conditions -->
-      <div class="mb-8">
-        <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
-          <i class="fas fa-file-contract mr-2 text-indigo-700"></i>
-          قوانین و مقررات
-        </h2>
-
-        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-          <div
-            class="h-64 overflow-y-auto mb-6 p-4 border border-gray-200 rounded-lg"
-          >
-            <h3 class="font-bold text-lg mb-4 text-gray-800">
-              قوانین و شرایط همکاری با پلتفرم مشاوره ای ما
-            </h3>
-            <p class="text-gray-700 mb-3">
-              1. تمامی اطلاعات ارائه شده باید صحیح و معتبر باشند. در صورت ارائه
-              اطلاعات نادرست، حساب کاربری شما مسدود خواهد شد.
-            </p>
-            <p class="text-gray-700 mb-3">
-              2. مسئولیت تمامی محتوای منتشر شده در پروفایل شما بر عهده خودتان می
-              باشد.
-            </p>
-            <p class="text-gray-700 mb-3">
-              3. پلتفرم ما 20% از هر جلسه مشاوره را به عنوان کارمزد دریافت می
-              کند.
-            </p>
-            <p class="text-gray-700 mb-3">
-              4. موظف به پاسخگویی به درخواست های مشاوره در مدت حداکثر 24 ساعت
-              هستید.
-            </p>
-            <p class="text-gray-700 mb-3">
-              5. در صورت بروز هرگونه مشکل در ارائه خدمات، پلتفرم حق دارد حساب
-              کاربری شما را به صورت موقت یا دائم مسدود نماید.
-            </p>
-            <p class="text-gray-700 mb-3">
-              6. اطلاعات شخصی شما صرفاً برای اهداف احراز هویت و ارتباط استفاده
-              خواهد شد و در اختیار اشخاص ثالث قرار نخواهد گرفت.
-            </p>
-            <p class="text-gray-700">
-              7. شما موظف هستید در صورت تغییر در تخصص ها، روش های مشاوره یا
-              هزینه ها، پلتفرم را مطلع نمایید.
-            </p>
-          </div>
-
-          <div class="flex items-start">
-            <div class="flex items-center h-5">
-              {{ form.accepted_terms }}
-            </div>
-            <div class="mr-3 text-sm">
-              <label for="{{ form.accepted_terms.id_for_label }}" class="font-medium text-gray-700"
-                >{{ form.accepted_terms.label }}</label
-              >
+          <!-- Terms and Conditions -->
+          <div class="mb-8">
+            <h2 class="text-xl font-bold mb-6 text-gray-800 section-title">
+              <i class="fas fa-file-contract mr-2 text-indigo-700"></i>
+              قوانین و مقررات
+            </h2>
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <div class="h-64 overflow-y-auto mb-6 p-4 border border-gray-200 rounded-lg">
+                <h3 class="font-bold text-lg mb-4 text-gray-800">قوانین و شرایط همکاری با پلتفرم مشاوره ای ما</h3>
+                <p class="text-gray-700 mb-3">1. تمامی اطلاعات ارائه شده باید صحیح و معتبر باشند. در صورت ارائه اطلاعات نادرست، حساب کاربری شما مسدود خواهد شد.</p>
+                <p class="text-gray-700 mb-3">2. مسئولیت تمامی محتوای منتشر شده در پروفایل شما بر عهده خودتان می باشد.</p>
+                <p class="text-gray-700 mb-3">3. پلتفرم ما 20% از هر جلسه مشاوره را به عنوان کارمزد دریافت می کند.</p>
+                <p class="text-gray-700 mb-3">4. موظف به پاسخگویی به درخواست های مشاوره در مدت حداکثر 24 ساعت هستید.</p>
+                <p class="text-gray-700 mb-3">5. در صورت بروز هرگونه مشکل در ارائه خدمات، پلتفرم حق دارد حساب کاربری شما را به صورت موقت یا دائم مسدود نماید.</p>
+                <p class="text-gray-700 mb-3">6. اطلاعات شخصی شما صرفاً برای اهداف احراز هویت و ارتباط استفاده خواهد شد و در اختیار اشخاص ثالث قرار نخواهد گرفت.</p>
+                <p class="text-gray-700">7. شما موظف هستید در صورت تغییر در تخصص ها، روش های مشاوره یا هزینه ها، پلتفرم را مطلع نمایید.</p>
+              </div>
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  {{ form.accepted_terms }}
+                </div>
+                <div class="mr-3 text-sm">
+                  <label for="{{ form.accepted_terms.id_for_label }}" class="font-medium text-gray-700">{{ form.accepted_terms.label }}</label>
+                </div>
+              </div>
+              {% if form.accepted_terms.errors %}
+                <div class="error-message">{{ form.accepted_terms.errors.0 }}</div>
+              {% endif %}
             </div>
           </div>
-          {% if form.accepted_terms.errors %}
-            <div class="error-message">{{ form.accepted_terms.errors.0 }}</div>
-          {% endif %}
+          <!-- Submit Button -->
+          <div class="flex justify-between">
+            <button type="button" class="submit-btn" onclick="showStep(2)">مرحله قبل</button>
+            <button type="submit" class="submit-btn">ارسال برای بررسی</button>
+          </div>
         </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="flex justify-center">
-        <button
-          type="submit"
-          class="submit-btn"
-        >
-          <i class="fas fa-paper-plane ml-2"></i>
-          ارسال برای بررسی
-        </button>
-      </div>
-    </form>
+      </form>
   </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+function fixToEnglishDigits(str) {
+  if (!str) return '';
+  return str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var phone = document.getElementById('id_phone');
+  if (phone) {
+    phone.addEventListener('input', function(e) {
+      var val = fixToEnglishDigits(this.value);
+      if (this.value !== val) this.value = val;
+    });
+  }
+  var nationalId = document.getElementById('id_national_id');
+  if (nationalId) {
+    nationalId.addEventListener('input', function(e) {
+      var val = fixToEnglishDigits(this.value);
+      if (this.value !== val) this.value = val;
+    });
+  }
+});
 // Tab functionality
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.tab');
@@ -631,5 +541,157 @@ document.addEventListener('DOMContentLoaded', function() {
       lngInput.value = e.latlng.lng;
     });
   });
+
+function validateStep(step) {
+  let valid = true;
+  let requiredFields = [];
+  // پیام خطا را حذف کن
+  document.querySelectorAll('.js-error-message').forEach(e => e.remove());
+  if (step === 1) {
+    requiredFields = [
+      'id_full_name',
+      'id_phone',
+      'id_email',
+      'id_age',
+      'id_gender',
+      'id_address'
+    ];
+    requiredFields.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el && !el.value.trim()) {
+        el.classList.add('border-red-500');
+        // پیام خطا فقط اگر وجود ندارد اضافه شود
+        if (!el.parentNode.querySelector('.js-error-message')) {
+          const err = document.createElement('div');
+          err.className = 'error-message js-error-message';
+          err.innerText = 'این فیلد الزامی است';
+          el.parentNode.appendChild(err);
+        }
+        valid = false;
+      } else if (el) {
+        el.classList.remove('border-red-500');
+        const err = el.parentNode.querySelector('.js-error-message');
+        if (err) err.remove();
+      }
+    });
+  } else if (step === 2) {
+    requiredFields = [
+      'id_bachelor_field',
+      'id_bachelor_year'
+    ];
+    requiredFields.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el && !el.value.trim()) {
+        el.classList.add('border-red-500');
+        if (!el.parentNode.querySelector('.js-error-message')) {
+          const err = document.createElement('div');
+          err.className = 'error-message js-error-message';
+          err.innerText = 'این فیلد الزامی است';
+          el.parentNode.appendChild(err);
+        }
+        valid = false;
+      } else if (el) {
+        el.classList.remove('border-red-500');
+        const err = el.parentNode.querySelector('.js-error-message');
+        if (err) err.remove();
+      }
+    });
+  } else if (step === 3) {
+    // Specialties (checkbox group)
+    const specialties = document.querySelectorAll('input[name="specialties"]:checked');
+    if (specialties.length === 0) {
+      document.querySelectorAll('input[name="specialties"]').forEach(el => el.classList.add('ring-2', 'ring-red-500'));
+      if (!document.getElementById('specialties-error')) {
+        const err = document.createElement('div');
+        err.className = 'error-message js-error-message';
+        err.id = 'specialties-error';
+        err.innerText = 'حداقل یک تخصص را انتخاب کنید';
+        document.querySelector('.checkbox-group input[name="specialties"]').parentNode.parentNode.appendChild(err);
+      }
+      valid = false;
+    } else {
+      document.querySelectorAll('input[name="specialties"]').forEach(el => el.classList.remove('ring-2', 'ring-red-500'));
+      const err = document.getElementById('specialties-error');
+      if (err) err.remove();
+    }
+    // Consultation methods (checkbox group)
+    const consults = document.querySelectorAll('input[name="consultation_methods"]:checked');
+    if (consults.length === 0) {
+      document.querySelectorAll('input[name="consultation_methods"]').forEach(el => el.classList.add('ring-2', 'ring-red-500'));
+      if (!document.getElementById('consultation-error')) {
+        const err = document.createElement('div');
+        err.className = 'error-message js-error-message';
+        err.id = 'consultation-error';
+        err.innerText = 'حداقل یک روش مشاوره را انتخاب کنید';
+        document.querySelector('.checkbox-group input[name="consultation_methods"]').parentNode.parentNode.appendChild(err);
+      }
+      valid = false;
+    } else {
+      document.querySelectorAll('input[name="consultation_methods"]').forEach(el => el.classList.remove('ring-2', 'ring-red-500'));
+      const err = document.getElementById('consultation-error');
+      if (err) err.remove();
+    }
+    // Accepted terms (checkbox)
+    const terms = document.getElementById('id_accepted_terms');
+    if (terms && !terms.checked) {
+      terms.classList.add('ring-2', 'ring-red-500');
+      if (!document.getElementById('terms-error')) {
+        const err = document.createElement('div');
+        err.className = 'error-message js-error-message';
+        err.id = 'terms-error';
+        err.innerText = 'پذیرش قوانین الزامی است';
+        terms.parentNode.appendChild(err);
+      }
+      valid = false;
+    } else if (terms) {
+      terms.classList.remove('ring-2', 'ring-red-500');
+      const err = document.getElementById('terms-error');
+      if (err) err.remove();
+    }
+  }
+  return valid;
+}
+
+function showStep(step) {
+  // اعتبارسنجی مرحله قبلی
+  if (step > 1) {
+    if (!validateStep(step - 1)) {
+      alert('لطفاً همه فیلدهای الزامی را پر کنید.');
+      return;
+    }
+  }
+  document.querySelectorAll('.step-form').forEach(div => div.style.display = 'none');
+  document.getElementById('step-' + step).style.display = 'block';
+  // Progress bar coloring
+  const steps = document.querySelectorAll('.bg-indigo-50 .w-8');
+  steps.forEach((el, idx) => {
+    if (idx < step) {
+      el.classList.add('bg-indigo-800', 'text-white');
+      el.classList.remove('bg-indigo-200', 'text-indigo-800');
+    } else {
+      el.classList.remove('bg-indigo-800', 'text-white');
+      el.classList.add('bg-indigo-200', 'text-indigo-800');
+    }
+  });
+}
+
+// اگر خطاهای سرور وجود داشتند، مرحله مناسب را نمایش بده
+window.addEventListener('DOMContentLoaded', function() {
+  var errorStep = 1;
+  // اگر خطا در فیلدهای مرحله 3 بود
+  if (
+    document.querySelector('.error-message[for="id_specialties"]') ||
+    document.querySelector('.error-message[for="id_consultation_methods"]') ||
+    document.querySelector('.error-message[for="id_accepted_terms"]')
+  ) {
+    errorStep = 3;
+  } else if (
+    document.querySelector('.error-message[for="id_bachelor_field"]') ||
+    document.querySelector('.error-message[for="id_bachelor_year"]')
+  ) {
+    errorStep = 2;
+  }
+  showStep(errorStep);
+});
 </script>
 {% endblock %}
