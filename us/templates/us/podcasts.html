@@ -46,7 +46,7 @@
                 <div class="p-4">
                     <div class="flex items-center mb-3">
                         <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">{{ podcast.category }}</span>
-                        <span class="text-gray-500 text-sm mr-2">{{ podcast.created_at|date:"Y/m/d" }}</span>
+                        {% comment %} <span class="text-gray-500 text-sm mr-2">{{ podcast.created_at|date:"Y/m/d" }}</span> {% endcomment %}
                     </div>
                     <h3 class="text-lg font-bold mb-2">{{ podcast.title }}</h3>
                     <p class="text-gray-600 text-sm mb-4">کلمات کلیدی: {{ podcast.keywords }}</p>
