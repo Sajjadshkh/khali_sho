@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, View
 from django.urls import reverse_lazy, reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
-from .models import Aboutus, OTP, adviser, Certificate, Cafe, Owner
+from .models import Aboutus, OTP, adviser, Certificate, Cafe, Owner, Podcast
 from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwnerForm, PodcastForm
 from random import randint
 import ghasedakpack
@@ -25,8 +25,11 @@ class ServicesView(ListView):
 
 class PodcastsView(ListView):
     template_name = 'us/podcasts.html'
-    model = Aboutus
-    context_object_name = 'aboutus'
+    model = Podcast
+    context_object_name = 'podcasts'
+
+    def get_queryset(self):
+        return Podcast.objects.filter(is_approved=True).order_by('-created_at')
 
 
 def podcast_create(request):

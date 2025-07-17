@@ -151,6 +151,7 @@ class Podcast(models.Model):
     audio_file = models.FileField(upload_to="podcasts/", verbose_name="فایل صوتی")
     accepted_rules = models.BooleanField(verbose_name="تایید قوانین")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاریخ ایجاد")
+    is_approved = models.BooleanField(default=False, verbose_name="تایید شده توسط ادمین")
 
     def __str__(self):
         return self.title

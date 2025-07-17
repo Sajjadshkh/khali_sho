@@ -33,9 +33,15 @@ class OwnerAdmin(admin.ModelAdmin):
 
 @admin.register(Podcast)
 class PodcastAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'created_at', 'accepted_rules')
+    list_display = ('title', 'category', 'created_at', 'accepted_rules', 'is_approved')
     search_fields = ('title', 'keywords')
-    list_filter = ('category', 'created_at')
+    list_filter = ('category', 'created_at', 'is_approved')
+    actions = ['approve_selected']
+
+    @admin.action(description='تایید پادکست‌های انتخاب‌شده')
+    def approve_selected(self, request, queryset):
+        updated = queryset.update(is_approved=True)
+        self.message_user(request, f'{updated} پادکست با موفقیت تأیید شد.')
 
 admin.site.register(models.Aboutus)
 admin.site.register(adviser, AdviserAdmin)
