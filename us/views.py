@@ -29,7 +29,17 @@ class PodcastsView(ListView):
     context_object_name = 'podcasts'
 
     def get_queryset(self):
-        return Podcast.objects.filter(is_approved=True).order_by('-created_at')
+        queryset = Podcast.objects.filter(is_approved=True).order_by('-created_at')
+        category = self.request.GET.get('category')
+        if category:
+            queryset = queryset.filter(category=category)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Podcast.CATEGORY_CHOICES 
+        context['selected_category'] = self.request.GET.get('category', '')
+        return context
 
 
 def podcast_create(request):
