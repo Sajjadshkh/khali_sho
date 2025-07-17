@@ -22,164 +22,45 @@
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 md:px-10 lg:px-20 py-8">
         <!-- Search and Filter -->
-        <div class="mb-8 bg-white rounded-xl shadow-sm p-4">
+        <form method="get" class="mb-8 bg-white rounded-xl shadow-sm p-4">
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="relative flex-grow">
-                    <input type="text" placeholder="جستجو بر اساس کلمه کلیدی (اضطراب، افسردگی، خانواده و ...)" 
+                    <input type="text" name="search" value="{{ request.GET.search|default:'' }}" placeholder="جستجو بر اساس کلمه کلیدی (اضطراب، افسردگی، خانواده و ...)" 
                            class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     <i class="fas fa-search absolute right-3 top-3.5 text-gray-400"></i>
                 </div>
-                <select class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    <option>همه موضوعات</option>
-                    <option>روابط عاطفی</option>
-                    <option>خانواده</option>
-                    <option>اضطراب و استرس</option>
-                    <option>افسردگی</option>
-                    <option>مسائل شغلی</option>
-                    <option>بحران‌های روانی</option>
+                <select name="category" class="border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <option value="همه موضوعات" {% if not selected_category or selected_category == 'همه موضوعات' %}selected{% endif %}>همه موضوعات</option>
+                    {% for cat, cat_label in categories %}
+                        <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat_label }}</option>
+                    {% endfor %}
                 </select>
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition">جستجو</button>
             </div>
-        </div>
+        </form>
 
         <!-- Podcast Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            <!-- Podcast Card 1 -->
+            {% for podcast in podcasts|slice:":6" %}
             <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
                 <div class="p-4">
                     <div class="flex items-center mb-3">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
-                        <span class="text-gray-500 text-sm mr-2">25 دقیقه</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">{{ podcast.category }}</span>
+                        <span class="text-gray-500 text-sm mr-2">{{ podcast.created_at|date:"Y/m/d" }}</span>
                     </div>
-                    <h3 class="text-lg font-bold mb-2">غلبه بر ترس از تنهایی</h3>
-                    <p class="text-gray-600 text-sm mb-4">تجربه یک دختر ۲۴ ساله از ترس‌های شبانه و راهکارهای مشاور</p>
+                    <h3 class="text-lg font-bold mb-2">{{ podcast.title }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">کلمات کلیدی: {{ podcast.keywords }}</p>
                     <div class="audio-player bg-gray-50 rounded-lg p-3">
                         <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
+                            <source src="{{ podcast.audio_file.url }}" type="audio/mpeg">
                             مرورگر شما از پخش صدا پشتیبانی نمی‌کند
                         </audio>
                     </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">تنهایی</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">اضطراب</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">شب‌های سخت</span>
-                    </div>
                 </div>
             </div>
-
-            <!-- Podcast Card 2 -->
-            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
-                <div class="p-4">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
-                        <span class="text-gray-500 text-sm mr-2">18 دقیقه</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">پس از جدایی چه کنم؟</h3>
-                    <p class="text-gray-600 text-sm mb-4">تجربه یک پسر ۳۰ ساله از شکست عاطفی و راه‌های مقابله</p>
-                    <div class="audio-player bg-gray-50 rounded-lg p-3">
-                        <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
-                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
-                        </audio>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">جدایی</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">عشق</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">سوگ عاطفی</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Podcast Card 3 -->
-            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
-                <div class="p-4">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
-                        <span class="text-gray-500 text-sm mr-2">32 دقیقه</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">کنترل خشم در خانواده</h3>
-                    <p class="text-gray-600 text-sm mb-4">مشاوره یک مادر ۴۰ ساله برای مدیریت عصبانیت با فرزندان</p>
-                    <div class="audio-player bg-gray-50 rounded-lg p-3">
-                        <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
-                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
-                        </audio>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">خشم</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">خانواده</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">مدیریت احساسات</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Podcast Card 4 -->
-            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
-                <div class="p-4">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
-                        <span class="text-gray-500 text-sm mr-2">15 دقیقه</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">ترس از آینده شغلی</h3>
-                    <p class="text-gray-600 text-sm mb-4">تجربه یک دانشجوی ۲۶ ساله از نگرانی‌های پس از فارغ‌التحصیلی</p>
-                    <div class="audio-player bg-gray-50 rounded-lg p-3">
-                        <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
-                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
-                        </audio>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">شغل</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">آینده</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">استرس</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Podcast Card 5 -->
-            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
-                <div class="p-4">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">مشاوره تلفنی</span>
-                        <span class="text-gray-500 text-sm mr-2">42 دقیقه</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">مقابله با افکار خودکشی</h3>
-                    <p class="text-gray-600 text-sm mb-4">مشاوره فوری با یک جوان ۲۲ ساله در بحران روانی</p>
-                    <div class="audio-player bg-gray-50 rounded-lg p-3">
-                        <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
-                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
-                        </audio>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">بحران</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">افکار منفی</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">حمایت فوری</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Podcast Card 6 -->
-            <div class="podcast-card bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300">
-                <div class="p-4">
-                    <div class="flex items-center mb-3">
-                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">درد دل کاربر</span>
-                        <span class="text-gray-500 text-sm mr-2">21 دقیقه</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2">تجربه مادرانگی در محرومیت</h3>
-                    <p class="text-gray-600 text-sm mb-4">داستان یک مادر باردار از چالش‌های زندگی در منطقه محروم</p>
-                    <div class="audio-player bg-gray-50 rounded-lg p-3">
-                        <audio controls class="w-full">
-                            <source src="#" type="audio/mpeg">
-                            مرورگر شما از پخش صدا پشتیبانی نمی‌کند
-                        </audio>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">بارداری</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">محرومیت</span>
-                        <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">حمایت</span>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+            <div class="col-span-3 text-center text-gray-500 py-8">هیچ پادکستی یافت نشد.</div>
+            {% endfor %}
         </div>
 
         <!-- Upload Section -->

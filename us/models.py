@@ -6,23 +6,23 @@ GENDER_CHOICES = [
 ]
 
 CONSULTATION_METHODS = [
-    ('in_person', 'حضوری'),
-    ('online', 'آنلاین'),
-    ('phone', 'تلفنی'),
+    ('حضوری', 'حضوری'),
+    ('آنلاین', 'آنلاین'),
+    ('تلفنی', 'تلفنی'),
 ]
 
 WORK_PREFERENCE_CHOICES = [
-    ('part_time', 'پاره وقت'),
-    ('semi_time', 'نیمه وقت'),
-    ('full_time', 'تمام وقت'),
+    ('پاره وقت', 'پاره وقت'),
+    ('نیمه وقت', 'نیمه وقت'),
+    ('تمام وقت', 'تمام وقت'),
 ]
 
 SPECIALTY_CHOICES = [
-    ('child', 'کودک'),
-    ('clinical', 'بالینی'),
-    ('family', 'خانواده'),
-    ('addiction', 'اعتیاد'),
-    ('couple', 'زوج درمانی'),
+    ('کودک', 'کودک'),
+    ('بالینی', 'بالینی'),
+    ('خانواده', 'خانواده'),
+    ('اعتیاد', 'اعتیاد'),
+    ('زوج درمانی', 'زوج درمانی'),
 ]
 
 CAFE_TYPES = [
@@ -74,7 +74,7 @@ class adviser(models.Model):
     phd_field = models.CharField(max_length=100, blank=True, null=True, verbose_name='رشته تحصیلی دکتری')
     phd_year = models.PositiveIntegerField(blank=True, null=True, verbose_name='سال فارغ التحصیلی دکتری')
 
-    is_unemployed = models.BooleanField(default=False)
+    is_unemployed = models.BooleanField(default=False, verbose_name='آیا در حال حاضر مشغول به کار هستید؟')
     current_position = models.CharField(max_length=100, blank=True, null=True, verbose_name='شغل فعلی')
     current_organization = models.CharField(max_length=100, blank=True, null=True, verbose_name='محل کار')
     current_description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
@@ -85,7 +85,7 @@ class adviser(models.Model):
 
     consultation_methods = models.JSONField(default=list, verbose_name='روش های مشاوره')
 
-    accepted_terms = models.BooleanField(default=False)
+    accepted_terms = models.BooleanField(default=False, verbose_name='قوانین و مقررات را قبول دارم')
 
     def __str__(self):
         return self.full_name
@@ -118,7 +118,7 @@ class Cafe(models.Model):
     has_workspace = models.BooleanField(default=False, blank=True)
     serves_breakfast = models.BooleanField(default=False, blank=True)
     has_disabled_access = models.BooleanField(default=False, blank=True)
-    accepted_terms = models.BooleanField(default=False, blank=True)
+    accepted_terms = models.BooleanField(default=False, blank=True, verbose_name='قوانین و مقررات را قبول دارم')
 
     def __str__(self):
         return self.cafe_name

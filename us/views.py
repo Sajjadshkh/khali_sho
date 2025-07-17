@@ -8,6 +8,7 @@ from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwne
 from random import randint
 import ghasedakpack
 from django.contrib import messages
+from django.db import models
 
 
 SMS = ghasedakpack.Ghasedak(
@@ -31,14 +32,21 @@ class PodcastsView(ListView):
     def get_queryset(self):
         queryset = Podcast.objects.filter(is_approved=True).order_by('-created_at')
         category = self.request.GET.get('category')
-        if category:
+        if category and category != 'همه موضوعات':
             queryset = queryset.filter(category=category)
+        search = self.request.GET.get('search')
+        if search:
+            queryset = queryset.filter(
+                models.Q(title__icontains=search) |
+                models.Q(keywords__icontains=search)
+            )
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Podcast.CATEGORY_CHOICES 
         context['selected_category'] = self.request.GET.get('category', '')
+        context['request'] = self.request
         return context
 
 

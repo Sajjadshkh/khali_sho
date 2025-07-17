@@ -8,7 +8,7 @@ class AdviserAdmin(admin.ModelAdmin):
     )
     fieldsets = (
         (None, {
-            'fields': ('full_name', 'phone', 'email', 'age', 'gender', 'location', 'latitude', 'longitude')
+            'fields': ('full_name', 'phone', 'email', 'age', 'gender', 'address', 'latitude', 'longitude')
         }),
         ('تحصیلات', {
             'fields': ('bachelor_field', 'bachelor_year', 'master_field', 'master_year', 'phd_field', 'phd_year')
