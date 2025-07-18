@@ -140,26 +140,31 @@ class CafeOwnerForm(forms.Form):
     # Cafe fields
     cafe_name = forms.CharField(
         label='نام کافه',
-        widget=forms.TextInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'نام کامل کافه'})
+        widget=forms.TextInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'نام کامل کافه'}),
+        required=True
     )
     cafe_type = forms.ChoiceField(
         label='نوع کافه',
         choices=[('', 'انتخاب کنید')] + list(CAFE_TYPES),
-        widget=forms.Select(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field'})
+        widget=forms.Select(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field'}),
+        required=True
     )
     address = forms.CharField(
         label='آدرس دقیق',
-        widget=forms.Textarea(attrs={'rows': 2, 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'آدرس کامل با ذکر محله و پلاک'})
+        widget=forms.Textarea(attrs={'rows': 2, 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'آدرس کامل با ذکر محله و پلاک'}),
+        required=True
     )
     size = forms.IntegerField(
         label='وسعت کافه (متر مربع)',
         min_value=10,
-        widget=forms.NumberInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'مثلا 120'})
+        widget=forms.NumberInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'مثلا 120'}),
+        required=True
     )
     capacity = forms.IntegerField(
         label='ظرفیت (تعداد نفر)',
         min_value=5,
-        widget=forms.NumberInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'مثلا 50'})
+        widget=forms.NumberInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'مثلا 50'}),
+        required=True
     )
     menu_file = forms.FileField(
         label='آپلود منوی کافه (PDF یا تصویر)',
@@ -169,7 +174,8 @@ class CafeOwnerForm(forms.Form):
     description = forms.CharField(
         label='توضیحات اضافه (اختیاری)',
         required=False,
-        widget=forms.Textarea(attrs={'rows': 3, 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'توضیحات بیشتر درباره فضای کافه، منوی خاص، جو کافه و...'})
+        widget=forms.Textarea(attrs={'rows': 3, 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'توضیحات بیشتر درباره فضای کافه، منوی خاص، جو کافه و...'}),
+        required=False
     )
     # Facilities
     has_wifi = forms.BooleanField(label='اینترنت وای فای', required=False)
@@ -183,7 +189,8 @@ class CafeOwnerForm(forms.Form):
     # Owner fields
     owner_full_name = forms.CharField(
         label='نام و نام خانوادگی مالک',
-        widget=forms.TextInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'نام کامل مالک'})
+        widget=forms.TextInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'نام کامل مالک'}),
+        required=True
     )
     owner_national_id = forms.CharField(
         label='کد ملی',
@@ -192,7 +199,8 @@ class CafeOwnerForm(forms.Form):
             'placeholder': 'کد ملی 10 رقمی',
             'pattern': '\\d{10}',
             'maxlength': '10'
-        })
+        }),
+        required=True
     )
     owner_phone = forms.CharField(
         label='شماره موبایل',
@@ -201,17 +209,18 @@ class CafeOwnerForm(forms.Form):
             'placeholder': 'مثال: 09123456789',
             'pattern': '09\\d{9}',
             'maxlength': '11'
-        })
+        }),
+        required=True
     )
     owner_email = forms.EmailField(
         label='ایمیل (اختیاری)',
-        required=False,
-        widget=forms.EmailInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'example@domain.com'})
+        widget=forms.EmailInput(attrs={'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'example@domain.com'}),
+        required=False
     )
     accepted_terms = forms.BooleanField(
         label='قوانین و شرایط را قبول دارم',
-        required=True,
-        widget=forms.CheckboxInput(attrs={'class': 'w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox'})
+        widget=forms.CheckboxInput(attrs={'class': 'w-4 h-4 text-amber-600 rounded focus:ring-amber-500 checkbox'}),
+        required=True
     )
     latitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
     longitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
