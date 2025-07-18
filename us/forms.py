@@ -173,7 +173,6 @@ class CafeOwnerForm(forms.Form):
     )
     description = forms.CharField(
         label='توضیحات اضافه (اختیاری)',
-        required=False,
         widget=forms.Textarea(attrs={'rows': 3, 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 input-field', 'placeholder': 'توضیحات بیشتر درباره فضای کافه، منوی خاص، جو کافه و...'}),
         required=False
     )
