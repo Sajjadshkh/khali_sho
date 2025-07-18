@@ -52,17 +52,17 @@
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              {{ form.cafe_name.label_tag }}
+              {{ form.cafe_name.label_tag }}<span class="text-red-500">*</span>
               {{ form.cafe_name }}
               {% if form.cafe_name.errors %}<div class="error-message">{{ form.cafe_name.errors.0 }}</div>{% endif %}
             </div>
             <div>
-              {{ form.cafe_type.label_tag }}
+              {{ form.cafe_type.label_tag }}<span class="text-red-500">*</span>
               {{ form.cafe_type }}
               {% if form.cafe_type.errors %}<div class="error-message">{{ form.cafe_type.errors.0 }}</div>{% endif %}
             </div>
             <div class="md:col-span-2">
-              {{ form.address.label_tag }}
+              {{ form.address.label_tag }}<span class="text-red-500">*</span>
               {{ form.address }}
               {% if form.address.errors %}<div class="error-message">{{ form.address.errors.0 }}</div>{% endif %}
               <label class="block text-sm font-medium text-gray-700 mb-1 mt-4">موقعیت مکانی روی نقشه (اختیاری)</label>
@@ -75,12 +75,12 @@
               </div>
             </div>
             <div>
-              {{ form.size.label_tag }}
+              {{ form.size.label_tag }}<span class="text-red-500">*</span>
               {{ form.size }}
               {% if form.size.errors %}<div class="error-message">{{ form.size.errors.0 }}</div>{% endif %}
             </div>
             <div>
-              {{ form.capacity.label_tag }}
+              {{ form.capacity.label_tag }}<span class="text-red-500">*</span>
               {{ form.capacity }}
               {% if form.capacity.errors %}<div class="error-message">{{ form.capacity.errors.0 }}</div>{% endif %}
             </div>
@@ -130,17 +130,17 @@
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              {{ form.owner_full_name.label_tag }}
+              {{ form.owner_full_name.label_tag }}<span class="text-red-500">*</span>
               {{ form.owner_full_name }}
               {% if form.owner_full_name.errors %}<div class="error-message">{{ form.owner_full_name.errors.0 }}</div>{% endif %}
             </div>
             <div>
-              {{ form.owner_national_id.label_tag }}
+              {{ form.owner_national_id.label_tag }}<span class="text-red-500">*</span>
               {{ form.owner_national_id }}
               {% if form.owner_national_id.errors %}<div class="error-message">{{ form.owner_national_id.errors.0 }}</div>{% endif %}
             </div>
             <div>
-              {{ form.owner_phone.label_tag }}
+              {{ form.owner_phone.label_tag }}<span class="text-red-500">*</span>
               {{ form.owner_phone }}
               {% if form.owner_phone.errors %}<div class="error-message">{{ form.owner_phone.errors.0 }}</div>{% endif %}
             </div>
@@ -179,7 +179,7 @@
                 {{ form.accepted_terms }}
               </div>
               <div class="mr-3 text-sm">
-                <label for="accepted_terms" class="font-medium text-gray-700">قوانین و شرایط را قبول دارم</label>
+                <label for="accepted_terms" class="font-medium text-gray-700">قوانین و شرایط را قبول دارم<span class="text-red-500">*</span></label>
                 {% if form.accepted_terms.errors %}<div class="error-message">{{ form.accepted_terms.errors.0 }}</div>{% endif %}
               </div>
             </div>

@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, View
 from django.urls import reverse_lazy, reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
-from .models import Aboutus, OTP, adviser, Certificate, Cafe, Owner, Podcast
+from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast
 from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwnerForm, PodcastForm
 from random import randint
 import ghasedakpack
@@ -14,10 +14,7 @@ from django.db import models
 SMS = ghasedakpack.Ghasedak(
     "3f37ee30f4690b3334c5e3552b67615a4171d8a1f2ed7444efb87b628bd53e9b")
 
-class AboutUsView(ListView):
-    template_name = 'us/aboutus.html'
-    model = Aboutus
-    context_object_name = 'aboutus'
+
 
 class ServicesView(ListView):
     template_name = 'us/services.html'
@@ -66,7 +63,7 @@ def podcast_create(request):
 
 
 class AdviserCreateView(CreateView):
-    model = adviser
+    model = Adviser
     form_class = AdviserForm
     template_name = 'us/workusadviser.html'
     success_url = reverse_lazy('home:home')
@@ -85,13 +82,21 @@ class AdviserCreateView(CreateView):
         return response
 
 class AllAdvisersView(ListView):
-    model = adviser
+    model = Adviser
     template_name = 'us/aboutus.html'
-    context_object_name = 'advisers'
+    context_object_name = 'advisers_list'
 
     def get_queryset(self):
-        return adviser.objects.filter(is_approved=True).order_by('-created_at')
+        return Adviser.objects.filter(is_approved=True).order_by('-created_at')
+class AboutUsView(ListView):
+    template_name = 'us/aboutus.html'
+    model = Aboutus
+    context_object_name = 'aboutus'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advisers_list'] = Adviser.objects.filter(is_approved=True)
+        return context
 
 class CafeCreateView(View):
     template_name = 'us/workuscafe.html'

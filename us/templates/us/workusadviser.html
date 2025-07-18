@@ -203,10 +203,10 @@
               <!-- Address & Location -->
               <div class="md:col-span-2">
                 <label for="{{ form.address.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
-                  {{ form.address.label }}
+                  {{ form.address.label }}<span class="text-red-500">*</span>
                 </label>
                 <div class="relative mb-4">
-                  {{ form.address }}
+                  {{ form.address }} 
                   {% if form.address.errors %}<div class="error-message">{{ form.address.errors.0 }}</div>{% endif %}
                 </div>
                 <label for="{{ form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-1">
@@ -457,7 +457,7 @@
                   {{ form.accepted_terms }}
                 </div>
                 <div class="mr-3 text-sm">
-                  <label for="{{ form.accepted_terms.id_for_label }}" class="font-medium text-gray-700">{{ form.accepted_terms.label }}</label>
+                  <label for="{{ form.accepted_terms.id_for_label }}" class="font-medium text-gray-700">{{ form.accepted_terms.label }}<span class="text-red-500">*</span></label>
                 </div>
               </div>
               {% if form.accepted_terms.errors %}

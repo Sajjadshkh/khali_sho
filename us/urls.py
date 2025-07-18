@@ -15,4 +15,5 @@ urlpatterns = [
     path("cafe/create/", views.CafeCreateView.as_view(), name='cafe_create'),
     path('otp/', views.OTPView.as_view(), name='otp'),
     path('checkotp/', views.CheckOTPView.as_view(), name='checkotp'),
+    path('aboutus/', views.AllAdvisersView.as_view(), name='aboutus'),
 ]

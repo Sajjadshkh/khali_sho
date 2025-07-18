@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-from .models import adviser, Certificate, Cafe, Owner, Podcast
+from .models import Adviser, Certificate, Cafe, Owner, Podcast
 
 
 class AdviserAdmin(admin.ModelAdmin):
@@ -56,7 +56,7 @@ class PodcastAdmin(admin.ModelAdmin):
         self.message_user(request, f'{updated} پادکست با موفقیت تأیید شد.')
 
 admin.site.register(models.Aboutus)
-admin.site.register(adviser, AdviserAdmin)
+admin.site.register(Adviser, AdviserAdmin)
 admin.site.register(Certificate)
 admin.site.register(Cafe, CafeAdmin)
 admin.site.register(Owner, OwnerAdmin)

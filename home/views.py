@@ -1,19 +1,24 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
-from us.models import adviser
+from us.models import Adviser
 
 # Create your views here.
 
 class HomeView(TemplateView):
     template_name = 'home/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['advisers'] = Adviser.objects.filter(is_approved=True, is_featured=True).order_by('-id')[:3]
+        return context
+
 class TopAdvisersView(ListView):
-    model = adviser
+    model = Adviser
     template_name = 'home/home.html'
     context_object_name = 'advisers'
 
     def get_queryset(self):
-        return adviser.objects.filter(is_featured=True).order_by('-created_at')[:3]
+        return Adviser.objects.filter(is_approved=True, is_featured=True).order_by('-id')[:3]
 
 def custom_404(request, exception):
     return render(request, '404/404.html', status=404)

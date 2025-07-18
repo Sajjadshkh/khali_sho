@@ -23,6 +23,11 @@ SPECIALTY_CHOICES = [
     ('خانواده', 'خانواده'),
     ('اعتیاد', 'اعتیاد'),
     ('زوج درمانی', 'زوج درمانی'),
+    ('مشاوره طلاق', 'مشاوره طلاق'),
+    ('منابع انسانی', 'منابع انسانی'),
+    ('حقوقی', 'حقوقی'),
+    ('تربیتی', 'تربیتی'),
+    ('اعتیاد', 'اعتیاد'),
 ]
 
 CAFE_TYPES = [
@@ -56,7 +61,7 @@ class OTP(models.Model):
         return self.phone
     
 
-class adviser(models.Model):
+class Adviser(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='نام و نام خانوادگی')
     phone = models.CharField(max_length=11, unique=True, verbose_name='شماره موبایل')
     email = models.EmailField(unique=True, verbose_name='ایمیل')
@@ -77,7 +82,7 @@ class adviser(models.Model):
     is_unemployed = models.BooleanField(default=False, verbose_name='آیا در حال حاضر مشغول به کار هستید؟')
     current_position = models.CharField(max_length=100, blank=True, null=True, verbose_name='شغل فعلی')
     current_organization = models.CharField(max_length=100, blank=True, null=True, verbose_name='محل کار')
-    current_description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
+    current_description = models.TextField(blank=True, null=True, verbose_name='توضیحات شغلی')
 
     work_preferences = models.JSONField(default=list, blank=True, verbose_name='مایل به کار')
 
@@ -93,7 +98,7 @@ class adviser(models.Model):
         return self.full_name
 
 class Certificate(models.Model):
-    adviser = models.ForeignKey(adviser, on_delete=models.CASCADE, related_name='certificates')
+    adviser = models.ForeignKey(Adviser, on_delete=models.CASCADE, related_name='certificates')
     file = models.FileField(upload_to='certificates/', verbose_name='مدارک')
 
     def __str__(self):

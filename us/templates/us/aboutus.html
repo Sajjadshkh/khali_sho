@@ -121,46 +121,20 @@
                 <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold">دکتر سارا محمدی</h3>
-                        <p class="text-blue-500 mb-2">روانشناس بالینی</p>
-                        <p class="text-gray-600 text-sm">متخصص در درمان افسردگی و اضطراب با 10 سال سابقه کار</p>
-                    </div>
-                </div>
-                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold">علی رضایی</h3>
-                        <p class="text-purple-500 mb-2">مشاور خانواده</p>
-                        <p class="text-gray-600 text-sm">متخصص در حل تعارضات خانوادگی و زناشویی</p>
-                    </div>
-                </div>
+                {% for adviser in advisers_list.all %}
+                
                 <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
                     <div class="overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
                     </div>
                     <div class="p-4">
-                        <h3 class="text-xl font-semibold">نرگس حسینی</h3>
-                        <p class="text-green-500 mb-2">کارشناس مددکاری اجتماعی</p>
-                        <p class="text-gray-600 text-sm">متخصص در حمایت از زنان و کودکان در معرض خطر</p>
+                        <h3 class="text-xl font-semibold">{{adviser.full_name}}</h3>
+                        <p class="text-green-500 mb-2">{{adviser.current_position}}</p>
+                        <p class="text-gray-600 text-sm">{{adviser.current_description}}</p>
                     </div>
                 </div>
-                <div class="team-member bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
-                    <div class="overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مشاور" class="w-full h-64 object-cover transition duration-500">
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-semibold">دکتر امیرحسین یوسفی</h3>
-                        <p class="text-red-500 mb-2">روانپزشک</p>
-                        <p class="text-gray-600 text-sm">متخصص در درمان اختلالات روانپزشکی و بحران‌های روانی</p>
-                    </div>
-                </div>
+                {% endfor %}
+                
             </div>
         </section>
 

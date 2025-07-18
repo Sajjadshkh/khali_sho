@@ -1,5 +1,5 @@
 from django import forms
-from .models import OTP, adviser, Certificate, GENDER_CHOICES, WORK_PREFERENCE_CHOICES, CONSULTATION_METHODS, SPECIALTY_CHOICES, Cafe, Owner, CAFE_TYPES, Podcast
+from .models import OTP, Adviser, Certificate, GENDER_CHOICES, WORK_PREFERENCE_CHOICES, CONSULTATION_METHODS, SPECIALTY_CHOICES, Cafe, Owner, CAFE_TYPES, Podcast
 from django.core import validators
 
 class OTPForm(forms.Form):
@@ -44,7 +44,7 @@ class AdviserForm(forms.ModelForm):
     )
 
     class Meta:
-        model = adviser
+        model = Adviser
         fields = [
             'full_name', 'phone', 'email', 'age', 'gender', 'address', 'location', 'latitude', 'longitude',
             'bachelor_field', 'bachelor_year',
@@ -127,7 +127,7 @@ class AdviserForm(forms.ModelForm):
             }),
             'current_description': forms.TextInput(attrs={
                 'class': 'w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 input-field',
-                'placeholder': 'توضیحات بیشتر'
+                'placeholder': 'توضیحات شغلی'
             }),
         }
 
