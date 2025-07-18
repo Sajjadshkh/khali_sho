@@ -12,7 +12,7 @@ class AdviserAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('اطلاعات شخصی', {
-            'fields': ('full_name', 'phone', 'email', 'age', 'gender', 'location', 'latitude', 'longitude', 'address')
+            'fields': ('full_name', 'phone', 'image', 'email', 'age', 'gender', 'location', 'latitude', 'longitude', 'address')
         }),
         ('تحصیلات', {
             'fields': (

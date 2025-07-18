@@ -455,8 +455,7 @@
                 <!-- Consultant -->
                 {% for adviser in advisers|slice:":3" %}
                 <div class="bg-white p-6 rounded-xl shadow-md text-center">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                         alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-purple-100">
+                    <img src="{{adviser.image.url}}" alt="مشاور" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-purple-100">
                     <h3 class="text-xl font-bold text-purple-800 mb-1">{{adviser.full_name}}</h3>
                     <p class="text-gray-500 text-sm mb-3">{{adviser.current_position}}</p>
                     <p class="text-gray-600 text-sm mb-4">
@@ -474,9 +473,9 @@
             </div>
             
             <div class="text-center mt-8">
-                <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
+                <a href="{% url 'us:aboutus' %}#ourteam" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full shadow-lg transition btn-no-border">
                     مشاهده تمام مشاوران
-                </button>
+                </a>
             </div>
         </div>
     </section>

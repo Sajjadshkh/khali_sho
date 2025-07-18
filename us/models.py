@@ -64,6 +64,7 @@ class OTP(models.Model):
 class Adviser(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='نام و نام خانوادگی')
     phone = models.CharField(max_length=11, unique=True, verbose_name='شماره موبایل')
+    image = models.ImageField(upload_to='advisers/', verbose_name='عکس', blank=True, null=True)
     email = models.EmailField(unique=True, verbose_name='ایمیل')
     age = models.PositiveIntegerField(verbose_name='سن')
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, verbose_name='جنسیت')
