@@ -86,6 +86,8 @@ class adviser(models.Model):
     consultation_methods = models.JSONField(default=list, verbose_name='روش های مشاوره')
 
     accepted_terms = models.BooleanField(default=False, verbose_name='قوانین و مقررات را قبول دارم')
+    is_approved = models.BooleanField(default=False, verbose_name="تایید شده توسط ادمین")
+    is_featured = models.BooleanField(default=False, verbose_name='نمایش به عنوان مشاور برتر')
 
     def __str__(self):
         return self.full_name
