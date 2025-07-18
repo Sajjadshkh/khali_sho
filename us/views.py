@@ -84,6 +84,15 @@ class AdviserCreateView(CreateView):
             Certificate.objects.create(adviser=self.object, file=f)
         return response
 
+class AllAdvisersView(ListView):
+    model = adviser
+    template_name = 'us/aboutus.html'
+    context_object_name = 'advisers'
+
+    def get_queryset(self):
+        return adviser.objects.filter(is_approved=True).order_by('-created_at')
+
+
 class CafeCreateView(View):
     template_name = 'us/workuscafe.html'
     success_url = reverse_lazy('home:home')
