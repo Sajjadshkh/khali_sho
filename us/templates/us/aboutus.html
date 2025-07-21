@@ -265,23 +265,19 @@
                 </div>
                 
                 <h3 class="text-xl font-semibold mb-6 text-center mt-12">کافه‌ها و رستوران‌های همراه</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="grid grid-cols-4 md:grid-cols-8 gap-6">
+                    {% for cafe in featured_cafes %}
                     <div class="flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه کتاب" class="w-24 h-24 object-cover rounded-full mb-2">
-                        <span class="font-medium">کافه کتاب آرامش</span>
+                        {% if cafe.menu_file %}
+                        <img src="{{ cafe.image.url }}" alt="{{ cafe.cafe_name }}" class="w-24 h-24 object-cover rounded-full mb-2">
+                        {% else %}
+                        <div class="w-24 h-24 bg-gray-200 rounded-full mb-2 flex items-center justify-center text-gray-400">بدون عکس</div>
+                        {% endif %}
+                        <span class="font-medium">{{ cafe.cafe_name }}</span>
                     </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه" class="w-24 h-24 object-cover rounded-full mb-2">
-                        <span class="font-medium">رستوران گفتگو</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="کافه" class="w-24 h-24 object-cover rounded-full mb-2">
-                        <span class="font-medium">کافه دنج</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <img src="https://images.unsplash.com/photo-1517248135467-4aea148b0d1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="رستوران" class="w-24 h-24 object-cover rounded-full mb-2">
-                        <span class="font-medium">رستوران همدلی</span>
-                    </div>
+                    {% empty %}
+                    <div class="col-span-8 text-center text-gray-400">کافه‌ای برای نمایش وجود ندارد.</div>
+                    {% endfor %}
                 </div>
             </div>
         </section>

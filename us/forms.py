@@ -223,6 +223,11 @@ class CafeOwnerForm(forms.Form):
     )
     latitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
     longitude = forms.FloatField(widget=forms.HiddenInput(), required=False)
+    image = forms.ImageField(
+        label='لوگو یا عکس کافه (اختیاری)',
+        required=False,
+        widget=forms.ClearableFileInput(attrs={'id': 'id_image'})
+    )
 
     def persian_to_english(self, value):
         if not value:

@@ -116,6 +116,7 @@ class Cafe(models.Model):
     description = models.TextField(blank=True, verbose_name='توضیحات اضافه')
     latitude = models.FloatField(null=True, blank=True, verbose_name='عرض جغرافیایی')
     longitude = models.FloatField(null=True, blank=True, verbose_name='طول جغرافیایی')
+    image = models.ImageField(upload_to='cafes/', verbose_name='لوگوی کافه', blank=True, null=True)
 
     # Facilities
     has_wifi = models.BooleanField(default=False, blank=True)
@@ -127,6 +128,7 @@ class Cafe(models.Model):
     serves_breakfast = models.BooleanField(default=False, blank=True)
     has_disabled_access = models.BooleanField(default=False, blank=True)
     accepted_terms = models.BooleanField(default=False, blank=True, verbose_name='قوانین و مقررات را قبول دارم')
+    is_featured = models.BooleanField(default=False, verbose_name='نمایش در صفحه درباره ما')
 
     def __str__(self):
         return self.cafe_name

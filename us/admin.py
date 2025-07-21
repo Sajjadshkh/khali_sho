@@ -34,9 +34,17 @@ class AdviserAdmin(admin.ModelAdmin):
 
 
 class CafeAdmin(admin.ModelAdmin):
-    list_display = ('cafe_name', 'cafe_type', 'address', 'size', 'capacity', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms')
+    list_display = ('cafe_name', 'cafe_type', 'address', 'size', 'capacity', 'image', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms', 'is_featured')
     search_fields = ('cafe_name', 'address')
-    list_filter = ('cafe_type', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms')
+    list_filter = ('cafe_type', 'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms', 'is_featured')
+    list_editable = ('is_featured',)
+    readonly_fields = ()
+    fieldsets = (
+        (None, {
+            'fields': ('cafe_name', 'cafe_type', 'address', 'size', 'capacity', 'menu_file', 'image', 'description', 'latitude', 'longitude',
+                       'has_wifi', 'has_parking', 'has_live_music', 'has_outdoor', 'has_hookah', 'has_workspace', 'serves_breakfast', 'has_disabled_access', 'accepted_terms', 'is_featured')
+        }),
+    )
 
 class OwnerAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'national_id', 'phone', 'email', 'cafe')

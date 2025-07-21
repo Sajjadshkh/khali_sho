@@ -46,62 +46,21 @@
             <div class="relative">
                 <div class="overflow-hidden">
                     <div class="flex transition-transform duration-300" id="testimonial-slider">
-                        <!-- Testimonial 1 -->
+                        {% for t in testimonials %}
                         <div class="testimonial-card flex-shrink-0 bg-white p-6 rounded-xl shadow-md mx-4">
                             <div class="flex items-center mb-4">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
-                                     alt="کاربر" 
-                                     class="w-16 h-16 rounded-full object-cover mr-4">
                                 <div>
-                                    <h4 class="font-bold text-purple-800">سارا محمدی</h4>
-                                    <p class="text-gray-500 text-sm">دانشجو</p>
+                                    <h4 class="font-bold text-purple-800">{{ t.name }}</h4>
+                                    <p class="text-gray-500 text-sm">{{ t.position }}</p>
                                 </div>
                             </div>
                             <p class="text-gray-600 text-sm">
-                                بعد از ماه‌ها احساس خفگی و تنهایی، بالاخره توانستم با یکی از مشاوران خالی شو صحبت کنم. بدون هیچ قضاوتی به حرف‌هایم گوش داد و واقعاً احساس سبکی می‌کنم.
+                                {{ t.experience }}
                             </p>
-                            <div class="mt-4 flex space-x-2 space-x-reverse">
-                                <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded">تخلیه احساسات</span>
-                            </div>
                         </div>
-                        
-                        <!-- Testimonial 2 -->
-                        <div class="testimonial-card flex-shrink-0 bg-white p-6 rounded-xl shadow-md mx-4">
-                            <div class="flex items-center mb-4">
-                                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                                     alt="کاربر" 
-                                     class="w-16 h-16 rounded-full object-cover mr-4">
-                                <div>
-                                    <h4 class="font-bold text-purple-800">امیر حسینی</h4>
-                                    <p class="text-gray-500 text-sm">کارمند</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-sm">
-                                مشاور مالی خالی شو واقعاً به من کمک کرد تا مشکلات اقتصادی‌ام را مدیریت کنم. راهکارهای عملی‌ای ارائه داد که بلافاصله قابل اجرا بودند.
-                            </p>
-                            <div class="mt-4 flex space-x-2 space-x-reverse">
-                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">مشاوره مالی</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Testimonial 3 -->
-                        <div class="testimonial-card flex-shrink-0 bg-white p-6 rounded-xl shadow-md mx-4">
-                            <div class="flex items-center mb-4">
-                                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
-                                     alt="کاربر" 
-                                     class="w-16 h-16 rounded-full object-cover mr-4">
-                                <div>
-                                    <h4 class="font-bold text-purple-800">فاطمه کریمی</h4>
-                                    <p class="text-gray-500 text-sm">مادر</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-sm">
-                                با مشکلات رفتاری پسرم کاملاً درمانده شده بودم. مشاور کودک خالی شو نه تنها به من آرامش داد، بلکه راهکارهای علمی‌ای برای تربیت بهتر ارائه کرد.
-                            </p>
-                            <div class="mt-4 flex space-x-2 space-x-reverse">
-                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">مشاوره کودک</span>
-                            </div>
-                        </div>
+                        {% empty %}
+                        <div class="text-center w-full py-8 text-gray-400">هنوز نظری ثبت نشده است.</div>
+                        {% endfor %}
                     </div>
                 </div>
                 

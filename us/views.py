@@ -96,6 +96,7 @@ class AboutUsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['advisers_list'] = Adviser.objects.filter(is_approved=True)
+        context['featured_cafes'] = Cafe.objects.filter(is_featured=True)[:8]
         return context
 
 class CafeCreateView(View):
@@ -117,6 +118,7 @@ class CafeCreateView(View):
                 size=form.cleaned_data['size'],
                 capacity=form.cleaned_data['capacity'],
                 menu_file=form.cleaned_data['menu_file'],
+                image=form.cleaned_data.get('image'),
                 description=form.cleaned_data['description'],
                 has_wifi=form.cleaned_data['has_wifi'],
                 has_parking=form.cleaned_data['has_parking'],
