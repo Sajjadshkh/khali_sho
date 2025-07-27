@@ -123,6 +123,11 @@
       <h1>ورود</h1>
    <form action="{% url 'accounts:login' %}" method="post">
   {% csrf_token %}
+  
+  <!-- Hidden input for next parameter -->
+  {% if request.GET.next %}
+  <input type="hidden" name="next" value="{{ request.GET.next }}">
+  {% endif %}
 
   <!-- USERNAME INPUT -->
   <label for="username">نام کاربری</label>

@@ -12,11 +12,16 @@ class OTPVerificationMiddleware:
             reverse('accounts:register'),
             reverse('us:adviser_create'),
             reverse('us:cafe_create'),
+            reverse('us:checkout'),  # اضافه کردن checkout
 
             # مسیرهای بیشتری اضافه کن اگر خواستی
         ]
 
         if request.path in protected_paths:
+            # اگر کاربر لاگین است، OTP نمی‌خواهیم
+            if request.user.is_authenticated:
+                return self.get_response(request)
+                
             otp_verified = request.session.get('otp_verified', False)
             otp_time = request.session.get('otp_verified_time')
 

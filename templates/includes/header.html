@@ -41,6 +41,14 @@
                </div>
    
                <div class="nav__actions">
+                  <!-- Cart button -->
+                  <a href="{% url 'us:cart' %}" class="nav__link" style="margin-left: 15px;">
+                    <i class="fas fa-shopping-cart"></i>
+                    {% if cart_count > 0 %}
+                    <span class="cart-count" style="background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; margin-right: 5px;">{{ cart_count }}</span>
+                    {% endif %}
+                  </a>
+                  
                   <!-- Search button -->
                   {% comment %} <i class="ri-search-line nav__search" id="search-btn"></i> {% endcomment %}
    
@@ -78,6 +86,11 @@
   {% csrf_token %}
   <h2 class="login__title">ورود</h2>
 
+  <!-- Hidden input for next parameter -->
+  {% if request.GET.next %}
+  <input type="hidden" name="next" value="{{ request.GET.next }}">
+  {% endif %}
+
   <div class="login__group">
     <div>
       <label class="login__label">نام کاربری</label>
@@ -111,6 +124,13 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
   const form = e.target;
   const formData = new FormData(form);
+  
+  // اضافه کردن پارامتر next از URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const nextParam = urlParams.get('next');
+  if (nextParam) {
+    formData.append('next', nextParam);
+  }
 
   fetch("{% url 'accounts:ajax_login' %}", {
     method: "POST",

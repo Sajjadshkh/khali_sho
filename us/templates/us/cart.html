@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}سبد خرید{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-purple-800 mb-8">سبد خرید</h2>
+        
+        {% if cart_items %}
+            <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                <div class="space-y-4">
+                    {% for item in cart_items %}
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-4 space-x-reverse">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-800">{{ item.plan.name }}</h3>
+                                <p class="text-sm text-gray-600">{{ item.plan.get_plan_type_display }}</p>
+                                <p class="text-sm text-gray-600">{{ item.plan.duration }} دقیقه + {{ item.plan.extra_time }} دقیقه اضافه</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 space-x-reverse">
+                            <div class="flex items-center space-x-2 space-x-reverse">
+                                <button class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition" 
+                                        onclick="updateQuantity({{ item.id }}, -1)">
+                                    <i class="fas fa-minus text-gray-600"></i>
+                                </button>
+                                <span class="w-12 text-center font-bold" id="quantity-{{ item.id }}">{{ item.quantity }}</span>
+                                <button class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-300 transition"
+                                        onclick="updateQuantity({{ item.id }}, 1)">
+                                    <i class="fas fa-plus text-gray-600"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="text-right">
+                                <p class="font-bold text-purple-800" id="item-total-{{ item.id }}">
+                                    {{ item.get_total_price|floatformat:0 }} تومان
+                                </p>
+                            </div>
+                            
+                            <a href="{% url 'us:remove_from_cart' item.id %}" 
+                               class="text-red-500 hover:text-red-700 transition"
+                               onclick="return confirm('آیا مطمئن هستید که می‌خواهید این آیتم را حذف کنید؟')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="border-t border-gray-200 mt-6 pt-6">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-bold text-gray-800">مجموع کل:</h3>
+                        <p class="text-2xl font-bold text-purple-800" id="total-price">
+                            {{ total_price|floatformat:0 }} تومان
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 flex justify-between">
+                    <a href="{% url 'us:services' %}" 
+                       class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-full transition">
+                        ادامه خرید
+                    </a>
+                    <a href="{% url 'us:checkout' %}" 
+                       class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full transition">
+                        تسویه حساب
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shopping-cart text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">سبد خرید شما خالی است</h3>
+                <p class="text-gray-600 mb-6">برای شروع خرید، یکی از پلن‌های ما را انتخاب کنید.</p>
+                <a href="{% url 'us:services' %}" 
+                   class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full transition">
+                    مشاهده پلن‌ها
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+function updateQuantity(itemId, change) {
+    const quantityElement = document.getElementById(`quantity-${itemId}`);
+    let currentQuantity = parseInt(quantityElement.textContent);
+    let newQuantity = currentQuantity + change;
+    
+    if (newQuantity < 1) {
+        newQuantity = 1;
+    }
+    
+    fetch(`/us/update-cart-item/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: `quantity=${newQuantity}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            quantityElement.textContent = newQuantity;
+            document.getElementById(`item-total-${itemId}`).textContent = 
+                new Intl.NumberFormat('fa-IR').format(data.item_total) + ' تومان';
+            document.getElementById('total-price').textContent = 
+                new Intl.NumberFormat('fa-IR').format(data.total_price) + ' تومان';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+</script>
+{% endblock %} 

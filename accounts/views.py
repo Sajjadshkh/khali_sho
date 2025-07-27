@@ -24,7 +24,9 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home:home')
+            # بررسی پارامتر next
+            next_url = request.GET.get('next') or request.POST.get('next') or reverse('home:home')
+            return redirect(next_url)
         else:
             return render(request, 'accounts/login.html', {'error': True})
     return render(request, 'accounts/login.html')
@@ -38,11 +40,12 @@ def ajax_login_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+        next_url = request.POST.get('next') or request.GET.get('next') or '/'
         user = authenticate(request, username=username, password=password)
 
         if user:
             login(request, user)
-            return JsonResponse({'success': True, 'redirect_url': '/'})
+            return JsonResponse({'success': True, 'redirect_url': next_url})
         else:
             return JsonResponse({'success': False, 'error': 'نام کاربری یا رمز اشتباه است'})
     return JsonResponse({'success': False, 'error': 'درخواست نامعتبر'})

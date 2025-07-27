@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 GENDER_CHOICES = [
     ('male', 'مرد'),
@@ -37,6 +40,115 @@ CAFE_TYPES = [
     ('book', 'کافه کتاب'),
     ('other', 'سایر'),
 ]
+
+# مدل‌های جدید برای سیستم خرید
+class Plan(models.Model):
+    PLAN_TYPES = [
+        ('phone', 'تلفنی'),
+        ('inperson', 'حضوری'),
+    ]
+    
+    name = models.CharField(max_length=100, verbose_name='نام پلن')
+    plan_type = models.CharField(max_length=10, choices=PLAN_TYPES, verbose_name='نوع پلن')
+    duration = models.IntegerField(verbose_name='مدت زمان (دقیقه)')
+    extra_time = models.IntegerField(verbose_name='زمان اضافه (دقیقه)')
+    price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='قیمت (تومان)')
+    is_active = models.BooleanField(default=True, verbose_name='فعال')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.get_plan_type_display()}"
+    
+    class Meta:
+        verbose_name = "پلن"
+        verbose_name_plural = "پلن‌ها"
+
+class Cart(models.Model):
+    session_key = models.CharField(max_length=40, unique=True, verbose_name='کلید نشست')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"سبد خرید {self.session_key}"
+    
+    def get_total_price(self):
+        return sum(item.get_total_price() for item in self.items.all())
+    
+    class Meta:
+        verbose_name = "سبد خرید"
+        verbose_name_plural = "سبدهای خرید"
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items', verbose_name='سبد خرید')
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, verbose_name='پلن')
+    quantity = models.PositiveIntegerField(default=1, verbose_name='تعداد')
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.plan.name} - {self.quantity}"
+    
+    def get_total_price(self):
+        return self.plan.price * self.quantity
+    
+    class Meta:
+        verbose_name = "آیتم سبد خرید"
+        verbose_name_plural = "آیتم‌های سبد خرید"
+
+class Order(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'در انتظار پرداخت'),
+        ('paid', 'پرداخت شده'),
+        ('cancelled', 'لغو شده'),
+        ('failed', 'ناموفق'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر', null=True, blank=True)
+    order_number = models.CharField(max_length=20, unique=True, verbose_name='شماره سفارش')
+    phone = models.CharField(max_length=11, verbose_name='شماره تلفن')
+    total_amount = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='مبلغ کل')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending', verbose_name='وضعیت')
+    payment_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='شناسه پرداخت')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
+    
+    def __str__(self):
+        return f"سفارش {self.order_number}"
+    
+    def save(self, *args, **kwargs):
+        if not self.order_number:
+            # تولید شماره سفارش منحصر به فرد
+            import random
+            import string
+            while True:
+                order_number = ''.join(random.choices(string.digits, k=8))
+                if not Order.objects.filter(order_number=order_number).exists():
+                    self.order_number = order_number
+                    break
+        super().save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name = "سفارش"
+        verbose_name_plural = "سفارشات"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items', verbose_name='سفارش')
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE, verbose_name='پلن')
+    quantity = models.PositiveIntegerField(verbose_name='تعداد')
+    price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='قیمت واحد')
+    total_price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='قیمت کل')
+    
+    def __str__(self):
+        return f"{self.plan.name} - {self.quantity}"
+    
+    def save(self, *args, **kwargs):
+        if not self.total_price:
+            self.total_price = self.price * self.quantity
+        super().save(*args, **kwargs)
+    
+    class Meta:
+        verbose_name = "آیتم سفارش"
+        verbose_name_plural = "آیتم‌های سفارش"
+
 
 class Aboutus(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')

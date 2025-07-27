@@ -1,6 +1,5 @@
 from django.contrib import admin
-from . import models
-from .models import Adviser, Certificate, Cafe, Owner, Podcast
+from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem
 
 
 class AdviserAdmin(admin.ModelAdmin):
@@ -63,7 +62,48 @@ class PodcastAdmin(admin.ModelAdmin):
         updated = queryset.update(is_approved=True)
         self.message_user(request, f'{updated} پادکست با موفقیت تأیید شد.')
 
-admin.site.register(models.Aboutus)
+@admin.register(Plan)
+class PlanAdmin(admin.ModelAdmin):
+    list_display = ['name', 'plan_type', 'duration', 'extra_time', 'price', 'is_active', 'created_at']
+    list_filter = ['plan_type', 'is_active', 'created_at']
+    search_fields = ['name']
+    ordering = ['price']
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['session_key', 'created_at', 'updated_at', 'get_total_price']
+    search_fields = ['session_key']
+    ordering = ['-created_at']
+    
+    def get_total_price(self, obj):
+        return f"{obj.get_total_price():,} تومان"
+    get_total_price.short_description = 'مجموع کل'
+
+@admin.register(CartItem)
+class CartItemAdmin(admin.ModelAdmin):
+    list_display = ['cart', 'plan', 'quantity', 'get_total_price', 'created_at']
+    list_filter = ['created_at']
+    search_fields = ['plan__name']
+    
+    def get_total_price(self, obj):
+        return f"{obj.get_total_price():,} تومان"
+    get_total_price.short_description = 'قیمت کل'
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['order_number', 'user', 'phone', 'total_amount', 'status', 'created_at']
+    list_filter = ['status', 'created_at', 'user']
+    search_fields = ['order_number', 'phone', 'user__username']
+    ordering = ['-created_at']
+    readonly_fields = ['order_number', 'created_at', 'updated_at']
+
+@admin.register(OrderItem)
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ['order', 'plan', 'quantity', 'price', 'total_price']
+    list_filter = ['plan__plan_type']
+    search_fields = ['order__order_number', 'plan__name']
+
+admin.site.register(Aboutus)
 admin.site.register(Adviser, AdviserAdmin)
 admin.site.register(Certificate)
 admin.site.register(Cafe, CafeAdmin)

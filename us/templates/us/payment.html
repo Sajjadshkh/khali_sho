@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پرداخت{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-purple-800 mb-8">پرداخت</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- اطلاعات سفارش -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">اطلاعات سفارش</h3>
+                
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">شماره سفارش:</span>
+                        <span class="font-bold">{{ order.order_number }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">تاریخ سفارش:</span>
+                        <span class="font-bold">{{ order.created_at|date:"Y/m/d" }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">شماره تلفن:</span>
+                        <span class="font-bold">{{ order.phone }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">وضعیت:</span>
+                        <span class="font-bold text-purple-600">{{ order.get_status_display }}</span>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 mt-6 pt-6">
+                    <h4 class="font-bold text-gray-800 mb-4">جزئیات سفارش:</h4>
+                    <div class="space-y-3">
+                        {% for item in order_items %}
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <h5 class="font-bold text-gray-800">{{ item.plan.name }}</h5>
+                                <p class="text-sm text-gray-600">{{ item.plan.get_plan_type_display }}</p>
+                                <p class="text-sm text-gray-600">تعداد: {{ item.quantity }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-bold text-purple-800">{{ item.total_price|floatformat:0 }} تومان</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-200 mt-6 pt-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-xl font-bold text-gray-800">مبلغ قابل پرداخت:</h4>
+                        <p class="text-2xl font-bold text-purple-800">{{ order.total_amount|floatformat:0 }} تومان</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- درگاه پرداخت -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">انتخاب روش پرداخت</h3>
+                
+                <form method="post" id="payment-form">
+                    {% csrf_token %}
+                    
+                    <div class="space-y-4 mb-6">
+                        <div class="border border-gray-200 rounded-lg p-4 hover:border-purple-500 cursor-pointer">
+                            <div class="flex items-center">
+                                <input type="radio" name="payment_method" value="shaparak" id="shaparak" class="mr-3" checked>
+                                <label for="shaparak" class="flex items-center cursor-pointer">
+                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-credit-card text-blue-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">پرداخت آنلاین</h4>
+                                        <p class="text-sm text-gray-600">پرداخت امن از طریق درگاه شاپرک</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-bold transition">
+                        پرداخت {{ order.total_amount|floatformat:0 }} تومان
+                    </button>
+                </form>
+                
+                <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-shield-alt text-yellow-600 ml-2"></i>
+                        <p class="text-sm text-yellow-800">
+                            تمامی پرداخت‌ها از طریق درگاه امن شاپرک انجام می‌شود.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.getElementById('payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // نمایش loading
+    const submitButton = this.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'در حال پردازش...';
+    submitButton.disabled = true;
+    
+    // ارسال فرم
+    this.submit();
+});
+</script>
+{% endblock %} 

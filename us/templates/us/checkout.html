@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}تسویه حساب{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-4xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-purple-800 mb-8">تسویه حساب</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- فرم اطلاعات -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">اطلاعات تماس</h3>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">شماره تلفن</label>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               value="{{ request.session.otp_phone|default:'' }}"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                               placeholder="09123456789"
+                               required>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-bold transition">
+                        ادامه به پرداخت
+                    </button>
+                </form>
+            </div>
+            
+            <!-- خلاصه سفارش -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">خلاصه سفارش</h3>
+                
+                <div class="space-y-4">
+                    {% for item in cart_items %}
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <h4 class="font-bold text-gray-800">{{ item.plan.name }}</h4>
+                            <p class="text-sm text-gray-600">{{ item.plan.get_plan_type_display }}</p>
+                            <p class="text-sm text-gray-600">{{ item.plan.duration }} دقیقه + {{ item.plan.extra_time }} دقیقه اضافه</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-bold text-purple-800">{{ item.get_total_price|floatformat:0 }} تومان</p>
+                            <p class="text-sm text-gray-600">تعداد: {{ item.quantity }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="border-t border-gray-200 mt-6 pt-6">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-lg font-bold text-gray-800">مجموع کل:</h4>
+                        <p class="text-2xl font-bold text-purple-800">{{ total_price|floatformat:0 }} تومان</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-600 ml-2"></i>
+                        <p class="text-sm text-blue-800">
+                            پس از تکمیل پرداخت، کد رهگیری برای شما ارسال خواهد شد.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

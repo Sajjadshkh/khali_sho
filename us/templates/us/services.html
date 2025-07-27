@@ -65,45 +65,23 @@
                 <h3 class="text-2xl font-bold text-center text-purple-800 mb-8">پلن‌های خدمات تلفنی</h3>
                 
                 <div class="grid md:grid-cols-4 gap-6">
-                    <!-- Plan 1 -->
+                    {% for plan in phone_plans %}
                     <div class="bg-white border border-purple-200 rounded-xl p-6 hover:border-purple-400 transition text-center">
-                        <h4 class="font-bold text-purple-700 mb-2">پلن پایه</h4>
-                        <p class="text-gray-500 text-sm mb-4">30 دقیقه مشاوره + 5 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-purple-800 mb-6">150,000 تومان</p>
-                        <button class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
+                        <h4 class="font-bold text-purple-700 mb-2">{{ plan.name }}</h4>
+                        <p class="text-gray-500 text-sm mb-4">{{ plan.duration }} دقیقه مشاوره + {{ plan.extra_time }} دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-purple-800 mb-6">{{ plan.price|floatformat:0 }} تومان</p>
+                        <form method="post" action="{% url 'us:add_to_cart' plan.id %}" class="w-full">
+                            {% csrf_token %}
+                            <button type="submit" class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
                             انتخاب پلن
                         </button>
+                        </form>
                     </div>
-                    
-                    <!-- Plan 2 -->
-                    <div class="bg-white border border-blue-200 rounded-xl p-6 hover:border-blue-400 transition text-center">
-                        <h4 class="font-bold text-blue-700 mb-2">پلن استاندارد</h4>
-                        <p class="text-gray-500 text-sm mb-4">60 دقیقه مشاوره + 10 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-blue-800 mb-6">280,000 تومان</p>
-                        <button class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-8">
+                        <p class="text-gray-600">در حال حاضر پلن تلفنی موجود نیست.</p>
                     </div>
-                    
-                    <!-- Plan 3 -->
-                    <div class="bg-white border border-pink-200 rounded-xl p-6 hover:border-pink-400 transition text-center">
-                        <h4 class="font-bold text-pink-700 mb-2">پلن پیشرفته</h4>
-                        <p class="text-gray-500 text-sm mb-4">90 دقیقه مشاوره + 15 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-pink-800 mb-6">390,000 تومان</p>
-                        <button class="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
-                    </div>
-                    
-                    <!-- Plan 4 -->
-                    <div class="bg-white border border-green-200 rounded-xl p-6 hover:border-green-400 transition text-center">
-                        <h4 class="font-bold text-green-700 mb-2">پلن ویژه</h4>
-                        <p class="text-gray-500 text-sm mb-4">120 دقیقه مشاوره + 25 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-green-800 mb-6">500,000 تومان</p>
-                        <button class="w-full bg-green-100 hover:bg-green-200 text-green-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -167,45 +145,23 @@
                 <h3 class="text-2xl font-bold text-center text-purple-800 mb-8">پلن‌های خدمات حضوری</h3>
                 
                 <div class="grid md:grid-cols-4 gap-6">
-                    <!-- Plan 1 -->
-                    <div class="bg-white border border-purple-200 rounded-xl p-6 hover:border-purple-400 transition text-center">
-                        <h4 class="font-bold text-purple-700 mb-2">پلن پایه</h4>
-                        <p class="text-gray-500 text-sm mb-4">30 دقیقه مشاوره + 5 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-purple-800 mb-6">150,000 تومان</p>
-                        <button class="w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
-                    </div>
-                    
-                    <!-- Plan 2 -->
+                    {% for plan in inperson_plans %}
                     <div class="bg-white border border-blue-200 rounded-xl p-6 hover:border-blue-400 transition text-center">
-                        <h4 class="font-bold text-blue-700 mb-2">پلن استاندارد</h4>
-                        <p class="text-gray-500 text-sm mb-4">60 دقیقه مشاوره + 10 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-blue-800 mb-6">280,000 تومان</p>
-                        <button class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
+                        <h4 class="font-bold text-blue-700 mb-2">{{ plan.name }}</h4>
+                        <p class="text-gray-500 text-sm mb-4">{{ plan.duration }} دقیقه مشاوره + {{ plan.extra_time }} دقیقه اضافه</p>
+                        <p class="text-2xl font-bold text-blue-800 mb-6">{{ plan.price|floatformat:0 }} تومان</p>
+                        <form method="post" action="{% url 'us:add_to_cart' plan.id %}" class="w-full">
+                            {% csrf_token %}
+                            <button type="submit" class="w-full bg-blue-100 hover:bg-blue-200 text-blue-700 py-2 rounded-full transition btn-no-border">
                             انتخاب پلن
                         </button>
+                        </form>
                     </div>
-                    
-                    <!-- Plan 3 -->
-                    <div class="bg-white border border-pink-200 rounded-xl p-6 hover:border-pink-400 transition text-center">
-                        <h4 class="font-bold text-pink-700 mb-2">پلن پیشرفته</h4>
-                        <p class="text-gray-500 text-sm mb-4">90 دقیقه مشاوره + 15 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-pink-800 mb-6">390,000 تومان</p>
-                        <button class="w-full bg-pink-100 hover:bg-pink-200 text-pink-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
+                    {% empty %}
+                    <div class="col-span-4 text-center py-8">
+                        <p class="text-gray-600">در حال حاضر پلن حضوری موجود نیست.</p>
                     </div>
-                    
-                    <!-- Plan 4 -->
-                    <div class="bg-white border border-green-200 rounded-xl p-6 hover:border-green-400 transition text-center">
-                        <h4 class="font-bold text-green-700 mb-2">پلن ویژه</h4>
-                        <p class="text-gray-500 text-sm mb-4">120 دقیقه مشاوره + 25 دقیقه اضافه</p>
-                        <p class="text-2xl font-bold text-green-800 mb-6">500,000 تومان</p>
-                        <button class="w-full bg-green-100 hover:bg-green-200 text-green-700 py-2 rounded-full transition btn-no-border">
-                            انتخاب پلن
-                        </button>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

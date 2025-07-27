@@ -1,14 +1,19 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, View
 from django.urls import reverse_lazy, reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
-from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast
+from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem
 from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwnerForm, PodcastForm
 from random import randint
 import ghasedakpack
 from django.contrib import messages
 from django.db import models
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+import requests
+import json
 
 
 SMS = ghasedakpack.Ghasedak(
@@ -20,6 +25,13 @@ class ServicesView(ListView):
     template_name = 'us/services.html'
     model = Aboutus
     context_object_name = 'aboutus'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # اضافه کردن پلن‌های فعال
+        context['phone_plans'] = Plan.objects.filter(plan_type='phone', is_active=True).order_by('price')
+        context['inperson_plans'] = Plan.objects.filter(plan_type='inperson', is_active=True).order_by('price')
+        return context
 
 class PodcastsView(ListView):
     template_name = 'us/podcasts.html'
@@ -217,3 +229,194 @@ class CheckOTPView(View):
             form.add_error("code", "داده وارد شده نامعتبر است")
 
             return render(request, 'us/checkotp.html', {'form': form})
+
+# View های جدید برای سیستم خرید
+def get_or_create_cart(request):
+    """دریافت یا ایجاد سبد خرید برای کاربر"""
+    if not request.session.session_key:
+        request.session.create()
+    
+    cart, created = Cart.objects.get_or_create(session_key=request.session.session_key)
+    return cart
+
+def add_to_cart(request, plan_id):
+    """اضافه کردن پلن به سبد خرید"""
+    if request.method == 'POST':
+        plan = get_object_or_404(Plan, id=plan_id, is_active=True)
+        cart = get_or_create_cart(request)
+        
+        # بررسی اینکه آیا این پلن قبلاً در سبد خرید وجود دارد
+        cart_item, created = CartItem.objects.get_or_create(
+            cart=cart,
+            plan=plan,
+            defaults={'quantity': 1}
+        )
+        
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
+        
+        messages.success(request, f'پلن {plan.name} به سبد خرید اضافه شد.')
+        return redirect('us:cart')
+    
+    return redirect('us:services')
+
+def cart_view(request):
+    """نمایش سبد خرید"""
+    cart = get_or_create_cart(request)
+    cart_items = cart.items.all()
+    
+    context = {
+        'cart': cart,
+        'cart_items': cart_items,
+        'total_price': cart.get_total_price(),
+    }
+    return render(request, 'us/cart.html', context)
+
+def remove_from_cart(request, item_id):
+    """حذف آیتم از سبد خرید"""
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__session_key=request.session.session_key)
+    cart_item.delete()
+    messages.success(request, 'آیتم از سبد خرید حذف شد.')
+    return redirect('us:cart')
+
+def update_cart_item(request, item_id):
+    """بروزرسانی تعداد آیتم در سبد خرید"""
+    if request.method == 'POST':
+        quantity = int(request.POST.get('quantity', 1))
+        cart_item = get_object_or_404(CartItem, id=item_id, cart__session_key=request.session.session_key)
+        
+        if quantity > 0:
+            cart_item.quantity = quantity
+            cart_item.save()
+        else:
+            cart_item.delete()
+        
+        return JsonResponse({
+            'success': True,
+            'total_price': cart_item.cart.get_total_price(),
+            'item_total': cart_item.get_total_price()
+        })
+    
+    return JsonResponse({'success': False})
+
+def checkout_view(request):
+    """صفحه تسویه حساب"""
+    # بررسی لاگین
+    if not request.user.is_authenticated:
+        return redirect(f"{reverse('accounts:login')}?next={reverse('us:checkout')}")
+    
+    # اگر کاربر لاگین است، OTP نمی‌خواهیم
+    # OTP فقط برای کاربران مهمان است
+    # if not request.session.get('otp_verified'):
+    #     messages.error(request, 'لطفاً ابتدا شماره تلفن خود را تایید کنید.')
+    #     return redirect(f"{reverse('us:otp')}?next={reverse('us:checkout')}")
+    
+    cart = get_or_create_cart(request)
+    cart_items = cart.items.all()
+    
+    if not cart_items.exists():
+        messages.error(request, 'سبد خرید شما خالی است.')
+        return redirect('us:services')
+    
+    if request.method == 'POST':
+        phone = request.POST.get('phone')
+        if phone:
+            # ایجاد سفارش
+            order = Order.objects.create(
+                user=request.user,  # اضافه کردن کاربر
+                phone=phone,
+                total_amount=cart.get_total_price()
+            )
+            
+            # انتقال آیتم‌ها از سبد خرید به سفارش
+            for cart_item in cart_items:
+                OrderItem.objects.create(
+                    order=order,
+                    plan=cart_item.plan,
+                    quantity=cart_item.quantity,
+                    price=cart_item.plan.price,
+                    total_price=cart_item.get_total_price()
+                )
+            
+            # پاک کردن سبد خرید
+            cart.delete()
+            
+            # انتقال به صفحه پرداخت
+            return redirect('us:payment', order_id=order.id)
+    
+    context = {
+        'cart': cart,
+        'cart_items': cart_items,
+        'total_price': cart.get_total_price(),
+    }
+    return render(request, 'us/checkout.html', context)
+
+def payment_view(request, order_id):
+    """صفحه پرداخت"""
+    order = get_object_or_404(Order, id=order_id)
+    
+    if request.method == 'POST':
+        # اینجا کد اتصال به درگاه شاپرک قرار می‌گیرد
+        payment_result = process_shaparak_payment(order)
+        
+        if payment_result['success']:
+            order.status = 'paid'
+            order.payment_id = payment_result['payment_id']
+            order.save()
+            messages.success(request, 'پرداخت با موفقیت انجام شد.')
+            return redirect('us:order_success', order_id=order.id)
+        else:
+            order.status = 'failed'
+            order.save()
+            messages.error(request, 'پرداخت ناموفق بود. لطفاً دوباره تلاش کنید.')
+            return redirect('us:payment', order_id=order.id)
+    
+    context = {
+        'order': order,
+        'order_items': order.items.all(),
+    }
+    return render(request, 'us/payment.html', context)
+
+from .shaparak import process_shaparak_payment
+
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentCallbackView(View):
+    """دریافت callback از درگاه پرداخت"""
+    
+    def post(self, request, order_id):
+        order = get_object_or_404(Order, id=order_id)
+        
+        # بررسی وضعیت پرداخت از درگاه
+        payment_status = request.POST.get('status')
+        payment_id = request.POST.get('payment_id')
+        
+        if payment_status == 'success':
+            order.status = 'paid'
+            order.payment_id = payment_id
+            order.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            order.status = 'failed'
+            order.save()
+            return JsonResponse({'status': 'failed'})
+
+def order_success(request, order_id):
+    """صفحه موفقیت پرداخت"""
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'us/order_success.html', {'order': order})
+
+def order_detail(request, order_id):
+    """جزئیات سفارش"""
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'us/order_detail.html', {'order': order})
+
+def get_cart_count(request):
+    """دریافت تعداد آیتم‌های سبد خرید"""
+    if request.session.session_key:
+        try:
+            cart = Cart.objects.get(session_key=request.session.session_key)
+            return cart.items.count()
+        except Cart.DoesNotExist:
+            return 0
+    return 0

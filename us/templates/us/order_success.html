@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پرداخت موفق{% endblock %}
+
+{% block content %}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-2xl mx-auto px-4">
+        <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check-circle text-green-600 text-3xl"></i>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-green-800 mb-4">پرداخت با موفقیت انجام شد!</h2>
+            <p class="text-gray-600 mb-8">سفارش شما با موفقیت ثبت و پرداخت شد.</p>
+            
+            <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                <div class="grid grid-cols-2 gap-4 text-right">
+                    <div>
+                        <span class="text-gray-600">شماره سفارش:</span>
+                        <p class="font-bold text-gray-800">{{ order.order_number }}</p>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">مبلغ پرداختی:</span>
+                        <p class="font-bold text-purple-800">{{ order.total_amount|floatformat:0 }} تومان</p>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">تاریخ پرداخت:</span>
+                        <p class="font-bold text-gray-800">{{ order.updated_at|date:"Y/m/d H:i" }}</p>
+                    </div>
+                    <div>
+                        <span class="text-gray-600">شناسه پرداخت:</span>
+                        <p class="font-bold text-gray-800">{{ order.payment_id|default:"-" }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">جزئیات سفارش:</h3>
+                {% for item in order.items.all %}
+                <div class="flex justify-between items-center p-4 bg-white border border-gray-200 rounded-lg">
+                    <div class="text-right">
+                        <h4 class="font-bold text-gray-800">{{ item.plan.name }}</h4>
+                        <p class="text-sm text-gray-600">{{ item.plan.get_plan_type_display }}</p>
+                        <p class="text-sm text-gray-600">{{ item.plan.duration }} دقیقه + {{ item.plan.extra_time }} دقیقه اضافه</p>
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-purple-800">{{ item.total_price|floatformat:0 }} تومان</p>
+                        <p class="text-sm text-gray-600">تعداد: {{ item.quantity }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                <div class="flex items-center justify-center">
+                    <i class="fas fa-info-circle text-blue-600 ml-2"></i>
+                    <p class="text-sm text-blue-800">
+                        کد رهگیری و جزئیات کامل سفارش برای شما پیامک خواهد شد.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-center space-x-4 space-x-reverse">
+                <a href="{% url 'us:services' %}" 
+                   class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full transition">
+                    بازگشت به خدمات
+                </a>
+                <a href="{% url 'us:order_detail' order.id %}" 
+                   class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-full transition">
+                    مشاهده جزئیات
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 
