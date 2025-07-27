@@ -86,24 +86,24 @@
                             کد تایید به شماره شما ارسال شده است.
                         </p>
                     </div>
-                </div>
-            </form>
+      </div>
+    </form>
 
             <!-- Hidden form for resend -->
-            <form id="resend-form" method="post" action="{% url 'us:otp' %}" style="display:none;">
-                {% csrf_token %}
+    <form id="resend-form" method="post" action="{% url 'us:otp' %}" style="display:none;">
+      {% csrf_token %}
                 {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
                 {% endif %}
-            </form>
-        </div>
-    </div>
+    </form>
+  </div>
+</div>
 </section>
 
 <script>
-let timerDisplay = document.getElementById('timer');
-let resendBtn = document.getElementById('resend-btn');
-let timeLeft = 120;
+  let timerDisplay = document.getElementById('timer');
+  let resendBtn = document.getElementById('resend-btn');
+  let timeLeft = 120;
 
 function updateTimer() {
     let minutes = Math.floor(timeLeft / 60);
@@ -111,16 +111,16 @@ function updateTimer() {
     timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     
     if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        resendBtn.disabled = false;
-        timerDisplay.textContent = '';
+      clearInterval(timerInterval);
+      resendBtn.disabled = false;
+      timerDisplay.textContent = '';
     }
     timeLeft--;
 }
 
 let timerInterval = setInterval(updateTimer, 1000);
 
-resendBtn.addEventListener('click', function() {
+  resendBtn.addEventListener('click', function() {
     resendBtn.disabled = true;
     timeLeft = 120;
     timerDisplay.textContent = '02:00';
@@ -154,6 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
-});
+  });
 </script>
 {% endblock %}

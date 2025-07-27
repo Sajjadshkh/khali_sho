@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: khali_sho_db
+      POSTGRES_USER: khali_sho_user
+      POSTGRES_PASSWORD: khali_sho_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    restart: always
+
+  web:
+    build: .
+    command: gunicorn khali_sho.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DEBUG: "0"
+      DJANGO_ALLOWED_HOSTS: "*"
+      DJANGO_DB_HOST: db
+      DJANGO_DB_PORT: 5432
+      DJANGO_DB_NAME: khali_sho_db
+      DJANGO_DB_USER: khali_sho_user
+      DJANGO_DB_PASSWORD: khali_sho_pass
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume: 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'jalali_date',
     'home',
     'accounts',
     'us',
@@ -132,3 +133,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 # زمان بر حسب ثانیه
+
+# Database
+if os.environ.get('DJANGO_DB_HOST'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DJANGO_DB_NAME', 'khali_sho_db'),
+            'USER': os.environ.get('DJANGO_DB_USER', 'khali_sho_user'),
+            'PASSWORD': os.environ.get('DJANGO_DB_PASSWORD', 'khali_sho_pass'),
+            'HOST': os.environ.get('DJANGO_DB_HOST', 'db'),
+            'PORT': os.environ.get('DJANGO_DB_PORT', '5432'),
+        }
+    }
+
+# Static/Media for Docker
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DEBUG = os.environ.get('DEBUG', '1') == '1'
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '*').split(',')

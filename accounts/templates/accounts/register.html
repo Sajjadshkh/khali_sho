@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block title %}ثبت نام{% endblock %}
-
-{% block content %}
+    
+    {% block content %}
 <section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
     <div class="container max-w-md mx-auto px-4">
         <div class="bg-white rounded-xl shadow-lg p-8">
@@ -18,8 +18,8 @@
 
             <!-- Register Form -->
             <form method="post" class="space-y-6">
-                {% csrf_token %}
-
+  {% csrf_token %}
+  
                 <!-- Username Field -->
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700 mb-2">نام کاربری</label>
@@ -103,25 +103,25 @@
                 </div>
 
                 <!-- Error Messages -->
-                {% if form.errors %}
+  {% if form.errors %}
                 <div class="bg-red-50 border border-red-200 rounded-lg p-4">
                     <div class="flex items-start">
                         <i class="fas fa-exclamation-circle text-red-500 ml-2 mt-1"></i>
                         <div>
                             <ul class="text-red-700 text-sm space-y-1">
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                {% endfor %}
-                                {% for error in form.non_field_errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
                         </div>
                     </div>
                 </div>
-                {% endif %}
+  {% endif %}
 
                 <!-- Submit Button -->
                 <button type="submit" 
@@ -136,9 +136,9 @@
                         <a href="{% url 'accounts:login' %}" class="text-purple-600 hover:text-purple-700 font-medium transition">
                             وارد شوید
                         </a>
-                    </p>
+  </p>
                 </div>
-            </form>
+</form>
         </div>
     </div>
 </section>

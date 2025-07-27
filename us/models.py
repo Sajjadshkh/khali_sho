@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+import django_jalali.db.models as jmodels
 
 User = get_user_model()
 
@@ -110,7 +111,7 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='شناسه پرداخت')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
-    
+    created_at_jalali = jmodels.jDateField(auto_now_add=True, verbose_name='تاریخ ایجاد (شمسی)')    
     def __str__(self):
         return f"سفارش {self.order_number}"
     
@@ -209,6 +210,9 @@ class Adviser(models.Model):
 
     def __str__(self):
         return self.full_name
+    class Meta:
+        verbose_name = "مشاور"
+        verbose_name_plural = "مشاوران"
 
 class Certificate(models.Model):
     adviser = models.ForeignKey(Adviser, on_delete=models.CASCADE, related_name='certificates')
@@ -216,6 +220,9 @@ class Certificate(models.Model):
 
     def __str__(self):
         return f'Certificate for {self.adviser.full_name}'
+    class Meta:
+        verbose_name = "مدرک"
+        verbose_name_plural = "مدرک‌ها"
 
 
 class Cafe(models.Model):
@@ -244,6 +251,9 @@ class Cafe(models.Model):
 
     def __str__(self):
         return self.cafe_name
+    class Meta:
+        verbose_name = "کافه"
+        verbose_name_plural = "کافه‌ها"
 
 
 class Owner(models.Model):
@@ -255,7 +265,9 @@ class Owner(models.Model):
 
     def __str__(self):
         return self.full_name
-
+    class Meta:
+        verbose_name = "مالک"
+        verbose_name_plural = "مالکان"
 
 class Podcast(models.Model):
     CATEGORY_CHOICES = [
@@ -277,5 +289,8 @@ class Podcast(models.Model):
 
     def __str__(self):
         return self.title
+    class Meta:
+        verbose_name = "پادکست"
+        verbose_name_plural = "پادکست‌ها"    
 
 

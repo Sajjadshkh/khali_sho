@@ -1,5 +1,9 @@
 from django.contrib import admin
 from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem
+from jalali_date.admin import ModelAdminJalaliMixin
+from jalali_date.widgets import AdminJalaliDateWidget
+from jalali_date import datetime2jalali
+from django.db import models
 
 
 class AdviserAdmin(admin.ModelAdmin):
@@ -51,10 +55,10 @@ class OwnerAdmin(admin.ModelAdmin):
     list_filter = ('cafe',)
 
 @admin.register(Podcast)
-class PodcastAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'created_at', 'accepted_rules', 'is_approved')
+class PodcastAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
+    list_display = ['title', 'category', 'created_at_jalali', 'accepted_rules', 'is_approved']
     search_fields = ('title', 'keywords')
-    list_filter = ('category', 'created_at', 'is_approved')
+    list_filter = ('category', 'is_approved', 'created_at')
     actions = ['approve_selected']
 
     @admin.action(description='تایید پادکست‌های انتخاب‌شده')
@@ -62,40 +66,64 @@ class PodcastAdmin(admin.ModelAdmin):
         updated = queryset.update(is_approved=True)
         self.message_user(request, f'{updated} پادکست با موفقیت تأیید شد.')
 
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
+
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
-    list_display = ['name', 'plan_type', 'duration', 'extra_time', 'price', 'is_active', 'created_at']
-    list_filter = ['plan_type', 'is_active', 'created_at']
+    list_display = ['name', 'plan_type', 'duration', 'extra_time', 'price', 'is_active', 'created_at_jalali']
+    list_filter = ['plan_type', 'is_active']
     search_fields = ['name']
     ordering = ['price']
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
-    list_display = ['session_key', 'created_at', 'updated_at', 'get_total_price']
+    list_display = ['session_key', 'created_at_jalali', 'updated_at_jalali', 'get_total_price']
     search_fields = ['session_key']
     ordering = ['-created_at']
-    
+
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
+
+    def updated_at_jalali(self, obj):
+        return datetime2jalali(obj.updated_at).strftime('%Y/%m/%d %H:%M')
+    updated_at_jalali.short_description = 'تاریخ بروزرسانی (شمسی)'
+
     def get_total_price(self, obj):
         return f"{obj.get_total_price():,} تومان"
     get_total_price.short_description = 'مجموع کل'
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    list_display = ['cart', 'plan', 'quantity', 'get_total_price', 'created_at']
+    list_display = ['cart', 'plan', 'quantity', 'get_total_price', 'created_at_jalali']
     list_filter = ['created_at']
     search_fields = ['plan__name']
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
     
     def get_total_price(self, obj):
         return f"{obj.get_total_price():,} تومان"
     get_total_price.short_description = 'قیمت کل'
 
 @admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ['order_number', 'user', 'phone', 'total_amount', 'status', 'created_at']
+class OrderAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
+    list_display = ['order_number', 'user', 'phone', 'total_amount', 'status', 'created_at_jalali']
     list_filter = ['status', 'created_at', 'user']
     search_fields = ['order_number', 'phone', 'user__username']
     ordering = ['-created_at']
     readonly_fields = ['order_number', 'created_at', 'updated_at']
+    formfield_overrides = {
+        models.DateField: {'widget': AdminJalaliDateWidget},
+    }
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):

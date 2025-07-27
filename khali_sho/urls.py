@@ -19,6 +19,10 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from . import settings
 
+admin.site.site_header = "مدیریت خالی شو"
+admin.site.site_title = "مدیریت خالی شو"
+admin.site.index_title = "به پنل مدیریت خوش آمدید"
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
