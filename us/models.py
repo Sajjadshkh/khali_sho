@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-import django_jalali.db.models as jmodels
+
 
 User = get_user_model()
 
@@ -111,7 +111,7 @@ class Order(models.Model):
     payment_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='شناسه پرداخت')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
-    created_at_jalali = jmodels.jDateField(auto_now_add=True, verbose_name='تاریخ ایجاد (شمسی)')    
+    
     def __str__(self):
         return f"سفارش {self.order_number}"
     

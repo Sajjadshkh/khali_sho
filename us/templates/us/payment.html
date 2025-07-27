@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load jalali_tags %}
 {% block title %}پرداخت{% endblock %}
 
 {% block content %}
@@ -20,8 +20,7 @@
                     </div>
                     <div class="flex justify-between">
                         <span class="text-gray-600">تاریخ سفارش:</span>
-                        <span class="font-bold">{{ order.created_at_jalali|date:"Y/m/d" }}</span>
-                    </div>
+                        <span class="font-bold">{{ order.created_at|to_jalali:"%Y/%m/%d" }}</span></div>
                     <div class="flex justify-between">
                         <span class="text-gray-600">شماره تلفن:</span>
                         <span class="font-bold">{{ order.phone }}</span>
