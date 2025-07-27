@@ -1,20 +1,108 @@
 {% extends 'base.html' %} 
 {% load static %}
-{% block title %}راستی آزمایی{% endblock %}
+
+{% block title %}تایید شماره تلفن{% endblock %}
+
 {% block content %}
-<div class="otp-page">
-  <div class="form">
-    <form class="register-form">
-      <input type="text" placeholder="name" />
-      <input type="password" placeholder="password" />
-      <input type="text" placeholder="email address" />
-    </form>
-    <form class="login-form" method="post">
-      <p>{{ forms.errors }}</p>
-      <h2>لطفا شماره تماس خود را وارد کنید:</h2>
-      {% csrf_token %} {{ form.phone }}
-      <button>ارسال</button>
-    </form>
-  </div>
-</div>
-{%endblock%}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-md mx-auto px-4">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <img src="{% static 'img/khalisho.png' %}" alt="Logo" class="w-12 h-12">
+                </div>
+                <h2 class="text-3xl font-bold text-purple-800 mb-2">تایید شماره تلفن</h2>
+                <p class="text-gray-600">کد تایید برای شما ارسال خواهد شد</p>
+            </div>
+
+            <!-- OTP Form -->
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Hidden input for next parameter -->
+                {% if request.GET.next %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                {% endif %}
+
+                <!-- Phone Field -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">شماره موبایل</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-mobile-alt text-gray-400"></i>
+                        </div>
+                        <input type="tel" 
+                               id="phone" 
+                               name="phone" 
+                               pattern="09[0-9]{9}"
+                               maxlength="11"
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="09123456789"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Error Messages -->
+                {% if form.errors %}
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-500 ml-2 mt-1"></i>
+                        <div>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-bold transition">
+                    ارسال کد تایید
+                </button>
+
+                <!-- Info Message -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 ml-2"></i>
+                        <p class="text-blue-700 text-sm">
+                            کد 4 رقمی به شماره شما پیامک خواهد شد.
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+function fixToEnglishDigits(str) {
+  if (!str) return '';
+  return str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var phone = document.getElementById('phone');
+  if (phone) {
+    phone.addEventListener('input', function(e) {
+      var val = fixToEnglishDigits(this.value);
+      if (this.value !== val) this.value = val;
+      
+      // محدودیت 11 رقم
+      if (val.length > 11) {
+        this.value = val.substring(0, 11);
+      }
+    });
+  }
+});
+</script>
+{% endblock %}

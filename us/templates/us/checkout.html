@@ -21,6 +21,8 @@
                                id="phone" 
                                name="phone" 
                                value="{{ request.session.otp_phone|default:'' }}"
+                               pattern="09[0-9]{9}"
+                               maxlength="11"
                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                                placeholder="09123456789"
                                required>
@@ -72,4 +74,26 @@
         </div>
     </div>
 </section>
+
+<script>
+function fixToEnglishDigits(str) {
+  if (!str) return '';
+  return str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var phone = document.getElementById('phone');
+  if (phone) {
+    phone.addEventListener('input', function(e) {
+      var val = fixToEnglishDigits(this.value);
+      if (this.value !== val) this.value = val;
+      
+      // محدودیت 11 رقم
+      if (val.length > 11) {
+        this.value = val.substring(0, 11);
+      }
+    });
+  }
+});
+</script>
 {% endblock %} 

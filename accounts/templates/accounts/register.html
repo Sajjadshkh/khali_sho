@@ -1,174 +1,167 @@
+{% extends 'base.html' %}
 {% load static %}
-{% comment %} {% load static %}
 
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-  <head>
-    {% include 'includes/head_refrences.html' %}
-    <title>{% block title %}{% endblock %}</title>
-  </head>
+{% block title %}ثبت نام{% endblock %}
 
-  <body class="body">
-    
-    {% block content %}
+{% block content %}
+<section class="py-16 bg-gradient-to-b from-purple-50 to-blue-50">
+    <div class="container max-w-md mx-auto px-4">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <img src="{% static 'img/khalisho.png' %}" alt="Logo" class="w-12 h-12">
+                </div>
+                <h2 class="text-3xl font-bold text-purple-800 mb-2">ثبت نام</h2>
+                <p class="text-gray-600">حساب کاربری جدید ایجاد کنید</p>
+            </div>
 
+            <!-- Register Form -->
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
 
+                <!-- Username Field -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">نام کاربری</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <input type="text" 
+                               id="username" 
+                               name="username" 
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="نام کاربری خود را وارد کنید"
+                               required>
+                    </div>
+                </div>
 
-    {% endblock %}
-    
-    
-  </body>
-</html> {% endcomment %}
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="utf-8">
-    <title>ثبت نام</title>
-    {% comment %} <link rel="stylesheet" href="/{css}/master.css"> {% endcomment %}
-    <style>
-      body {
-  margin: 0;
-  padding: 0;
-  background: url(../../../../static/img/bg-image.png) no-repeat center top;
-  background-size: cover;
-  font-family: sans-serif;
-  height: 100vh;
-}
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">ایمیل</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" 
+                               id="email" 
+                               name="email" 
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="ایمیل خود را وارد کنید"
+                               required>
+                    </div>
+                </div>
 
-.login-box {
-  width: 320px;
-  height: 700px;
-  background:rgb(36, 27, 165);
-  color: #fff;
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  box-sizing: border-box;
-  padding: 70px 30px;
-  border-radius: 20px;
-}
+                <!-- Mobile Field -->
+                <div>
+                    <label for="mobile" class="block text-sm font-medium text-gray-700 mb-2">شماره موبایل</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-mobile-alt text-gray-400"></i>
+                        </div>
+                        <input type="tel" 
+                               id="mobile" 
+                               name="mobile" 
+                               pattern="09[0-9]{9}"
+                               maxlength="11"
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="09123456789"
+                               required>
+                    </div>
+                </div>
 
-.login-box .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  position: absolute;
-  top: -50px;
-  left: calc(50% - 50px);
-}
+                <!-- Password Field -->
+                <div>
+                    <label for="password1" class="block text-sm font-medium text-gray-700 mb-2">رمز ورود</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" 
+                               id="password1" 
+                               name="password1" 
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="رمز خود را وارد کنید"
+                               required>
+                    </div>
+                </div>
 
-.login-box h1 {
-  margin: 0;
-  padding: 0 0 20px;
-  text-align: center;
-  font-size: 22px;
-}
+                <!-- Password Confirm Field -->
+                <div>
+                    <label for="password2" class="block text-sm font-medium text-gray-700 mb-2">تکرار رمز ورود</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" 
+                               id="password2" 
+                               name="password2" 
+                               class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
+                               placeholder="تکرار رمز خود را وارد کنید"
+                               required>
+                    </div>
+                </div>
 
-.login-box label {
-  margin: 0;
-  padding: 0;
-  font-weight: bold;
-  display: block;
-}
+                <!-- Error Messages -->
+                {% if form.errors %}
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-500 ml-2 mt-1"></i>
+                        <div>
+                            <ul class="text-red-700 text-sm space-y-1">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
-.login-box input {
-  width: 100%;
-  margin-bottom: 20px;
-}
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-bold transition">
+                    ثبت نام
+                </button>
 
-.login-box input[type="text"], .login-box input[type="password"], .login-box input[type="email"], .login-box input[type="tel"] {
-  border: none;
-  border-bottom: 1px solid #fff;
-  background: transparent;
-  outline: none;
-  height: 40px;
-  color: #fff;
-  font-size: 16px;
-}
-
-.login-box input[type="submit"] {
-  border: none;
-  outline: none;
-  height: 40px;
-  background:rgb(184, 15, 150);
-  color: #fff;
-  font-size: 18px;
-  border-radius: 20px;
-}
-
-.login-box input[type="submit"]:hover {
-  cursor: pointer;
-  background: #ffc107;
-  color: #000;
-}
-
-.login-box a {
-  text-decoration: none;
-  font-size: 12px;
-  line-height: 20px;
-  color: darkgrey;
-}
-
-.login-box a:hover {
-  color: #fff;
-}
-/* CSS */
-.rtl-placeholder::placeholder {
-  direction: rtl;
-  text-align: right;
-  font-family: inherit; /* اگه فونت خاصی داری */
-}
-
-    </style>
-  </head>
-  <body>
-
-    <div class="login-box">
-      <img src="{% static 'img/khalisho.png' %}" class="avatar" alt="Avatar Image">
-      <h1>ثبت نام</h1>
-      <form action="{% url 'accounts:register' %}" method="post">
-  {% csrf_token %}
-  
-  <!-- USERNAME INPUT -->
-  <label for="username">نام کاربری</label>
-  <input type="text" name="username" placeholder="نام کاربری خود را وارد کنید" required>
-
-  <!-- EMAIL INPUT -->
-  <label for="email">ایمیل</label>
-  <input type="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
-
-  <!-- MOBILE INPUT -->
-  <label for="mobile">شماره موبایل</label>
-  <input type="tel" name="mobile" placeholder="شماره موبایل خود را وارد کنید" pattern="09[0-9]{9}" class="rtl-placeholder" required>
-
-  <!-- PASSWORD INPUT -->
-  <label for="password1">رمز ورود</label>
-  <input type="password" name="password1" placeholder="رمز خود را وارد کنید" required>
-
-  <!-- PASSWORD CONFIRM -->
-  <label for="password2">تکرار رمز ورود</label>
-  <input type="password" name="password2" placeholder="تکرار رمز خود را وارد کنید" required>
-
-  <input type="submit" value="ثبت نام">
-
-  {% if form.errors %}
-    <ul style="color: yellow;">
-      {% for field in form %}
-        {% for error in field.errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
-      {% endfor %}
-      {% for error in form.non_field_errors %}
-        <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-
-  <p>اکانت کاربری دارید؟
-    <a href="{% url 'accounts:login' %}">ورود</a>
-  </p>
-</form>
+                <!-- Login Link -->
+                <div class="text-center">
+                    <p class="text-gray-600">
+                        حساب کاربری دارید؟ 
+                        <a href="{% url 'accounts:login' %}" class="text-purple-600 hover:text-purple-700 font-medium transition">
+                            وارد شوید
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
     </div>
-  </body>
-</html>
+</section>
+
+<script>
+function fixToEnglishDigits(str) {
+  if (!str) return '';
+  return str.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var mobile = document.getElementById('mobile');
+  if (mobile) {
+    mobile.addEventListener('input', function(e) {
+      var val = fixToEnglishDigits(this.value);
+      if (this.value !== val) this.value = val;
+      
+      // محدودیت 11 رقم
+      if (val.length > 11) {
+        this.value = val.substring(0, 11);
+      }
+    });
+  }
+});
+</script>
+{% endblock %}
