@@ -47,27 +47,128 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-// Testimonial Slider (safe version)
-document.addEventListener("DOMContentLoaded", function () {
-  const slider = document.getElementById('testimonial-slider');
-  const prevBtn = document.getElementById('prev-testimonial');
-  const nextBtn = document.getElementById('next-testimonial');
-  const testimonialCard = document.querySelector('.testimonial-card');
-
-  if (slider && prevBtn && nextBtn && testimonialCard) {
+// Simple Testimonial Slider
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM loaded, initializing testimonial slider...");
+    
+    const slider = document.getElementById('testimonial-slider');
+    const prevBtn = document.getElementById('prev-testimonial');
+    const nextBtn = document.getElementById('next-testimonial');
+    const dots = document.querySelectorAll('.slider-dot');
+    
+    // Check if elements exist
+    if (!slider) {
+        console.error('Slider element not found');
+        return;
+    }
+    
+    if (!prevBtn || !nextBtn) {
+        console.error('Navigation buttons not found');
+        return;
+    }
+    
+    const slides = slider.querySelectorAll('.testimonial-slide');
+    const totalSlides = slides.length;
+    
+    if (totalSlides === 0) {
+        console.error('No slides found');
+        return;
+    }
+    
+    console.log(`Found ${totalSlides} slides`);
+    
     let currentSlide = 0;
-    const slideWidth = testimonialCard.offsetWidth + 32; // 32 is for margin
-
-    nextBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide + 1) % 3;
-      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    
+    // Update slider position
+    function updateSlider() {
+        const translateX = -currentSlide * 100;
+        console.log(`Moving to slide ${currentSlide}, translateX: ${translateX}%`);
+        slider.style.transform = `translateX(${translateX}%)`;
+    }
+    
+    // Update dots
+    function updateDots() {
+        dots.forEach((dot, index) => {
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }
+    
+    // Update navigation buttons
+    function updateNavButtons() {
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+    
+    // Go to specific slide
+    function goToSlide(slideIndex) {
+        if (slideIndex < 0 || slideIndex >= totalSlides) return;
+        
+        currentSlide = slideIndex;
+        updateSlider();
+        updateDots();
+        updateNavButtons();
+    }
+    
+    // Next slide
+    function nextSlide() {
+        if (currentSlide < totalSlides - 1) {
+            goToSlide(currentSlide + 1);
+        } else {
+            goToSlide(0); // Loop to first
+        }
+    }
+    
+    // Previous slide
+    function prevSlide() {
+        if (currentSlide > 0) {
+            goToSlide(currentSlide - 1);
+        } else {
+            goToSlide(totalSlides - 1); // Loop to last
+        }
+    }
+    
+    // Event listeners
+    prevBtn.addEventListener('click', function() {
+        console.log('Prev button clicked');
+        prevSlide();
     });
-
-    prevBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide - 1 + 3) % 3;
-      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    
+    nextBtn.addEventListener('click', function() {
+        console.log('Next button clicked');
+        nextSlide();
     });
-  }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            console.log(`Dot ${index} clicked`);
+            goToSlide(index);
+        });
+    });
+    
+    // Initialize
+    updateSlider();
+    updateDots();
+    updateNavButtons();
+    
+    console.log('Testimonial slider initialized successfully');
+    
+    // Global test function
+    window.testSlider = function() {
+        console.log('=== SLIDER DEBUG INFO ===');
+        console.log('Current slide:', currentSlide);
+        console.log('Total slides:', totalSlides);
+        console.log('Slider element:', slider);
+        console.log('Prev button:', prevBtn);
+        console.log('Next button:', nextBtn);
+        console.log('Dots:', dots);
+        console.log('Slider transform:', slider.style.transform);
+        console.log('========================');
+    };
 });
  
  // Chat Button

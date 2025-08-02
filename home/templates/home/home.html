@@ -43,34 +43,46 @@
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center text-purple-800 mb-12">تجربیات کاربران ما</h2>
             
-            <div class="relative">
-                <div class="overflow-hidden">
-                    <div class="flex transition-transform duration-300" id="testimonial-slider">
+            <div class="testimonial-container relative max-w-7xl mx-auto" >
+                <div class="testimonial-wrapper overflow-hidden">
+                    <div class="testimonial-track flex transition-transform duration-500 ease-in-out flex-row-reverse" id="testimonial-track">
                         {% for t in testimonials %}
-                        <div class="testimonial-card flex-shrink-0 bg-white p-6 rounded-xl shadow-md mx-4">
-                            <div class="flex items-center mb-4">
-                                <div>
-                                    <h4 class="font-bold text-purple-800">{{ t.name }}</h4>
-                                    <p class="text-gray-500 text-sm">{{ t.position }}</p>
+                        <div class="testimonial-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 px-4">
+                            <div class="testimonial-card bg-white p-6 rounded-xl shadow-md h-full border border-gray-100 hover:shadow-lg transition-shadow duration-300">
+                                <div class="flex items-center mb-4">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-user text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-purple-800">{{ t.name }}</h4>
+                                        <p class="text-gray-500 text-sm">{{ t.position }}</p>
+                                    </div>
                                 </div>
+                                
+                                <p class="text-gray-600 text-sm leading-relaxed">
+                                    {{ t.experience }}
+                                </p>
                             </div>
-                            <p class="text-gray-600 text-sm">
-                                {{ t.experience }}
-                            </p>
                         </div>
                         {% empty %}
-                        <div class="text-center w-full py-8 text-gray-400">هنوز نظری ثبت نشده است.</div>
+                        <div class="testimonial-slide flex-shrink-0 w-full px-4">
+                            <div class="text-center py-8 text-gray-400">
+                                <i class="fas fa-comments text-4xl mb-4 opacity-50"></i>
+                                <p>هنوز نظری ثبت نشده است.</p>
+                            </div>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
                 
                 <!-- Navigation Arrows -->
-                <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-purple-700 hover:text-purple-900">
-                    <i class="fas fa-chevron-left"></i>
+                <button id="prev-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-purple-700 hover:text-purple-900 hover:bg-purple-50 transition-all duration-300 z-10 border border-gray-200">
+                    <i class="fas fa-chevron-right text-lg"></i>
                 </button>
-                <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-purple-700 hover:text-purple-900">
-                    <i class="fas fa-chevron-right"></i>
+                <button id="next-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-lg text-purple-700 hover:text-purple-900 hover:bg-purple-50 transition-all duration-300 z-10 border border-gray-200">
+                    <i class="fas fa-chevron-left text-lg"></i>
                 </button>
+                
             </div>
         </div>
     </section>

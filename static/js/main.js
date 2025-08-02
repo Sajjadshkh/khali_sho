@@ -47,25 +47,125 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-// Testimonial Slider (safe version)
+// Testimonial Slider (Enhanced version)
 document.addEventListener("DOMContentLoaded", function () {
-  const slider = document.getElementById('testimonial-slider');
+  const track = document.getElementById('testimonial-track');
   const prevBtn = document.getElementById('prev-testimonial');
   const nextBtn = document.getElementById('next-testimonial');
-  const testimonialCard = document.querySelector('.testimonial-card');
+  const slides = document.querySelectorAll('.testimonial-slide');
 
-  if (slider && prevBtn && nextBtn && testimonialCard) {
+  if (track && prevBtn && nextBtn && slides.length > 0) {
     let currentSlide = 0;
-    const slideWidth = testimonialCard.offsetWidth + 32; // 32 is for margin
+    const totalSlides = slides.length;
+    
+    // Calculate slides per view based on screen size
+    function getSlidesPerView() {
+      if (window.innerWidth >= 1400) return 4; // xl
+      if (window.innerWidth >= 1024) return 3; // lg
+      if (window.innerWidth >= 768) return 2;  // md
+      return 1; // mobile
+    }
+    
+    let slidesPerView = getSlidesPerView();
+    let maxSlide = Math.max(0, totalSlides - slidesPerView);
+    
+    
+    // Go to specific slide
+    function goToSlide(slideIndex) {
+      currentSlide = Math.max(0, Math.min(slideIndex, maxSlide));
+      const translateX = -(currentSlide * (100 / slidesPerView));
+      track.style.transform = `translateX(${translateX}%)`;
 
-    nextBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide + 1) % 3;
-      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+      updateButtons();
+    }
+    
+    // Update button states
+    function updateButtons() {
+      // Always enable buttons for loop functionality
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      
+      prevBtn.style.opacity = '1';
+      nextBtn.style.opacity = '1';
+    }
+    
+    // Next slide
+    function nextSlide() {
+      if (currentSlide < maxSlide) {
+        goToSlide(currentSlide + 1);
+      } else {
+        // Loop back to first slide
+        goToSlide(0);
+      }
+    }
+    
+    // Previous slide
+    function prevSlide() {
+      if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+      } else {
+        // Loop to last slide
+        goToSlide(maxSlide);
+      }
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', prevSlide);
+    prevBtn.addEventListener('click', nextSlide);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const newSlidesPerView = getSlidesPerView();
+      if (newSlidesPerView !== slidesPerView) {
+        slidesPerView = newSlidesPerView;
+        maxSlide = Math.max(0, totalSlides - slidesPerView);
+        currentSlide = Math.min(currentSlide, maxSlide);
+        createDots();
+        goToSlide(currentSlide);
+      }
     });
-
-    prevBtn.addEventListener('click', () => {
-      currentSlide = (currentSlide - 1 + 3) % 3;
-      slider.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+    
+    // Auto-play functionality
+    let autoPlayInterval;
+    
+    function startAutoPlay() {
+      autoPlayInterval = setInterval(() => {
+        prevSlide(); // This will handle looping automatically
+      }, 5000); // Change slide every 5 seconds
+    }
+    
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+    
+    // Pause auto-play on hover
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+    
+    // Initialize
+    createDots();
+    updateButtons();
+    startAutoPlay();
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+      
+      if (Math.abs(diff) > 50) { // Minimum swipe distance
+        if (diff > 0) {
+          nextSlide(); // Swipe left
+        } else {
+          nextSlide(); // Swipe right
+        }
+      }
     });
   }
 });

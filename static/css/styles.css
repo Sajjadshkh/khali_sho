@@ -32,10 +32,7 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d1d5db' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-.testimonial-card {
-    width: 8cm;
-    height: 5cm;
-}
+/* Old testimonial-card styles removed - replaced with enhanced slider */
 
 .plan-btn {
     position: fixed;
@@ -822,3 +819,202 @@ img {
             height: 3px;
             background-color: #d1a054;
         }
+
+/* =============== Enhanced Testimonial Slider =============== */
+.testimonial-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.testimonial-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+    gap: 0;
+}
+
+.testimonial-slide {
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    font-size: 4rem;
+    color: #e5e7eb;
+    font-family: serif;
+    line-height: 1;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+}
+
+/* Navigation buttons */
+#prev-testimonial,
+#next-testimonial {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+#prev-testimonial:hover,
+#next-testimonial:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.2);
+}
+
+/* RTL specific adjustments
+.testimonial-container[dir="rtl"] .testimonial-track {
+    direction: rtl;
+}
+
+.testimonial-container[dir="rtl"] #prev-testimonial {
+    right: 0;
+}
+
+.testimonial-container[dir="rtl"] #next-testimonial {
+    left: 0;
+} */
+
+#prev-testimonial:disabled,
+#next-testimonial:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Dots navigation */
+#testimonial-dots {
+    margin-top: 2rem;
+}
+
+#testimonial-dots button {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#testimonial-dots button:hover {
+    transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .testimonial-slide {
+        width: 100% !important;
+        flex: 0 0 100%;
+    }
+    
+    #prev-testimonial,
+    #next-testimonial {
+        padding: 0.5rem;
+    }
+    
+    #prev-testimonial i,
+    #next-testimonial i {
+        font-size: 1rem;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .testimonial-slide {
+        width: 50% !important;
+        flex: 0 0 50%;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+    .testimonial-slide {
+        width: 33.333333% !important;
+        flex: 0 0 33.333333%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .testimonial-slide {
+        width: 25% !important;
+        flex: 0 0 25%;
+    }
+}
+
+/* Animation for slide entrance */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.testimonial-slide {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Auto-play indicator */
+.testimonial-container::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #3b82f6, #8b5cf6);
+    border-radius: 2px;
+    animation: autoPlayIndicator 5s linear infinite;
+}
+
+@keyframes autoPlayIndicator {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 60px;
+    }
+}
+
+/* Touch/swipe feedback */
+.testimonial-track.swiping {
+    transition: none;
+}
+
+/* Loading state */
+.testimonial-container.loading .testimonial-track {
+    opacity: 0.7;
+}
+
+.testimonial-container.loading::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top: 3px solid #8b5cf6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 10;
+}
