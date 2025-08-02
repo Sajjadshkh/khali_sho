@@ -3,8 +3,8 @@ from django.views.generic import ListView, CreateView, View
 from django.urls import reverse_lazy, reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
-from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem
-from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwnerForm, PodcastForm
+from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem, Donation
+from .forms import OTPForm, CheckOTPForm, AdviserForm, CertificateForm, CafeOwnerForm, PodcastForm, DonationForm
 from random import randint
 import ghasedakpack
 from django.contrib import messages
@@ -420,3 +420,96 @@ def get_cart_count(request):
         except Cart.DoesNotExist:
             return 0
     return 0
+
+# Views مربوط به سیستم حمایت مالی
+def donation_view(request):
+    """صفحه فرم حمایت مالی"""
+    if request.method == 'POST':
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            donation = form.save(commit=False)
+            donation.save()
+            messages.success(request, 'اطلاعات حمایت شما ثبت شد. لطفاً برای تکمیل فرآیند پرداخت اقدام کنید.')
+            return redirect('us:donation_payment', donation_id=donation.id)
+        else:
+            messages.error(request, 'لطفاً خطاهای فرم را برطرف کنید.')
+    else:
+        form = DonationForm()
+    
+    context = {
+        'form': form,
+        'donation_types': Donation.DONATION_TYPES,
+    }
+    return render(request, 'us/donation.html', context)
+
+def donation_payment_view(request, donation_id):
+    """صفحه پرداخت حمایت مالی"""
+    donation = get_object_or_404(Donation, id=donation_id)
+    
+    if request.method == 'POST':
+        # اینجا کد اتصال به درگاه شاپرک قرار می‌گیرد
+        payment_result = process_shaparak_payment_donation(donation)
+        
+        if payment_result['success']:
+            donation.status = 'completed'
+            donation.payment_id = payment_result['payment_id']
+            donation.save()
+            messages.success(request, 'حمایت شما با موفقیت ثبت شد. از همراهی شما سپاسگزاریم.')
+            return redirect('us:donation_success', donation_id=donation.id)
+        else:
+            donation.status = 'failed'
+            donation.save()
+            messages.error(request, 'پرداخت ناموفق بود. لطفاً دوباره تلاش کنید.')
+            return redirect('us:donation_payment', donation_id=donation.id)
+    
+    context = {
+        'donation': donation,
+    }
+    return render(request, 'us/donation_payment.html', context)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DonationPaymentCallbackView(View):
+    """دریافت callback از درگاه پرداخت برای حمایت مالی"""
+    
+    def post(self, request, donation_id):
+        donation = get_object_or_404(Donation, id=donation_id)
+        
+        # بررسی وضعیت پرداخت از درگاه
+        payment_status = request.POST.get('status')
+        payment_id = request.POST.get('payment_id')
+        
+        if payment_status == 'success':
+            donation.status = 'completed'
+            donation.payment_id = payment_id
+            donation.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            donation.status = 'failed'
+            donation.save()
+            return JsonResponse({'status': 'failed'})
+
+def donation_success(request, donation_id):
+    """صفحه موفقیت حمایت مالی"""
+    donation = get_object_or_404(Donation, id=donation_id)
+    return render(request, 'us/donation_success.html', {'donation': donation})
+
+def donation_list(request):
+    """لیست حمایت‌های مالی (برای ادمین)"""
+    donations = Donation.objects.filter(status='completed').order_by('-created_at')
+    total_amount = sum(donation.amount for donation in donations)
+    
+    context = {
+        'donations': donations,
+        'total_amount': total_amount,
+    }
+    return render(request, 'us/donation_list.html', context)
+
+# تابع کمکی برای پرداخت حمایت مالی
+def process_shaparak_payment_donation(donation):
+    """پردازش پرداخت حمایت مالی از طریق درگاه شاپرک"""
+    # این تابع مشابه process_shaparak_payment است اما برای حمایت مالی
+    # در اینجا کد اتصال به درگاه پرداخت قرار می‌گیرد
+    return {
+        'success': True,
+        'payment_id': f'donation_{donation.id}_{uuid4().hex[:8]}'
+    }

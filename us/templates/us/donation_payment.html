@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}پرداخت حمایت مالی - خالی شو{% endblock %}
+
+{% block content %}
+<main class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-2xl mx-auto px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">پرداخت حمایت مالی</h1>
+            <div class="w-24 h-1 bg-green-500 mx-auto"></div>
+        </div>
+
+        <!-- Donation Summary -->
+        <div class="bg-white rounded-xl shadow-md p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">خلاصه حمایت شما</h2>
+            
+            <div class="space-y-4">
+                <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                    <span class="text-gray-600">نام:</span>
+                    <span class="font-semibold">
+                        {% if donation.is_anonymous %}
+                            حمایت‌کننده ناشناس
+                        {% else %}
+                            {{ donation.donor_name|default:"نامشخص" }}
+                        {% endif %}
+                    </span>
+                </div>
+                
+                <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                    <span class="text-gray-600">نوع حمایت:</span>
+                    <span class="font-semibold">{{ donation.get_donation_type_display }}</span>
+                </div>
+                
+                <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                    <span class="text-gray-600">مبلغ:</span>
+                    <span class="font-bold text-green-600 text-xl">{{ donation.amount|floatformat:0 }} تومان</span>
+                </div>
+                
+                {% if donation.message %}
+                <div class="py-3 border-b border-gray-200">
+                    <span class="text-gray-600 block mb-2">پیام شما:</span>
+                    <p class="text-gray-800 bg-gray-50 p-3 rounded-lg">{{ donation.message }}</p>
+                </div>
+                {% endif %}
+                
+                <div class="flex justify-between items-center py-3 border-b border-gray-200">
+                    <span class="text-gray-600">تاریخ:</span>
+                    <span class="font-semibold">{{ donation.created_at|date:"Y/m/d" }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div class="bg-white rounded-xl shadow-md p-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">انتخاب روش پرداخت</h3>
+            
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <!-- Payment Method Selection -->
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-green-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment_method" value="online" id="online" class="w-4 h-4 text-green-600" checked>
+                            <label for="online" class="mr-3 text-gray-700 font-medium">پرداخت آنلاین</label>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 mr-7">پرداخت امن از طریق درگاه‌های معتبر</p>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-green-500 cursor-pointer">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment_method" value="wallet" id="wallet" class="w-4 h-4 text-green-600">
+                            <label for="wallet" class="mr-3 text-gray-700 font-medium">کیف پول</label>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 mr-7">پرداخت از طریق کیف پول دیجیتال</p>
+                    </div>
+                </div>
+
+                <!-- Payment Button -->
+                <div class="text-center pt-6">
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 text-lg">
+                        پرداخت {{ donation.amount|floatformat:0 }} تومان
+                        <i class="fas fa-credit-card mr-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Security Notice -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mt-8">
+            <div class="flex items-start">
+                <i class="fas fa-shield-alt text-blue-500 text-xl mt-1 ml-3"></i>
+                <div>
+                    <h4 class="font-semibold text-blue-800 mb-2">امنیت پرداخت</h4>
+                    <p class="text-blue-700 text-sm">
+                        تمامی پرداخت‌ها از طریق درگاه‌های معتبر و امن انجام می‌شود. 
+                        اطلاعات شما محفوظ خواهد ماند و هیچ‌گونه هزینه اضافی دریافت نمی‌شود.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Donation -->
+        <div class="text-center mt-8">
+            <a href="{% url 'us:donation' %}" class="text-green-600 hover:text-green-700 font-medium">
+                <i class="fas fa-arrow-right ml-2"></i>
+                بازگشت به صفحه حمایت
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %} 

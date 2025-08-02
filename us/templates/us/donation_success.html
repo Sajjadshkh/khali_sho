@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}حمایت موفق - خالی شو{% endblock %}
+
+{% block content %}
+<main class="min-h-screen bg-gray-50 py-12">
+    <div class="max-w-2xl mx-auto px-4">
+        <!-- Success Message -->
+        <div class="bg-white rounded-xl shadow-md p-8 text-center">
+            <div class="mb-6">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-500 text-3xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">حمایت شما با موفقیت ثبت شد!</h1>
+                <p class="text-lg text-gray-600">
+                    از همراهی و حمایت شما سپاسگزاریم. مبلغ شما مستقیماً صرف کمک به افراد نیازمند خواهد شد.
+                </p>
+            </div>
+
+            <!-- Donation Details -->
+            <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">جزئیات حمایت</h2>
+                <div class="space-y-3 text-right">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">شماره حمایت:</span>
+                        <span class="font-semibold">#{{ donation.id }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">مبلغ:</span>
+                        <span class="font-bold text-green-600 text-xl">{{ donation.amount|floatformat:0 }} تومان</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">نوع حمایت:</span>
+                        <span class="font-semibold">{{ donation.get_donation_type_display }}</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">تاریخ:</span>
+                        <span class="font-semibold">{{ donation.created_at|date:"Y/m/d H:i" }}</span>
+                    </div>
+                    {% if donation.payment_id %}
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">شناسه پرداخت:</span>
+                        <span class="font-semibold text-sm">{{ donation.payment_id }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Impact Message -->
+            <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-lg p-6 text-white mb-8">
+                <h3 class="text-xl font-bold mb-4">تأثیر حمایت شما</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+                    <div>
+                        <div class="text-2xl font-bold mb-2">۱</div>
+                        <div class="text-sm">ساعت مشاوره رایگان</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold mb-2">۱</div>
+                        <div class="text-sm">زندگی بهبود یافته</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-gray-800">مراحل بعدی</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold ml-3 mt-1">۱</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">دریافت رسید</p>
+                            <p class="text-sm text-gray-600">رسید الکترونیکی به ایمیل شما ارسال خواهد شد</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold ml-3 mt-1">۲</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">گزارش عملکرد</p>
+                            <p class="text-sm text-gray-600">گزارش استفاده از مبلغ شما در پایان ماه ارسال می‌شود</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold ml-3 mt-1">۳</div>
+                        <div>
+                            <p class="font-semibold text-gray-800">پیگیری تأثیر</p>
+                            <p class="text-sm text-gray-600">می‌توانید تأثیر حمایت خود را در صفحه گزارشات مشاهده کنید</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 mt-8">
+                <a href="{% url 'us:donation' %}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                    حمایت مجدد
+                    <i class="fas fa-heart mr-2"></i>
+                </a>
+                <a href="{% url 'home:home' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                    بازگشت به صفحه اصلی
+                    <i class="fas fa-home mr-2"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Share Section -->
+        <div class="bg-white rounded-xl shadow-md p-8 mt-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">این خبر خوب را به اشتراک بگذارید</h3>
+            <p class="text-gray-600 text-center mb-6">
+                با به اشتراک گذاری این خبر، دیگران را نیز به حمایت تشویق کنید
+            </p>
+            <div class="flex justify-center space-x-4 space-x-reverse">
+                <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full transition duration-300">
+                    <i class="fab fa-telegram text-xl"></i>
+                </a>
+                <a href="#" class="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full transition duration-300">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full transition duration-300">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition duration-300">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %} 

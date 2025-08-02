@@ -27,4 +27,11 @@ urlpatterns = [
     path('payment/callback/<int:order_id>/', views.PaymentCallbackView.as_view(), name='payment_callback'),
     path('order/success/<int:order_id>/', views.order_success, name='order_success'),
     path('order/detail/<int:order_id>/', views.order_detail, name='order_detail'),
+    
+    # URL های جدید برای سیستم حمایت مالی
+    path('donation/', views.donation_view, name='donation'),
+    path('donation/payment/<int:donation_id>/', views.donation_payment_view, name='donation_payment'),
+    path('donation/callback/<int:donation_id>/', views.DonationPaymentCallbackView.as_view(), name='donation_callback'),
+    path('donation/success/<int:donation_id>/', views.donation_success, name='donation_success'),
+    path('donation/list/', views.donation_list, name='donation_list'),
 ]

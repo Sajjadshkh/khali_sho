@@ -294,3 +294,38 @@ class Podcast(models.Model):
         verbose_name_plural = "پادکست‌ها"    
 
 
+class Donation(models.Model):
+    DONATION_TYPES = [
+        ('charity', 'خیریه'),
+        ('support', 'حمایت از پروژه'),
+        ('general', 'حمایت عمومی'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('pending', 'در انتظار پرداخت'),
+        ('completed', 'پرداخت شده'),
+        ('failed', 'ناموفق'),
+        ('cancelled', 'لغو شده'),
+    ]
+    
+    donor_name = models.CharField(max_length=100, verbose_name='نام اهداکننده', blank=True, null=True)
+    donor_phone = models.CharField(max_length=11, verbose_name='شماره تلفن')
+    donor_email = models.EmailField(verbose_name='ایمیل', blank=True, null=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='مبلغ (تومان)')
+    donation_type = models.CharField(max_length=20, choices=DONATION_TYPES, default='charity', verbose_name='نوع حمایت')
+    message = models.TextField(verbose_name='پیام', blank=True, null=True)
+    is_anonymous = models.BooleanField(default=False, verbose_name='حمایت ناشناس')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending', verbose_name='وضعیت')
+    payment_id = models.CharField(max_length=100, blank=True, null=True, verbose_name='شناسه پرداخت')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
+    
+    def __str__(self):
+        return f"حمایت {self.amount} تومانی - {self.get_donation_type_display()}"
+    
+    class Meta:
+        verbose_name = "حمایت مالی"
+        verbose_name_plural = "حمایت‌های مالی"
+        ordering = ['-created_at']    
+
+

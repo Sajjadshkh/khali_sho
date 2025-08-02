@@ -1,5 +1,5 @@
 from django import forms
-from .models import OTP, Adviser, Certificate, GENDER_CHOICES, WORK_PREFERENCE_CHOICES, CONSULTATION_METHODS, SPECIALTY_CHOICES, Cafe, Owner, CAFE_TYPES, Podcast
+from .models import OTP, Adviser, Certificate, GENDER_CHOICES, WORK_PREFERENCE_CHOICES, CONSULTATION_METHODS, SPECIALTY_CHOICES, Cafe, Owner, CAFE_TYPES, Podcast, Donation
 from django.core import validators
 
 class OTPForm(forms.Form):
@@ -283,3 +283,71 @@ class PodcastForm(forms.ModelForm):
         if not accepted:
             raise forms.ValidationError('پذیرفتن قوانین الزامی است.')
         return accepted
+
+class DonationForm(forms.ModelForm):
+    class Meta:
+        model = Donation
+        fields = ['donor_name', 'donor_phone', 'donor_email', 'amount', 'donation_type', 'message', 'is_anonymous']
+        widgets = {
+            'donor_name': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
+                'placeholder': 'نام شما (اختیاری)'
+            }),
+            'donor_phone': forms.TextInput(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
+                'placeholder': 'مثال: 09123456789',
+                'pattern': '09\\d{9}',
+                'maxlength': '11'
+            }),
+            'donor_email': forms.EmailInput(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
+                'placeholder': 'example@domain.com (اختیاری)'
+            }),
+            'amount': forms.NumberInput(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
+                'placeholder': 'مبلغ به تومان',
+                'min': '1000',
+                'step': '1000'
+            }),
+            'donation_type': forms.Select(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field'
+            }),
+            'message': forms.Textarea(attrs={
+                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
+                'rows': 3,
+                'placeholder': 'پیام شما (اختیاری)'
+            }),
+            'is_anonymous': forms.CheckboxInput(attrs={
+                'class': 'w-4 h-4 text-green-600 rounded focus:ring-green-500 checkbox'
+            }),
+        }
+        labels = {
+            'donor_name': 'نام شما',
+            'donor_phone': 'شماره تلفن',
+            'donor_email': 'ایمیل',
+            'amount': 'مبلغ حمایت (تومان)',
+            'donation_type': 'نوع حمایت',
+            'message': 'پیام شما',
+            'is_anonymous': 'حمایت ناشناس',
+        }
+
+    def clean_donor_phone(self):
+        phone = self.cleaned_data.get('donor_phone')
+        if not phone:
+            raise forms.ValidationError('شماره تلفن الزامی است.')
+        
+        # تبدیل اعداد فارسی به انگلیسی
+        persian_digits = '۰۱۲۳۴۵۶۷۸۹'
+        english_digits = '0123456789'
+        table = str.maketrans(persian_digits, english_digits)
+        phone = phone.translate(table)
+        
+        if not phone.isdigit() or not phone.startswith('09') or len(phone) != 11:
+            raise forms.ValidationError('شماره موبایل باید با 09 شروع شده و 11 رقم باشد.')
+        return phone
+
+    def clean_amount(self):
+        amount = self.cleaned_data.get('amount')
+        if amount < 1000:
+            raise forms.ValidationError('حداقل مبلغ حمایت 1000 تومان است.')
+        return amount

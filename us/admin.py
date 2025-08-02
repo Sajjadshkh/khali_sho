@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem
+from .models import Aboutus, OTP, Adviser, Certificate, Cafe, Owner, Podcast, Plan, Cart, CartItem, Order, OrderItem, Donation
 from jalali_date.admin import ModelAdminJalaliMixin
 from jalali_date.widgets import AdminJalaliDateWidget
 from jalali_date import datetime2jalali
@@ -130,6 +130,45 @@ class OrderItemAdmin(admin.ModelAdmin):
     list_display = ['order', 'plan', 'quantity', 'price', 'total_price']
     list_filter = ['plan__plan_type']
     search_fields = ['order__order_number', 'plan__name']
+
+@admin.register(Donation)
+class DonationAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
+    list_display = ['id', 'donor_name_display', 'donor_phone', 'amount', 'donation_type', 'status', 'created_at_jalali']
+    list_filter = ['donation_type', 'status', 'is_anonymous', 'created_at']
+    search_fields = ['donor_name', 'donor_phone', 'donor_email', 'message']
+    ordering = ['-created_at']
+    readonly_fields = ['created_at', 'updated_at']
+    list_editable = ['status']
+    
+    fieldsets = (
+        ('اطلاعات اهداکننده', {
+            'fields': ('donor_name', 'donor_phone', 'donor_email', 'is_anonymous')
+        }),
+        ('اطلاعات حمایت', {
+            'fields': ('amount', 'donation_type', 'message')
+        }),
+        ('وضعیت پرداخت', {
+            'fields': ('status', 'payment_id')
+        }),
+        ('تاریخ‌ها', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def donor_name_display(self, obj):
+        if obj.is_anonymous:
+            return "ناشناس"
+        return obj.donor_name or "نامشخص"
+    donor_name_display.short_description = 'نام اهداکننده'
+    
+    def created_at_jalali(self, obj):
+        return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
+    created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
+    
+    def amount_display(self, obj):
+        return f"{obj.amount:,} تومان"
+    amount_display.short_description = 'مبلغ'
 
 admin.site.register(Aboutus)
 admin.site.register(Adviser, AdviserAdmin)
