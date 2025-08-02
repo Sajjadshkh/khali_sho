@@ -73,29 +73,25 @@ document.addEventListener("DOMContentLoaded", function () {
     // Go to specific slide
     function goToSlide(slideIndex) {
       currentSlide = Math.max(0, Math.min(slideIndex, maxSlide));
-      const translateX = -(currentSlide * (100 / slidesPerView));
+      const translateX = (currentSlide * (100 / slidesPerView));
       track.style.transform = `translateX(${translateX}%)`;
-
+      updateDots();
       updateButtons();
     }
     
     // Update button states
     function updateButtons() {
-      // Always enable buttons for loop functionality
-      prevBtn.disabled = false;
-      nextBtn.disabled = false;
+      prevBtn.disabled = currentSlide === 0; 
+      nextBtn.disabled = currentSlide >= maxSlide;
       
-      prevBtn.style.opacity = '1';
-      nextBtn.style.opacity = '1';
+      prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+      nextBtn.style.opacity = currentSlide >= maxSlide ? '0.5' : '1';
     }
     
     // Next slide
     function nextSlide() {
       if (currentSlide < maxSlide) {
         goToSlide(currentSlide + 1);
-      } else {
-        // Loop back to first slide
-        goToSlide(0);
       }
     }
     
@@ -103,15 +99,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function prevSlide() {
       if (currentSlide > 0) {
         goToSlide(currentSlide - 1);
-      } else {
-        // Loop to last slide
-        goToSlide(maxSlide);
       }
     }
     
     // Event listeners
-    nextBtn.addEventListener('click', prevSlide);
-    prevBtn.addEventListener('click', nextSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
     
     // Handle window resize
     window.addEventListener('resize', () => {
@@ -130,7 +123,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
     function startAutoPlay() {
       autoPlayInterval = setInterval(() => {
-        prevSlide(); // This will handle looping automatically
+        if (currentSlide >= maxSlide) {
+          goToSlide(0);
+        } else {
+          nextSlide(); // This will handle looping automatically
+        }
       }, 5000); // Change slide every 5 seconds
     }
     
@@ -161,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       if (Math.abs(diff) > 50) { // Minimum swipe distance
         if (diff > 0) {
-          nextSlide(); // Swipe left
+          prevSlide(); // Swipe left
         } else {
           nextSlide(); // Swipe right
         }
