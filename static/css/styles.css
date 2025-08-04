@@ -250,6 +250,7 @@ img {
   color: var(--title-color);
   cursor: pointer;
   transition: color .4s;
+
 }
 
 :is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
@@ -257,7 +258,11 @@ img {
 }
 
 /* Navigation for mobile devices */
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 767px) {
+  .nav {
+    height: calc(var(--header-height) + 1rem);
+    column-gap: 3rem;
+  }
   .nav__menu {
     position: fixed;
     top: -100%;
@@ -265,12 +270,12 @@ img {
     background-color: var(--body-color);
     box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
     width: 100%;
-    padding-block: 4.5rem 4rem;
+    padding-block: 1rem 4rem;
     transition: top .4s;
   }
   .nav .logo {
-    width: 62px;
-    height: 36px;
+    width: 70px;
+    height: 70px;
   }
   /* .nav__toggle {
   display: block;
@@ -459,7 +464,7 @@ img {
 }
 
 /* For large devices */
-@media screen and (min-width: 1023px) {
+@media screen and (min-width: 768px) {
   .nav {
     height: calc(var(--header-height) + 2rem);
     column-gap: 3rem;
