@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
-from us.models import Adviser
+from us.models import Adviser, Podcast, Plan
 from accounts.models import Testimonial
 
 # Create your views here.
@@ -12,6 +12,9 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['advisers'] = Adviser.objects.filter(is_approved=True, is_featured=True).order_by('-id')[:3]
         context['testimonials'] = Testimonial.objects.filter(is_active=True).order_by('-created_at')
+        context['podcasts'] = Podcast.objects.filter(is_approved=True).order_by('-created_at')
+        context['inperson_plans'] = Plan.objects.filter(plan_type='inperson', is_active=True).order_by('price')
+        context['phone_plans'] = Plan.objects.filter(plan_type='phone', is_active=True).order_by('price')
         return context
 
 class TopAdvisersView(ListView):
