@@ -170,7 +170,7 @@ class CafeOwnerForm(forms.Form):
     menu_file = forms.FileField(
         label='آپلود منوی کافه (PDF یا تصویر)',
         widget=forms.ClearableFileInput(attrs={'id': 'menu-upload'}),
-        required=True
+        required=False
     )
     description = forms.CharField(
         label='توضیحات اضافه (اختیاری)',
@@ -178,13 +178,9 @@ class CafeOwnerForm(forms.Form):
         required=False
     )
     # Facilities
-    has_wifi = forms.BooleanField(label='اینترنت وای فای', required=False)
+
     has_parking = forms.BooleanField(label='پارکینگ', required=False)
-    has_live_music = forms.BooleanField(label='موسیقی زنده', required=False)
-    has_outdoor = forms.BooleanField(label='فضای باز', required=False)
-    has_hookah = forms.BooleanField(label='قلیان', required=False)
     has_workspace = forms.BooleanField(label='فضای کار', required=False)
-    serves_breakfast = forms.BooleanField(label='صبحانه', required=False)
     has_disabled_access = forms.BooleanField(label='دسترسی معلولین', required=False)
     # Owner fields
     owner_full_name = forms.CharField(

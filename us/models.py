@@ -35,10 +35,10 @@ SPECIALTY_CHOICES = [
 ]
 
 CAFE_TYPES = [
-    ('traditional', 'کافه سنتی'),
-    ('modern', 'کافه مدرن'),
-    ('roastery', 'رستری و تخصصی'),
-    ('book', 'کافه کتاب'),
+    ('traditional restaurant', 'رستوران سنتی'),
+    ('cafe', 'کافه'),
+    ('cafe restaurant', 'کافه رستوران'),
+    ('book cafe', 'کافه کتاب'),
     ('other', 'سایر'),
 ]
 
@@ -178,7 +178,7 @@ class Adviser(models.Model):
     full_name = models.CharField(max_length=100, verbose_name='نام و نام خانوادگی')
     phone = models.CharField(max_length=11, unique=True, verbose_name='شماره موبایل')
     image = models.ImageField(upload_to='advisers/', verbose_name='عکس', blank=True, null=True)
-    email = models.EmailField(unique=True, verbose_name='ایمیل')
+    email = models.EmailField(unique=True, verbose_name='ایمیل', blank=True, null=True)
     age = models.PositiveIntegerField(verbose_name='سن')
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, verbose_name='جنسیت')
     location = models.CharField(max_length=255, verbose_name='موقعیت', blank=True, null=True)
@@ -227,25 +227,20 @@ class Certificate(models.Model):
 
 class Cafe(models.Model):
     cafe_name = models.CharField(max_length=255, verbose_name='نام کافه')
-    cafe_type = models.CharField(max_length=20, choices=CAFE_TYPES, verbose_name='نوع کافه')
+    cafe_type = models.CharField(max_length=30, choices=CAFE_TYPES, verbose_name='نوع کافه')
     address = models.TextField(verbose_name='آدرس دقیق')
     size = models.PositiveIntegerField(verbose_name='وسعت کافه')
     capacity = models.PositiveIntegerField(verbose_name='ظرفیت')
-    menu_file = models.FileField(upload_to='menus/', verbose_name='منو')
+    menu_file = models.FileField(blank=True, null=True, upload_to='menus/', verbose_name='منو')
     description = models.TextField(blank=True, verbose_name='توضیحات اضافه')
     latitude = models.FloatField(null=True, blank=True, verbose_name='عرض جغرافیایی')
     longitude = models.FloatField(null=True, blank=True, verbose_name='طول جغرافیایی')
     image = models.ImageField(upload_to='cafes/', verbose_name='لوگوی کافه', blank=True, null=True)
 
     # Facilities
-    has_wifi = models.BooleanField(default=False, blank=True)
-    has_parking = models.BooleanField(default=False, blank=True)
-    has_live_music = models.BooleanField(default=False, blank=True)
-    has_outdoor = models.BooleanField(default=False, blank=True)
-    has_hookah = models.BooleanField(default=False, blank=True)
-    has_workspace = models.BooleanField(default=False, blank=True)
-    serves_breakfast = models.BooleanField(default=False, blank=True)
-    has_disabled_access = models.BooleanField(default=False, blank=True)
+    has_parking = models.BooleanField(default=False, blank=True, verbose_name='پارکینگ')
+    has_workspace = models.BooleanField(default=False, blank=True, verbose_name='فضای کار')
+    has_disabled_access = models.BooleanField(default=False, blank=True, verbose_name='دسترسی معلولین')
     accepted_terms = models.BooleanField(default=False, blank=True, verbose_name='قوانین و مقررات را قبول دارم')
     is_featured = models.BooleanField(default=False, verbose_name='نمایش در صفحه درباره ما')
 
@@ -261,7 +256,7 @@ class Owner(models.Model):
     full_name = models.CharField(max_length=255, verbose_name='نام و نام خانوادگی مالک')
     national_id = models.CharField(max_length=10, verbose_name='کد ملی')
     phone = models.CharField(max_length=11, verbose_name='شماره موبایل')
-    email = models.EmailField(blank=True, verbose_name='ایمیل')
+    email = models.EmailField(blank=True, null=True, verbose_name='ایمیل')
 
     def __str__(self):
         return self.full_name
