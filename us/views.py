@@ -64,10 +64,18 @@ def podcast_create(request):
         form = PodcastForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'پادکست شما با موفقیت ثبت شد و پس از بررسی منتشر خواهد شد.')
+            messages.success(
+                request,
+                'پادکست شما با موفقیت ثبت شد و پس از بررسی منتشر خواهد شد.',
+                extra_tags='podcast'
+            )
             return redirect('us:podcast_create')
         else:
-            messages.error(request, 'لطفاً خطاهای فرم را برطرف کنید.')
+            messages.error(
+                request,
+                'لطفاً خطاهای فرم را برطرف کنید.',
+                extra_tags='podcast'
+            )
     else:
         form = PodcastForm()
     return render(request, 'us/podcast_create.html', {'form': form})

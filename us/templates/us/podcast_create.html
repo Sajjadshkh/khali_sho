@@ -18,14 +18,16 @@
     </section>
     <!-- پیام‌های موفقیت یا خطا -->
     {% if messages %}
-      <div class="max-w-2xl mx-auto mt-6">
-        {% for message in messages %}
-          <div class="mb-4 p-3 rounded-lg {% if message.tags == 'success' %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+    <div class="max-w-2xl mx-auto mt-6">
+      {% for message in messages %}
+        {% if 'podcast' in message.tags %}
+          <div class="mb-4 p-3 rounded-lg {% if 'success' in message.tags %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
             {{ message }}
           </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
     <!-- فرم ارسال پادکست -->
     <div class="bg-white rounded-xl shadow-sm p-6 mb-12">
         <div class="max-w-2xl mx-auto">
