@@ -296,15 +296,12 @@ class DonationForm(forms.ModelForm):
                 'pattern': '09\\d{9}',
                 'maxlength': '11'
             }),
-            'donor_email': forms.EmailInput(attrs={
-                'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
-                'placeholder': 'example@domain.com (اختیاری)'
-            }),
+           
             'amount': forms.NumberInput(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
-                'placeholder': 'مبلغ به تومان',
-                'min': '1000',
-                'step': '1000'
+                'placeholder': 'مبلغ به ریال',
+                'min': '100000',
+                'step': '10000'
             }),
             'donation_type': forms.Select(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field'
@@ -312,7 +309,7 @@ class DonationForm(forms.ModelForm):
             'message': forms.Textarea(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 input-field',
                 'rows': 3,
-                'placeholder': 'پیام شما (اختیاری)'
+                'placeholder': 'توضیحات شما'
             }),
             'is_anonymous': forms.CheckboxInput(attrs={
                 'class': 'w-4 h-4 text-green-600 rounded focus:ring-green-500 checkbox'
@@ -322,9 +319,9 @@ class DonationForm(forms.ModelForm):
             'donor_name': 'نام شما',
             'donor_phone': 'شماره تلفن',
             'donor_email': 'ایمیل',
-            'amount': 'مبلغ حمایت (تومان)',
+            'amount': 'مبلغ حمایت (ریال)',
             'donation_type': 'نوع حمایت',
-            'message': 'پیام شما',
+            'message': 'توضیحاتی دارید؟',
             'is_anonymous': 'حمایت ناشناس',
         }
 
