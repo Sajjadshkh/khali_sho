@@ -22,7 +22,7 @@
   
                 <!-- Username Field -->
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">نام کاربری</label>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">نام کاربری<span class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <i class="fas fa-user text-gray-400"></i>
@@ -47,14 +47,13 @@
                                id="email" 
                                name="email" 
                                class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
-                               placeholder="ایمیل خود را وارد کنید"
-                               required>
+                               placeholder="ایمیل خود را وارد کنید">
                     </div>
                 </div>
 
                 <!-- Mobile Field -->
                 <div>
-                    <label for="mobile" class="block text-sm font-medium text-gray-700 mb-2">شماره موبایل</label>
+                    <label for="mobile" class="block text-sm font-medium text-gray-700 mb-2">شماره موبایل<span class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <i class="fas fa-mobile-alt text-gray-400"></i>
@@ -66,13 +65,14 @@
                                maxlength="11"
                                class="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
                                placeholder="09123456789"
-                               required>
+                               required
+                               value="{{ mobile }}">
                     </div>
                 </div>
 
                 <!-- Password Field -->
                 <div>
-                    <label for="password1" class="block text-sm font-medium text-gray-700 mb-2">رمز ورود</label>
+                    <label for="password1" class="block text-sm font-medium text-gray-700 mb-2">رمز ورود<span class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <i class="fas fa-lock text-gray-400"></i>
@@ -88,7 +88,7 @@
 
                 <!-- Password Confirm Field -->
                 <div>
-                    <label for="password2" class="block text-sm font-medium text-gray-700 mb-2">تکرار رمز ورود</label>
+                    <label for="password2" class="block text-sm font-medium text-gray-700 mb-2">تکرار رمز ورود<span class="text-red-500">*</span></label>
                     <div class="relative">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                             <i class="fas fa-lock text-gray-400"></i>

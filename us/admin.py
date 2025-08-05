@@ -113,8 +113,8 @@ class CartItemAdmin(admin.ModelAdmin):
 
 @admin.register(Order)
 class OrderAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
-    list_display = ['order_number', 'user', 'phone', 'total_amount', 'status', 'created_at_jalali']
-    list_filter = ['status', 'created_at', 'user']
+    list_display = ['order_number', 'user', 'phone', 'plan_names', 'total_amount', 'status', 'created_at_jalali']
+    list_filter = ['status', 'created_at', 'items__plan']
     search_fields = ['order_number', 'phone', 'user__username']
     ordering = ['-created_at']
     readonly_fields = ['order_number', 'created_at', 'updated_at']
@@ -124,6 +124,11 @@ class OrderAdmin(ModelAdminJalaliMixin, admin.ModelAdmin):
     def created_at_jalali(self, obj):
         return datetime2jalali(obj.created_at).strftime('%Y/%m/%d %H:%M')
     created_at_jalali.short_description = 'تاریخ ایجاد (شمسی)'
+
+    def plan_names(self, obj):
+        return ", ".join([item.plan.name for item in obj.items.all()])
+    plan_names.short_description = 'پلن(ها)'
+    
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):

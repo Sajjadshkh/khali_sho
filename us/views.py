@@ -80,6 +80,11 @@ class AdviserCreateView(CreateView):
     template_name = 'us/workusadviser.html'
     success_url = reverse_lazy('home:home')
 
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['phone'] = self.request.session.get('otp_phone', '')
+        return initial
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if 'form' not in context:
@@ -116,7 +121,8 @@ class CafeCreateView(View):
     success_url = reverse_lazy('home:home')
 
     def get(self, request):
-        form = CafeOwnerForm()
+        initial = {'owner_phone': request.session.get('otp_phone', '')}
+        form = CafeOwnerForm(initial=initial)
         return render(request, self.template_name, {'form': form})
 
     def post(self, request):

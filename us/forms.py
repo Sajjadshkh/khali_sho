@@ -66,7 +66,8 @@ class AdviserForm(forms.ModelForm):
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 input-field',
-                'placeholder': 'example@domain.com'
+                'placeholder': 'example@domain.com',
+                'required': False
             }),
             'age': forms.NumberInput(attrs={
                 'class': 'w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 input-field',
