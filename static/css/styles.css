@@ -239,6 +239,7 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1000; /* بالاترین مقدار نسبت به بقیه */
 }
 
 .nav__logo {
