@@ -7,11 +7,11 @@
 
     <section class="header-podcast bg-gradient-to-r from-blue-50 to-purple-50 py-16 px-4 md:px-10 lg:px-20">
         <div class="container mx-auto text-center">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6 flex flex-col gap-3 text-center">
                 <span class="gradient-text">داستان خود را با ما به اشتراک بگذارید</span>
-                <br>صدای بی‌صدایان را بشنوید
+                <span>صدای بی‌صدایان را بشنوید</span>
             </h1>
-            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p class="text-1xl md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 تجربیات شما می‌تواند به دیگران کمک کند
             </p>
         </div>
@@ -33,27 +33,34 @@
         <div class="max-w-2xl mx-auto">
             <form method="post" enctype="multipart/form-data" novalidate>
                 {% csrf_token %}
-                <!-- Step 1: Record/Upload -->
-                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
-                    <div class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
-                        <span class="font-bold">۱</span>
-                    </div>
-                    <div class="w-full">
-                        <h3 class="font-semibold mb-2">آپلود فایل صوتی</h3>
-                        <p class="text-gray-600 text-sm">می‌توانید مستقیماً فایل صوتی آماده را آپلود نمایید</p>
-                        <div class="mt-3">
-                            {{ form.audio_file.errors }}
-                            {{ form.audio_file }}
+    
+                <div class="p-4 border border-gray-200 rounded-lg mb-6" dir="rtl">
+                    <div class="flex items-start gap-3 mb-4">
+                        <div class="bg-purple-100 text-purple-800 rounded-full w-8 h-8 flex items-center justify-center shrink-0">
+                            <span class="font-bold">۱</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold mt-1">آپلود فایل صوتی</h3>
+                            <p class="text-sm text-gray-500">فایل صوتی پادکست خود را در این قسمت بارگذاری کنید.</p>
                         </div>
                     </div>
-                </div>
-                <!-- Step 2: Add Details -->
-                <div class="flex items-start mb-6 p-4 border border-gray-200 rounded-lg">
-                    <div class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
-                        <span class="font-bold">۲</span>
+                    <div class="border-t border-gray-200 pt-4">
+                        {{ form.audio_file.errors }}
+                        {{ form.audio_file }}
                     </div>
-                    <div class="w-full space-y-3">
-                        <h3 class="font-semibold mb-2">اطلاعات پادکست</h3>
+                </div>
+    
+                <div class="p-4 border border-gray-200 rounded-lg mb-6" dir="rtl">
+                    <div class="flex items-start gap-3 mb-4">
+                        <div class="bg-green-100 text-green-800 rounded-full w-8 h-8 flex items-center justify-center shrink-0">
+                            <span class="font-bold">۲</span>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold mt-1">اطلاعات پادکست</h3>
+                            <p class="text-sm text-gray-500">عنوان، دسته‌بندی و کلمات کلیدی پادکست خود را وارد کنید.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 border-t border-gray-200 pt-4">
                         <div>
                             {{ form.title.label_tag }}
                             {{ form.title.errors }}
@@ -71,30 +78,33 @@
                         </div>
                     </div>
                 </div>
-                <!-- Step 3: Accept Rules -->
-                <div class="flex items-start p-4 border border-gray-200 rounded-lg">
-                    <div class="bg-red-100 text-red-800 rounded-full w-8 h-8 flex items-center justify-center mr-3 mt-0.5">
-                        <span class="font-bold">۳</span>
-                    </div>
-                    <div class="w-full">
-                        <h3 class="font-semibold mb-2">قوانین و مقررات</h3>
-                        <div class="bg-gray-50 p-3 rounded-lg mb-3 text-sm text-gray-600">
-                            <ul class="list-disc pr-5 space-y-1">
-                                <li>رعایت کامل محرمانگی اطلاعات و عدم افشای هویت واقعی</li>
-                                <li>عدم استفاده از اسامی واقعی افراد</li>
-                                <li>پرهیز از هرگونه توهین به مقدسات، حکومت و مذهب</li>
-                                <li>عدم انتشار محتوای غیراخلاقی یا خلاف قانون</li>
-                                <li>مسئولیت محتوای منتشر شده بر عهده کاربر است</li>
-                            </ul>
+    
+                <div class="p-4 border border-gray-200 rounded-lg" dir="rtl">
+                     <div class="flex items-start gap-3 mb-4">
+                        <div class="flex items-center justify-center w-8 h-8 bg-red-100 text-red-800 rounded-full shrink-0">
+                            <span class="font-bold text-sm leading-none">۳</span>
                         </div>
-                        <div class="flex items-start">
+                        <div class="flex-1">
+                            <h3 class="font-semibold mt-1">قوانین و مقررات انتشار</h3>
+                            <p class="text-sm text-gray-500">لطفاً پیش از انتشار، موارد زیر را مطالعه و تایید کنید.</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg space-y-3 text-gray-700 text-sm">
+                        <div class="flex items-start"><svg class="w-4 h-4 text-red-500 ml-3 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>رعایت کامل محرمانگی اطلاعات و عدم افشای هویت واقعی</span></div>
+                        <div class="flex items-start"><svg class="w-4 h-4 text-red-500 ml-3 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>عدم استفاده از اسامی واقعی افراد در محتوای پادکست</span></div>
+                        <div class="flex items-start"><svg class="w-4 h-4 text-red-500 ml-3 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>پرهیز از هرگونه توهین به مقدسات، حکومت و مذهب</span></div>
+                        <div class="flex items-start"><svg class="w-4 h-4 text-red-500 ml-3 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>عدم انتشار محتوای غیراخلاقی یا خلاف قوانین کشور</span></div>
+                        <div class="flex items-start"><svg class="w-4 h-4 text-red-500 ml-3 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>مسئولیت حقوقی و کیفری محتوای منتشر شده بر عهده کاربر است</span></div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="flex items-center">
                             {{ form.accepted_rules }}
+                            <label for="id_accepted_rules" class="mr-3 text-sm text-gray-800 font-medium">قوانین و مقررات را مطالعه کرده‌ام و تمامی موارد فوق را می‌پذیرم.</label>
                             {{ form.accepted_rules.errors }}
-                            <label for="id_accepted_rules" class="text-sm text-gray-700">قوانین و مقررات را مطالعه کرده‌ام و می‌پذیرم</label>
                         </div>
                     </div>
                 </div>
-                <!-- Submit Button -->
+    
                 <div class="mt-6 text-center">
                     <button type="submit" class="upload-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-full transition inline-flex items-center">
                         <i class="fas fa-podcast ml-2"></i>
