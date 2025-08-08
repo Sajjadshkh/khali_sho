@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load jalali_tags %}
 {% block title %}پرداخت حمایت مالی - خالی شو{% endblock %}
 
 {% block content %}
@@ -47,7 +47,7 @@
                 
                 <div class="flex justify-between items-center py-3 border-b border-gray-200">
                     <span class="text-gray-600">تاریخ:</span>
-                    <span class="font-semibold">{{ donation.created_at|date:"Y/m/d" }}</span>
+                    <span class="font-semibold">{{ donation.created_at|to_jalali:"%Y/%m/%d"}}</span>
                 </div>
             </div>
         </div>
