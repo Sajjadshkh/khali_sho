@@ -273,7 +273,7 @@ img {
 @media screen and (max-width: 767px) {
   .nav {
     height: calc(var(--header-height) + 1rem);
-    column-gap: 3rem;
+    /* column-gap: 3rem; */
   }
   .nav__menu {
     position: fixed;
