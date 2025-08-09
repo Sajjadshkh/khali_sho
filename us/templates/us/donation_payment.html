@@ -35,7 +35,7 @@
                 
                 <div class="flex justify-between items-center py-3 border-b border-gray-200">
                     <span class="text-gray-600">مبلغ:</span>
-                    <span class="font-bold text-green-600 text-xl">{{ donation.amount|floatformat:0 }} تومان</span>
+                    <span class="font-bold text-green-600 text-xl">{{ donation.amount|floatformat:0 }} ریال</span>
                 </div>
                 
                 {% if donation.message %}
@@ -81,7 +81,7 @@
                 <!-- Payment Button -->
                 <div class="text-center pt-6">
                     <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 text-lg">
-                        پرداخت {{ donation.amount|floatformat:0 }} تومان
+                        پرداخت {{ donation.amount|floatformat:0 }} ریال
                         <i class="fas fa-credit-card mr-2"></i>
                     </button>
                 </div>

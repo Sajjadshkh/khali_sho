@@ -317,7 +317,7 @@ class DonationForm(forms.ModelForm):
         }
         labels = {
             'donor_name': 'نام شما',
-            'donor_phone': 'شماره تلفن',
+            'donor_phone': 'شماره تلفن(به انگلیسی)',
             'donor_email': 'ایمیل',
             'amount': 'مبلغ حمایت (ریال)',
             'donation_type': 'نوع حمایت',
@@ -342,6 +342,6 @@ class DonationForm(forms.ModelForm):
 
     def clean_amount(self):
         amount = self.cleaned_data.get('amount')
-        if amount < 1000:
-            raise forms.ValidationError('حداقل مبلغ حمایت 1000 تومان است.')
+        if amount < 100000:
+            raise forms.ValidationError('حداقل مبلغ حمایت 100000 ریال است.')
         return amount
